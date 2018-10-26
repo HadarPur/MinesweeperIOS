@@ -10,6 +10,7 @@ import UIKit
 
 class GameViewController: UIViewController {
     var mDiff: Int? = 0
+    @IBOutlet weak var mGameBoard: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

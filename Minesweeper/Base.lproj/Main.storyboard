@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3zp-ds-FuO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3zp-ds-FuO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,6 +23,9 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" image="island" translatesAutoresizingMaskIntoConstraints="NO" id="hB5-T0-g7N">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hB5-T0-g7N" secondAttribute="height" multiplier="375:667" id="usS-iE-9Fh"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWq-HD-Cpg">
                                 <rect key="frame" x="88" y="230" width="200" height="47"/>
@@ -83,13 +82,22 @@
                         <constraints>
                             <constraint firstItem="hB5-T0-g7N" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Jpa-4H-oF5"/>
                             <constraint firstItem="hB5-T0-g7N" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Nbw-3F-9O6"/>
+                            <constraint firstItem="hB5-T0-g7N" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="YWf-Kg-SJR"/>
                             <constraint firstAttribute="trailing" secondItem="hB5-T0-g7N" secondAttribute="trailing" id="ZKr-dQ-gX1"/>
                             <constraint firstItem="hB5-T0-g7N" firstAttribute="bottom" secondItem="s5Z-4Y-cwH" secondAttribute="top" id="bn5-ka-rR2"/>
+                            <constraint firstItem="hB5-T0-g7N" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="sE9-DX-tU0"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="4dI-IZ-fSX"/>
                     <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="mEazyBtn" destination="IWq-HD-Cpg" id="yuR-Ob-1Jx"/>
+                        <outlet property="mHardBtn" destination="bdF-ax-Mwr" id="2BW-7f-7aM"/>
+                        <outlet property="mInstructionBtn" destination="6v2-Fa-V5e" id="jsq-bF-1YX"/>
+                        <outlet property="mNormalBtn" destination="ClO-Je-ncT" id="jd8-nt-brB"/>
+                        <outlet property="mRecordsBtn" destination="DNL-Um-M66" id="jEF-0k-b1y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -136,8 +144,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="yV6-cW-Meh">
-                                <rect key="frame" x="19" y="198" width="338" height="338"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="19" y="198" width="337.5" height="337.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="yV6-cW-Meh" secondAttribute="height" multiplier="1:1" id="0Ug-wI-PkQ"/>
                                 </constraints>
@@ -170,6 +177,9 @@
                             <constraint firstItem="nTp-hE-YgG" firstAttribute="centerX" secondItem="ZZ5-XH-LA1" secondAttribute="centerX" id="rGb-2D-4SE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mGameBoard" destination="yV6-cW-Meh" id="8RH-3V-UHd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CnM-3u-4Nq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -187,9 +197,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="island2" translatesAutoresizingMaskIntoConstraints="NO" id="rZP-BA-DPf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="island2" translatesAutoresizingMaskIntoConstraints="NO" id="rZP-BA-DPf">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rZP-BA-DPf" secondAttribute="height" multiplier="375:667" id="PFG-73-Nz4"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ulg-9q-BDa">
                                 <rect key="frame" x="16" y="50" width="73" height="41"/>
@@ -247,6 +259,10 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rZP-BA-DPf" firstAttribute="width" secondItem="4GO-7g-hjA" secondAttribute="width" id="eKD-im-m0a"/>
+                            <constraint firstItem="rZP-BA-DPf" firstAttribute="height" secondItem="4GO-7g-hjA" secondAttribute="height" id="lGg-V8-Dcn"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="mapViewContainer" destination="Mpm-9N-mBV" id="R7F-ZC-2sE"/>
@@ -270,15 +286,18 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island2" translatesAutoresizingMaskIntoConstraints="NO" id="2as-Ie-HDI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="2as-Ie-HDI" secondAttribute="height" multiplier="375:667" id="9NS-wd-Pfq"/>
+                                </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table" translatesAutoresizingMaskIntoConstraints="NO" id="wQ3-SS-99s">
-                                <rect key="frame" x="97" y="47" width="181" height="52"/>
+                                <rect key="frame" x="97" y="47.5" width="181" height="52"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="qJ1-zG-pp3"/>
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uTh-ak-uwr">
-                                <rect key="frame" x="0.0" y="119" width="375" height="508"/>
+                                <rect key="frame" x="0.0" y="119.5" width="375" height="507.5"/>
                                 <color key="backgroundColor" red="0.6470588235294118" green="0.80392156862745101" blue="0.99215686274509807" alpha="0.7126765839041096" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="375" id="7Qr-J0-1y3"/>
@@ -317,7 +336,7 @@ Of course to see where it was, you need to click on location marker.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZg-jQ-JvL">
-                                <rect key="frame" x="16" y="54" width="73" height="39"/>
+                                <rect key="frame" x="16" y="53.5" width="73" height="40"/>
                                 <state key="normal" backgroundImage="back"/>
                                 <connections>
                                     <action selector="backBtn:" destination="cRC-wn-nbv" eventType="touchUpInside" id="b6e-CD-yQK"/>
@@ -326,6 +345,7 @@ Of course to see where it was, you need to click on location marker.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="2as-Ie-HDI" firstAttribute="width" secondItem="c6G-OJ-Xcp" secondAttribute="width" id="1B5-rx-a2m"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="centerX" secondItem="2as-Ie-HDI" secondAttribute="centerX" id="1ot-1u-aVV"/>
                             <constraint firstItem="bZg-jQ-JvL" firstAttribute="leading" secondItem="c6G-OJ-Xcp" secondAttribute="leadingMargin" id="2EO-eb-yDe"/>
                             <constraint firstItem="wQ3-SS-99s" firstAttribute="leading" secondItem="bZg-jQ-JvL" secondAttribute="trailing" constant="8" symbolic="YES" id="FBi-RR-M7e"/>
@@ -335,6 +355,7 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="leading" secondItem="c6G-OJ-Xcp" secondAttribute="leadingMargin" constant="-16" id="JfU-6n-cGl"/>
                             <constraint firstItem="Imu-mn-Ti7" firstAttribute="top" secondItem="uTh-ak-uwr" secondAttribute="bottom" constant="40" id="LfC-VE-K6d"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="top" secondItem="wQ3-SS-99s" secondAttribute="bottom" constant="20" id="SMe-1h-0OB"/>
+                            <constraint firstItem="2as-Ie-HDI" firstAttribute="height" secondItem="c6G-OJ-Xcp" secondAttribute="height" id="Tv8-wn-sOJ"/>
                             <constraint firstItem="bZg-jQ-JvL" firstAttribute="centerY" secondItem="wQ3-SS-99s" secondAttribute="centerY" id="cqe-Kr-5aG"/>
                             <constraint firstItem="wQ3-SS-99s" firstAttribute="centerX" secondItem="uTh-ak-uwr" secondAttribute="centerX" id="dcg-o0-1JH"/>
                             <constraint firstItem="utc-kJ-6xK" firstAttribute="centerY" secondItem="wQ3-SS-99s" secondAttribute="centerY" constant="0.5" id="eqa-yw-q0H"/>
@@ -368,9 +389,12 @@ Of course to see where it was, you need to click on location marker.</string>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island2" translatesAutoresizingMaskIntoConstraints="NO" id="f16-RR-llk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="f16-RR-llk" secondAttribute="height" multiplier="375:667" id="PnX-Hz-Sa0"/>
+                                </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table" translatesAutoresizingMaskIntoConstraints="NO" id="rK7-m6-oJ9">
-                                <rect key="frame" x="97" y="47" width="181" height="52"/>
+                                <rect key="frame" x="97" y="47" width="181" height="53"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7R4-gp-Uc6">
                                 <rect key="frame" x="0.0" y="490" width="165" height="63"/>
@@ -424,6 +448,7 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="f16-RR-llk" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leading" id="3xM-gQ-xyx"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="top" secondItem="7R4-gp-Uc6" secondAttribute="bottom" constant="8" symbolic="YES" id="5Vi-t5-7fM"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="bottom" secondItem="YhT-4A-N1u" secondAttribute="top" id="6Ux-Do-rq7"/>
+                            <constraint firstItem="f16-RR-llk" firstAttribute="width" secondItem="QUn-ig-cjA" secondAttribute="width" id="Gxr-Bp-Wct"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leadingMargin" constant="88" id="Nia-nA-ZLA"/>
                             <constraint firstItem="7R4-gp-Uc6" firstAttribute="leading" secondItem="f16-RR-llk" secondAttribute="leading" id="PdD-gf-43a"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="top" secondItem="TVt-lZ-g0V" secondAttribute="bottom" constant="37" id="VUl-Nm-ue5"/>
@@ -437,6 +462,7 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="centerY" secondItem="rK7-m6-oJ9" secondAttribute="centerY" id="f5y-BP-Jg1"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="top" secondItem="QUn-ig-cjA" secondAttribute="top" id="inQ-v3-oH8"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="baseline" secondItem="7R4-gp-Uc6" secondAttribute="firstBaseline" id="sda-Lo-9kC"/>
+                            <constraint firstItem="f16-RR-llk" firstAttribute="height" secondItem="QUn-ig-cjA" secondAttribute="height" id="xU8-fh-aq3"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="trailing" secondItem="QUn-ig-cjA" secondAttribute="trailingMargin" id="y6X-q9-aO2"/>
                             <constraint firstItem="7R4-gp-Uc6" firstAttribute="baseline" secondItem="M8i-Kr-8Ry" secondAttribute="firstBaseline" id="ymb-FV-xyE"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="leading" secondItem="7R4-gp-Uc6" secondAttribute="trailing" constant="29" id="zRt-RV-G5i"/>
@@ -461,6 +487,9 @@ Of course to see where it was, you need to click on location marker.</string>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island2" translatesAutoresizingMaskIntoConstraints="NO" id="S1w-uM-Z80">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="S1w-uM-Z80" secondAttribute="height" multiplier="375:667" id="QgN-30-zc9"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9tk-BE-Xao">
                                 <rect key="frame" x="16" y="568" width="165" height="56"/>
@@ -481,7 +510,7 @@ Of course to see where it was, you need to click on location marker.</string>
                                 </state>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table" translatesAutoresizingMaskIntoConstraints="NO" id="2eM-sF-lYb">
-                                <rect key="frame" x="97" y="44" width="181" height="52"/>
+                                <rect key="frame" x="97" y="44" width="181" height="53"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="table" translatesAutoresizingMaskIntoConstraints="NO" id="fH4-6r-IaJ">
                                 <rect key="frame" x="20" y="190" width="334" height="52"/>
@@ -490,7 +519,7 @@ Of course to see where it was, you need to click on location marker.</string>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2H-bZ-v3U">
-                                <rect key="frame" x="126" y="54" width="122" height="33"/>
+                                <rect key="frame" x="126.5" y="54" width="122" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="122" id="dPo-t7-sLm"/>
                                     <constraint firstAttribute="height" constant="33" id="sGO-Gc-qo8"/>
@@ -530,9 +559,11 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="lqu-Qc-sI1" firstAttribute="top" secondItem="9tk-BE-Xao" secondAttribute="bottom" constant="43" id="QEa-7Q-HsK"/>
                             <constraint firstItem="if0-Z5-OtN" firstAttribute="top" secondItem="9tk-BE-Xao" secondAttribute="top" id="Rz1-uQ-U71"/>
                             <constraint firstItem="2eM-sF-lYb" firstAttribute="centerY" secondItem="d2H-bZ-v3U" secondAttribute="centerY" id="dfc-7K-scT"/>
+                            <constraint firstItem="S1w-uM-Z80" firstAttribute="height" secondItem="gLS-wI-5r5" secondAttribute="height" id="eNx-2I-tFr"/>
                             <constraint firstAttribute="trailing" secondItem="S1w-uM-Z80" secondAttribute="trailing" id="fcS-kB-cR7"/>
                             <constraint firstItem="S1w-uM-Z80" firstAttribute="leading" secondItem="gLS-wI-5r5" secondAttribute="leading" id="hgD-a0-0wL"/>
                             <constraint firstItem="2eM-sF-lYb" firstAttribute="top" secondItem="yxE-Mg-21a" secondAttribute="bottom" constant="24" id="kh7-My-LBQ"/>
+                            <constraint firstItem="S1w-uM-Z80" firstAttribute="width" secondItem="gLS-wI-5r5" secondAttribute="width" id="nyB-Pf-6d0"/>
                             <constraint firstItem="9tk-BE-Xao" firstAttribute="leading" secondItem="gLS-wI-5r5" secondAttribute="leadingMargin" id="o84-9I-usF"/>
                             <constraint firstItem="if0-Z5-OtN" firstAttribute="baseline" secondItem="9tk-BE-Xao" secondAttribute="firstBaseline" id="pyN-ea-iOB"/>
                             <constraint firstItem="if0-Z5-OtN" firstAttribute="firstBaseline" secondItem="9tk-BE-Xao" secondAttribute="baseline" id="tdT-kk-7zO"/>
