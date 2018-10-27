@@ -8,7 +8,8 @@
 
 import UIKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController{
+//, UICollectionViewDelegate, UICollectionViewDataSource 
     var mDiff: Int? = 0
     @IBOutlet weak var mGameBoard: UICollectionView!
     
@@ -17,6 +18,14 @@ class GameViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
+    
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        <#code#>
+//    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -20,6 +20,7 @@
 		3E560151213EB85D00ACFF91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E56014F213EB85D00ACFF91 /* LaunchScreen.storyboard */; };
 		3E56015C213EB85E00ACFF91 /* MinesweeperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E56015B213EB85E00ACFF91 /* MinesweeperTests.swift */; };
 		3E560167213EB85E00ACFF91 /* MinesweeperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E560166213EB85E00ACFF91 /* MinesweeperUITests.swift */; };
+		3E68B1352184BACD001FA5CD /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E68B1342184BACD001FA5CD /* CollectionViewCell.swift */; };
 		3ECA2C09217D9A12006BE85D /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */; };
 		5FAD9F87ED734252A65F9E72 /* Pods_MinesweeperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72DB4F1CFD52E1BC6577E14B /* Pods_MinesweeperUITests.framework */; };
 		718203646EC1E1B58E6D5C25 /* Pods_Minesweeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACE3D8C4FA56EB64B3D2582 /* Pods_Minesweeper.framework */; };
@@ -64,6 +65,7 @@
 		3E560162213EB85E00ACFF91 /* MinesweeperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinesweeperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E560166213EB85E00ACFF91 /* MinesweeperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinesweeperUITests.swift; sourceTree = "<group>"; };
 		3E560168213EB85E00ACFF91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E68B1342184BACD001FA5CD /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		6831C85FF2450BD94107784C /* Pods-MinesweeperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinesweeperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MinesweeperTests/Pods-MinesweeperTests.release.xcconfig"; sourceTree = "<group>"; };
 		72DB4F1CFD52E1BC6577E14B /* Pods_MinesweeperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinesweeperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +182,7 @@
 				3E530C76217CB9EA00440B79 /* InstructionsViewController.swift */,
 				3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */,
 				3E560145213EB85B00ACFF91 /* MainViewController.swift */,
+				3E68B1342184BACD001FA5CD /* CollectionViewCell.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E68B1352184BACD001FA5CD /* CollectionViewCell.swift in Sources */,
 				3E530C712178D7D100440B79 /* ResultViewController.swift in Sources */,
 				3E530C6F2178D78700440B79 /* GameViewController.swift in Sources */,
 				3E093C7821832A5200AFC581 /* ButtonExtentions.swift in Sources */,
