@@ -9,6 +9,10 @@ target 'Minesweeper' do
   # Pods for Minesweeper
     pod 'GoogleMaps'
     pod 'GooglePlaces'
+    pod 'Firebase'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
 
   target 'MinesweeperTests' do
     inherit! :search_paths
