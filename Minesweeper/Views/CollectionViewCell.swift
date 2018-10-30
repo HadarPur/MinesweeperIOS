@@ -12,9 +12,66 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellLable: UILabel!
+    var row: Int!
+    var col: Int!
+    var status: Int!
+    var isPressed: Bool!
+    var isLongPressed: Bool!
+
+    override func awakeFromNib() {
+    }
+
+    func configure(row: Int, col: Int, status: Int) {
+        self.row = row
+        self.col = col
+        self.status = status
+        self.isPressed = false
+        self.isLongPressed = false
+    }
 
     func displayContent(image: UIImage, text: String) {
         cellImage.image = image
         cellLable.text = text
     }
+    
+    // returns number of bombs around the cell
+    func getStatus() -> Int {
+        return self.status
+    }
+    
+    //set number of bombs around the cell
+    func setStatus(status: Int){
+        self.status = status
+    }
+    
+    // chang cell status to be pressed
+    func pressButton() {
+        self.isPressed = true
+    }
+    
+    //update cell status to be unpressed
+    func unPress() {
+        self.isPressed = false
+    }
+    
+    //returns if cell was pressed
+    func pressed() -> Bool{
+        return self.isPressed
+    }
+    
+    //returns if cell was long pressed
+    func pressLongButton() {
+        if self.isLongPressed == true {
+            self.isLongPressed = false
+        }
+        else {
+            self.isLongPressed = true
+        }
+    }
+    
+    // chang cell status to be long pressed
+    func longPressed() -> Bool{
+        return self.isLongPressed
+    }
+    
 }

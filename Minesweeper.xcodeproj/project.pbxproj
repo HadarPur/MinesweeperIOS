@@ -25,6 +25,10 @@
 		3E7B328C2185B7D500285186 /* PaddingLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B328B2185B7D500285186 /* PaddingLable.swift */; };
 		3E7B328E2185B7EE00285186 /* AlertsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B328D2185B7EE00285186 /* AlertsHandler.swift */; };
 		3ECA2C09217D9A12006BE85D /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */; };
+		3EF85ABF2186D6650041BC80 /* GPSTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF85ABE2186D6650041BC80 /* GPSTracker.swift */; };
+		3EF85AC12186D7100041BC80 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF85AC02186D7100041BC80 /* CoreLocation.framework */; };
+		3EF85AC32186D9EB0041BC80 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF85AC22186D9EB0041BC80 /* CoreText.framework */; };
+		3EF85AC52186D9F30041BC80 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF85AC42186D9F30041BC80 /* MapKit.framework */; };
 		5FAD9F87ED734252A65F9E72 /* Pods_MinesweeperUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72DB4F1CFD52E1BC6577E14B /* Pods_MinesweeperUITests.framework */; };
 		718203646EC1E1B58E6D5C25 /* Pods_Minesweeper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACE3D8C4FA56EB64B3D2582 /* Pods_Minesweeper.framework */; };
 		C1ED26754A9D626132A252D1 /* Pods_MinesweeperTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA2BB8BD3C794BF1E432778 /* Pods_MinesweeperTests.framework */; };
@@ -73,6 +77,10 @@
 		3E7B328B2185B7D500285186 /* PaddingLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLable.swift; sourceTree = "<group>"; };
 		3E7B328D2185B7EE00285186 /* AlertsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsHandler.swift; sourceTree = "<group>"; };
 		3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
+		3EF85ABE2186D6650041BC80 /* GPSTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSTracker.swift; sourceTree = "<group>"; };
+		3EF85AC02186D7100041BC80 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		3EF85AC22186D9EB0041BC80 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		3EF85AC42186D9F30041BC80 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6831C85FF2450BD94107784C /* Pods-MinesweeperTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinesweeperTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MinesweeperTests/Pods-MinesweeperTests.release.xcconfig"; sourceTree = "<group>"; };
 		72DB4F1CFD52E1BC6577E14B /* Pods_MinesweeperUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinesweeperUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BC446F3D536DD4191B98F2A /* Pods-MinesweeperUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinesweeperUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MinesweeperUITests/Pods-MinesweeperUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -88,6 +96,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EF85AC52186D9F30041BC80 /* MapKit.framework in Frameworks */,
+				3EF85AC32186D9EB0041BC80 /* CoreText.framework in Frameworks */,
+				3EF85AC12186D7100041BC80 /* CoreLocation.framework in Frameworks */,
 				718203646EC1E1B58E6D5C25 /* Pods_Minesweeper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -211,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				3E560143213EB85B00ACFF91 /* AppDelegate.swift */,
+				3EF85ABE2186D6650041BC80 /* GPSTracker.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -231,6 +243,9 @@
 		BB07653036358140B559F91B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3EF85AC42186D9F30041BC80 /* MapKit.framework */,
+				3EF85AC22186D9EB0041BC80 /* CoreText.framework */,
+				3EF85AC02186D7100041BC80 /* CoreLocation.framework */,
 				DACE3D8C4FA56EB64B3D2582 /* Pods_Minesweeper.framework */,
 				EFA2BB8BD3C794BF1E432778 /* Pods_MinesweeperTests.framework */,
 				72DB4F1CFD52E1BC6577E14B /* Pods_MinesweeperUITests.framework */,
@@ -480,6 +495,7 @@
 				3E68B1352184BACD001FA5CD /* CollectionViewCell.swift in Sources */,
 				3E530C712178D7D100440B79 /* ResultViewController.swift in Sources */,
 				3E530C6F2178D78700440B79 /* GameViewController.swift in Sources */,
+				3EF85ABF2186D6650041BC80 /* GPSTracker.swift in Sources */,
 				3E093C7821832A5200AFC581 /* ButtonExtentions.swift in Sources */,
 				3E56014C213EB85B00ACFF91 /* Minesweeper.xcdatamodeld in Sources */,
 				3E560146213EB85B00ACFF91 /* MainViewController.swift in Sources */,
@@ -664,7 +680,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FM8FM6T9QK;
 				INFOPLIST_FILE = Minesweeper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Hadar.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -680,7 +699,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FM8FM6T9QK;
 				INFOPLIST_FILE = Minesweeper/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Hadar.Minesweeper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -697,7 +719,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FM8FM6T9QK;
 				INFOPLIST_FILE = MinesweeperTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Hadar.MinesweeperTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -715,7 +741,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FM8FM6T9QK;
 				INFOPLIST_FILE = MinesweeperTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Hadar.MinesweeperTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -732,7 +762,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FM8FM6T9QK;
 				INFOPLIST_FILE = MinesweeperUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Hadar.MinesweeperUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -749,7 +783,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FM8FM6T9QK;
 				INFOPLIST_FILE = MinesweeperUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Hadar.MinesweeperUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
