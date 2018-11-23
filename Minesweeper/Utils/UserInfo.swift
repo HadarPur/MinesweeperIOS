@@ -68,8 +68,8 @@ class UserInfo {
     }
     
     func toString() -> String{
-        var objectString : String = " "
-        objectString += " Name: "
+        var objectString : String = ""
+        objectString += "Name: "
         objectString += self.name
         objectString += "  , Time: "
         objectString += String(self.points)

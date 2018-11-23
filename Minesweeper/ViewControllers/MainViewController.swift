@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import GoogleMaps
 
 class MainViewController: UIViewController {
     var firstAsk = true
     var mGameViewController: GameViewController?
     var firstShow: Bool = true
+    let locationManager = CLLocationManager()
     @IBOutlet weak var mEazyBtn: UIButton!
     @IBOutlet weak var mNormalBtn: UIButton!
     @IBOutlet weak var mHardBtn: UIButton!
@@ -22,6 +24,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -196,3 +201,17 @@ class MainViewController: UIViewController {
     }
 }
 
+// extension for map view
+extension MainViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else {
+            return
+        }
+        self.locationManager.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.locationManager.stopUpdatingLocation()
+    }
+}

@@ -283,7 +283,7 @@
                                     <action selector="eazyBtnPressed:" destination="5Uo-GX-dnp" eventType="touchUpInside" id="qEL-LO-CaQ"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpm-9N-mBV" customClass="MKMapView" customModule="Minesweeper" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mpm-9N-mBV" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="418.5" width="375" height="248.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -306,14 +306,14 @@
                                 <color key="backgroundColor" red="0.64705882349999999" green="0.80392156859999997" blue="0.99215686270000003" alpha="0.71267658389999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" red="0.64705882349999999" green="0.80392156859999997" blue="0.99215686270000003" alpha="0.71267658389999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="table" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="table" id="etd-fF-8BC" customClass="TableViewCell" customModule="Minesweeper" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="table" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="table" id="etd-fF-8BC" customClass="TableViewCell" customModule="Minesweeper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="etd-fF-8BC" id="cMO-xs-p48">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tc7-KY-rzv">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tc7-KY-rzv">
                                                     <rect key="frame" x="0.0" y="-1" width="375" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <color key="backgroundColor" red="0.64705882349999999" green="0.80392156859999997" blue="0.99215686270000003" alpha="0.71267658389999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -385,7 +385,7 @@
                     <connections>
                         <outlet property="eazyBtn" destination="IuQ-ea-law" id="m0V-ed-piJ"/>
                         <outlet property="hardBtn" destination="j93-NN-TIM" id="8KZ-b6-3e4"/>
-                        <outlet property="mapViewContainer" destination="Mpm-9N-mBV" id="R7F-ZC-2sE"/>
+                        <outlet property="mapView" destination="Mpm-9N-mBV" id="1qd-z1-W8i"/>
                         <outlet property="normalBtn" destination="eMR-LW-Nts" id="Mtp-89-4zb"/>
                         <outlet property="tableView" destination="EHu-di-bcE" id="REa-SQ-SVo"/>
                     </connections>
