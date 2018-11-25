@@ -24,8 +24,11 @@ class RecordsViewController: UIViewController, CallData {
     @IBOutlet weak var hardBtn: UIButton!
     let unPressedImage = UIImage(named: "table.png") as UIImage?
     let pressedImage = UIImage(named: "tableopen.png") as UIImage?
-    let locationManager: CLLocationManager? = nil
-    var marker: GMSMarker!
+    let locationManager = CLLocationManager()
+
+    var currentLat: Double = 0
+    var currentLong: Double = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,18 +39,9 @@ class RecordsViewController: UIViewController, CallData {
             self.performQuery()
         })
         self.tableView.isScrollEnabled = true
-        self.locationManager?.delegate = self
-        
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                print("No access")
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("Access")
-            }
-        } else {
-            print("Location services are not enabled")
-        }
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.checkGPS()
 
     }
     
@@ -111,7 +105,74 @@ class RecordsViewController: UIViewController, CallData {
             i+=1
         }
         self.tableView.endUpdates()
+    }
+    
+    func checkGPS() {
+        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            guard let currentLocation = self.locationManager.location else {
+                return
+            }
+            self.currentLat = currentLocation.coordinate.latitude
+            self.currentLong = currentLocation.coordinate.longitude
+            self.setMyLocationOnTheMap(latitudeUser: self.currentLat, longitudeUser: self.currentLong)
+        }
+    }
+    
+    func setLocationOnTheMap(latitudeUser: Double, longitudeUser: Double, titleUser: String) {
+        self.setMyLocationOnTheMap(latitudeUser: self.currentLat, longitudeUser: self.currentLong)
 
+        let latitude = latitudeUser
+        let longitude = longitudeUser
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 12)
+        let userLocetion = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let geocoder = CLGeocoder()
+        let loc: CLLocation = CLLocation(latitude:userLocetion.latitude, longitude: userLocetion.longitude)
+        let marker = GMSMarker(position: userLocetion)
+        
+        marker.iconView = UIImageView(image: UIImage(named: "mark.png"))
+        marker.title = titleUser
+        
+        geocoder.reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) in
+            if (error != nil) {
+                print("reverse geodcode fail: \(error!.localizedDescription)")
+            }
+            else {
+                let locationStreet = placemarks?[0]
+                marker.snippet = (locationStreet?.name)!+", "+(locationStreet?.locality)!
+            }
+        })
+        
+        self.mapView.animate(to: camera)
+        marker.map = self.mapView
+    }
+    
+    func setMyLocationOnTheMap(latitudeUser: Double, longitudeUser: Double) {
+        self.mapView.clear()
+        
+        let latitude = latitudeUser
+        let longitude = longitudeUser
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 12)
+        let userLocetion = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let geocoder = CLGeocoder()
+        let loc: CLLocation = CLLocation(latitude:userLocetion.latitude, longitude: userLocetion.longitude)
+        let marker = GMSMarker(position: userLocetion)
+        
+        marker.title = "Current Position"
+        
+        if (latitude != 0 && longitude != 0) {
+            geocoder.reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) in
+                if (error != nil) {
+                    print("reverse geodcode fail: \(error!.localizedDescription)")
+                }
+                else {
+                    let locationStreet = placemarks?[0]
+                    marker.snippet = (locationStreet?.name)!+", "+(locationStreet?.locality)!
+                }
+            })
+        }
+        
+        self.mapView.animate(to: camera)
+        marker.map = self.mapView
     }
 }
 
@@ -128,47 +189,9 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = row
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.mapView.clear()
-        
-        print("section: \(indexPath.section)")
-        print("row: \(indexPath.row)")
-        
-        let latitude = self.usersData[indexPath.row].getLatitude()
-        let longitude = self.usersData[indexPath.row].getLongitude()
-        
-        print("latitude: \(latitude)")
-        print("longitude: \(longitude)")
-        
-        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 12)
-        self.mapView.animate(to: camera)
-
-        let currentLocetion = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        self.marker = GMSMarker(position: currentLocetion)
-        self.marker.iconView = UIImageView(image: UIImage(named: "mark.png"))
-        self.marker.title = self.usersData[indexPath.row].toString()
-        print("users: \(self.usersData[indexPath.row].toString())")
-
-        let geocoder = CLGeocoder()
-        let loc: CLLocation = CLLocation(latitude:currentLocetion.latitude, longitude: currentLocetion.longitude)
-        geocoder.reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) in
-            if (error != nil)
-            {
-                print("reverse geodcode fail: \(error!.localizedDescription)")
-            }
-            else
-            {
-                let locationStreet = placemarks?[0]
-                self.marker.snippet = (locationStreet?.name)!+", "+(locationStreet?.locality)!
-            }
-        })
-        self.marker.map = self.mapView
-        
+        self.setLocationOnTheMap(latitudeUser: self.usersData[indexPath.row].getLatitude(), longitudeUser: self.usersData[indexPath.row].getLongitude(), titleUser: self.usersData[indexPath.row].toString())
     }
 }
 
@@ -179,7 +202,7 @@ extension RecordsViewController: CLLocationManagerDelegate {
     guard status == .authorizedWhenInUse else {
     return
     }
-    self.locationManager?.startUpdatingLocation()
+    self.locationManager.startUpdatingLocation()
     
     self.mapView.isMyLocationEnabled = true
     self.mapView.settings.myLocationButton = true
@@ -189,8 +212,9 @@ extension RecordsViewController: CLLocationManagerDelegate {
         guard let location = locations.first else {
             return
         }
-        
-        self.mapView.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
-        self.locationManager?.stopUpdatingLocation()
+//        self.currentLat = location.coordinate.latitude
+//        self.currentLong = location.coordinate.latitude
+//        self.setMyLocationOnTheMap(latitudeUser: self.currentLat, longitudeUser: self.currentLong)
+        self.locationManager.stopUpdatingLocation()
     }
 }

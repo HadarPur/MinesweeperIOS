@@ -24,9 +24,9 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {

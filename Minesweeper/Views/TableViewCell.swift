@@ -10,11 +10,7 @@ import Foundation
 import UIKit
 
 class TableViewCell: UITableViewCell {
-    var title: String!
     @IBOutlet weak var textLable: UILabel!
-    
-    func configure(title: String) {
-        self.title = title
-    }
+
 }
 
