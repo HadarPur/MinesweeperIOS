@@ -21,7 +21,7 @@ extension UIButton {
         
         touch.fromValue = NSValue(cgPoint: fromPoint)
         touch.toValue = NSValue(cgPoint: toPoint)
-        touch.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        touch.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
 
         layer.add(touch, forKey: nil)
     }

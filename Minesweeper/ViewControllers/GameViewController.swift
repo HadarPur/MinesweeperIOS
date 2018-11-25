@@ -128,6 +128,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let leftInset = (mGameBoard.frame.width - CGFloat(totalCellWidth - totalSpacingWidth))/4
             let rightInset = leftInset
             
-            return UIEdgeInsetsMake(0, leftInset, 0, rightInset)
+            return UIEdgeInsets(top: 0, left: leftInset, bottom: 0, right: rightInset)
         }
 }

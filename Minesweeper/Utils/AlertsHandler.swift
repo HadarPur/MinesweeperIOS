@@ -13,7 +13,7 @@ class AlertsHandler {
     
     class func showAlertMessage(title: String?, message: String?, cancelButtonTitle: String) {
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let cancelAction = UIAlertAction(title: cancelButtonTitle, style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         

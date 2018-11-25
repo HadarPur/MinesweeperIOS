@@ -37,7 +37,7 @@ class FuncUtils: NSObject {
     
     public func showAlertActivityIndicator(viewController: UIViewController,msg: String) {
         mLoadingAlertController = UIAlertController(title: msg, message: nil, preferredStyle: .alert)
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        let activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         mLoadingAlertController.view.addSubview(activityIndicator)
         let xConstraint = NSLayoutConstraint(item: activityIndicator, attribute: .centerX, relatedBy: .equal, toItem: mLoadingAlertController.view, attribute: .centerX, multiplier: 1, constant: 0)
@@ -45,7 +45,7 @@ class FuncUtils: NSObject {
         NSLayoutConstraint.activate([ xConstraint, yConstraint])
         activityIndicator.isUserInteractionEnabled = false
         activityIndicator.startAnimating()
-        let height: NSLayoutConstraint = NSLayoutConstraint(item: mLoadingAlertController.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: 80)
+        let height: NSLayoutConstraint = NSLayoutConstraint(item: mLoadingAlertController.view, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: 80)
         mLoadingAlertController.view.addConstraint(height);
         viewController.present(self.mLoadingAlertController, animated: true, completion: nil)
     }
