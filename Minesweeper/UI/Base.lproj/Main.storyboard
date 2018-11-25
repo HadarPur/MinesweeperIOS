@@ -453,13 +453,12 @@ Of course to see where it was, you need to click on location marker.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="2as-Ie-HDI" firstAttribute="top" secondItem="c6G-OJ-Xcp" secondAttribute="top" id="1bG-Qi-GsF"/>
+                            <constraint firstItem="2as-Ie-HDI" firstAttribute="centerY" secondItem="c6G-OJ-Xcp" secondAttribute="centerY" id="3RV-39-kYU"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="top" secondItem="phW-Yd-SoJ" secondAttribute="bottom" constant="105" id="60s-dH-6Yi"/>
                             <constraint firstItem="2as-Ie-HDI" firstAttribute="height" secondItem="c6G-OJ-Xcp" secondAttribute="height" id="8WS-OY-Cyf"/>
                             <constraint firstItem="bZg-jQ-JvL" firstAttribute="centerY" secondItem="wQ3-SS-99s" secondAttribute="centerY" id="AvQ-lY-ihy"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="width" secondItem="c6G-OJ-Xcp" secondAttribute="width" id="CYj-Y3-oo1"/>
                             <constraint firstItem="wQ3-SS-99s" firstAttribute="leading" secondItem="bZg-jQ-JvL" secondAttribute="trailing" constant="8" symbolic="YES" id="FRG-h5-w5r"/>
-                            <constraint firstItem="2as-Ie-HDI" firstAttribute="bottom" secondItem="Imu-mn-Ti7" secondAttribute="top" id="J3Y-nU-Mdq"/>
                             <constraint firstItem="wQ3-SS-99s" firstAttribute="centerX" secondItem="c6G-OJ-Xcp" secondAttribute="centerX" id="Kog-gl-cZB"/>
                             <constraint firstItem="2as-Ie-HDI" firstAttribute="width" secondItem="c6G-OJ-Xcp" secondAttribute="width" id="Kxu-m7-YE2"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="top" secondItem="wQ3-SS-99s" secondAttribute="bottom" constant="25" id="Lu0-Bg-AFw"/>
@@ -467,7 +466,7 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="bZg-jQ-JvL" firstAttribute="leading" secondItem="c6G-OJ-Xcp" secondAttribute="leading" constant="16" id="Wt6-rJ-nK5"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="centerX" secondItem="c6G-OJ-Xcp" secondAttribute="centerX" id="Xdw-Tz-Z8F"/>
                             <constraint firstItem="Imu-mn-Ti7" firstAttribute="top" secondItem="uTh-ak-uwr" secondAttribute="bottom" constant="20" id="jzF-ds-gDt"/>
-                            <constraint firstItem="2as-Ie-HDI" firstAttribute="leading" secondItem="c6G-OJ-Xcp" secondAttribute="leading" id="qhT-iV-j2P"/>
+                            <constraint firstItem="2as-Ie-HDI" firstAttribute="centerX" secondItem="c6G-OJ-Xcp" secondAttribute="centerX" id="lyd-WG-taF"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="top" secondItem="bZg-jQ-JvL" secondAttribute="bottom" constant="30" id="soM-ZD-0it"/>
                             <constraint firstItem="uTh-ak-uwr" firstAttribute="top" secondItem="utc-kJ-6xK" secondAttribute="bottom" constant="38" id="vJF-Aj-LDQ"/>
                         </constraints>
