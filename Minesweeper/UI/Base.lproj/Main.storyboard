@@ -549,7 +549,7 @@ Of course to see where it was, you need to click on location marker.</string>
                         <constraints>
                             <constraint firstItem="f16-RR-llk" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leading" id="3xM-gQ-xyx"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="top" secondItem="7R4-gp-Uc6" secondAttribute="bottom" constant="8" symbolic="YES" id="5Vi-t5-7fM"/>
-                            <constraint firstItem="f16-RR-llk" firstAttribute="bottom" secondItem="YhT-4A-N1u" secondAttribute="top" id="6Ux-Do-rq7"/>
+                            <constraint firstItem="tA8-4X-OEt" firstAttribute="width" secondItem="M8i-Kr-8Ry" secondAttribute="width" id="7KX-xw-cBq"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="height" secondItem="7R4-gp-Uc6" secondAttribute="height" id="9Zm-vu-wUv"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="width" secondItem="QUn-ig-cjA" secondAttribute="width" id="Gxr-Bp-Wct"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leadingMargin" constant="88" id="Nia-nA-ZLA"/>
@@ -560,16 +560,14 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="rK7-m6-oJ9" firstAttribute="top" secondItem="TVt-lZ-g0V" secondAttribute="bottom" constant="27" id="XHM-WX-FB0"/>
                             <constraint firstItem="YhT-4A-N1u" firstAttribute="top" secondItem="tA8-4X-OEt" secondAttribute="bottom" constant="43" id="XrS-GC-wOH"/>
                             <constraint firstItem="rK7-m6-oJ9" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leadingMargin" constant="81" id="Xzt-Lf-XW3"/>
-                            <constraint firstAttribute="trailing" secondItem="f16-RR-llk" secondAttribute="trailing" id="Zs3-bW-TkQ"/>
                             <constraint firstItem="rK7-m6-oJ9" firstAttribute="centerX" secondItem="f16-RR-llk" secondAttribute="centerX" id="aPF-U4-9jx"/>
+                            <constraint firstItem="f16-RR-llk" firstAttribute="centerY" secondItem="QUn-ig-cjA" secondAttribute="centerY" id="daO-gG-OJg"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="centerX" secondItem="rK7-m6-oJ9" secondAttribute="centerX" id="dpD-z9-vrb"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="centerY" secondItem="rK7-m6-oJ9" secondAttribute="centerY" id="f5y-BP-Jg1"/>
-                            <constraint firstItem="f16-RR-llk" firstAttribute="top" secondItem="QUn-ig-cjA" secondAttribute="top" id="inQ-v3-oH8"/>
+                            <constraint firstItem="tA8-4X-OEt" firstAttribute="height" secondItem="M8i-Kr-8Ry" secondAttribute="height" id="kck-K6-DRV"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="baseline" secondItem="7R4-gp-Uc6" secondAttribute="firstBaseline" id="sda-Lo-9kC"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="height" secondItem="QUn-ig-cjA" secondAttribute="height" id="xU8-fh-aq3"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="trailing" secondItem="QUn-ig-cjA" secondAttribute="trailingMargin" id="y6X-q9-aO2"/>
-                            <constraint firstItem="7R4-gp-Uc6" firstAttribute="baseline" secondItem="M8i-Kr-8Ry" secondAttribute="firstBaseline" id="ymb-FV-xyE"/>
-                            <constraint firstItem="M8i-Kr-8Ry" firstAttribute="leading" secondItem="7R4-gp-Uc6" secondAttribute="trailing" constant="29" id="zRt-RV-G5i"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -596,7 +594,7 @@ Of course to see where it was, you need to click on location marker.</string>
                                 <rect key="frame" x="16" y="568" width="165" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="56" id="c5Q-ky-xyQ"/>
-                                    <constraint firstAttribute="width" constant="165" id="kFq-jM-iSc"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="kFq-jM-iSc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Save" backgroundImage="table">
@@ -605,6 +603,10 @@ Of course to see where it was, you need to click on location marker.</string>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="if0-Z5-OtN" userLabel="Cancel Btn">
                                 <rect key="frame" x="194" y="568" width="165" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="165" id="R5x-Ju-aWQ"/>
+                                    <constraint firstAttribute="height" constant="56" id="jz9-UJ-z27"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Cancel" backgroundImage="table">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -622,7 +624,7 @@ Of course to see where it was, you need to click on location marker.</string>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Record" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2H-bZ-v3U">
                                 <rect key="frame" x="126.5" y="54" width="122" height="33"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="122" id="dPo-t7-sLm"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="122" id="dPo-t7-sLm"/>
                                     <constraint firstAttribute="height" constant="33" id="sGO-Gc-qo8"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
@@ -635,9 +637,8 @@ Of course to see where it was, you need to click on location marker.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="table" disabledBackground="table" translatesAutoresizingMaskIntoConstraints="NO" id="zeo-SO-Ss7" userLabel="Name Text Field">
-                                <rect key="frame" x="20" y="261" width="334" height="45"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" background="table" disabledBackground="table" translatesAutoresizingMaskIntoConstraints="NO" id="zeo-SO-Ss7" userLabel="Name Text Field">
+                                <rect key="frame" x="20" y="260" width="335" height="52"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -648,26 +649,27 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="d2H-bZ-v3U" firstAttribute="top" secondItem="yxE-Mg-21a" secondAttribute="bottom" constant="34" id="0QF-7W-qPH"/>
                             <constraint firstItem="cFA-30-BAW" firstAttribute="centerY" secondItem="fH4-6r-IaJ" secondAttribute="centerY" id="18x-ZM-cih"/>
                             <constraint firstItem="cFA-30-BAW" firstAttribute="centerX" secondItem="fH4-6r-IaJ" secondAttribute="centerX" id="1VA-ky-htl"/>
-                            <constraint firstItem="S1w-uM-Z80" firstAttribute="bottom" secondItem="lqu-Qc-sI1" secondAttribute="top" id="2JB-Xb-Qcr"/>
-                            <constraint firstItem="if0-Z5-OtN" firstAttribute="leading" secondItem="9tk-BE-Xao" secondAttribute="trailing" constant="13" id="2Qh-7c-alc"/>
-                            <constraint firstItem="if0-Z5-OtN" firstAttribute="trailing" secondItem="gLS-wI-5r5" secondAttribute="trailingMargin" id="3fS-NJ-Azh"/>
-                            <constraint firstItem="fH4-6r-IaJ" firstAttribute="top" secondItem="2eM-sF-lYb" secondAttribute="bottom" constant="57" id="AgY-e6-Rbv"/>
+                            <constraint firstItem="zeo-SO-Ss7" firstAttribute="width" secondItem="fH4-6r-IaJ" secondAttribute="width" constant="1" id="9ID-MZ-PrO"/>
+                            <constraint firstItem="S1w-uM-Z80" firstAttribute="centerY" secondItem="gLS-wI-5r5" secondAttribute="centerY" id="9LA-9E-gW2"/>
+                            <constraint firstItem="fH4-6r-IaJ" firstAttribute="top" secondItem="2eM-sF-lYb" secondAttribute="bottom" constant="93" id="AgY-e6-Rbv"/>
                             <constraint firstItem="2eM-sF-lYb" firstAttribute="leading" secondItem="gLS-wI-5r5" secondAttribute="leadingMargin" constant="81" id="CTN-8b-iGr"/>
+                            <constraint firstItem="9tk-BE-Xao" firstAttribute="leading" secondItem="gLS-wI-5r5" secondAttribute="leading" constant="16" id="Dqd-op-pt1"/>
                             <constraint firstItem="fH4-6r-IaJ" firstAttribute="leading" secondItem="gLS-wI-5r5" secondAttribute="leadingMargin" constant="4" id="F3c-nV-xh7"/>
-                            <constraint firstItem="cFA-30-BAW" firstAttribute="top" secondItem="2eM-sF-lYb" secondAttribute="bottom" constant="67" id="FzR-XF-2GJ"/>
-                            <constraint firstItem="S1w-uM-Z80" firstAttribute="top" secondItem="gLS-wI-5r5" secondAttribute="top" id="GuA-Jz-blE"/>
+                            <constraint firstItem="cFA-30-BAW" firstAttribute="top" secondItem="2eM-sF-lYb" secondAttribute="bottom" constant="103" id="FzR-XF-2GJ"/>
+                            <constraint firstAttribute="trailing" secondItem="if0-Z5-OtN" secondAttribute="trailing" constant="16" id="I0N-g9-QQE"/>
                             <constraint firstItem="fH4-6r-IaJ" firstAttribute="centerX" secondItem="d2H-bZ-v3U" secondAttribute="centerX" id="Iee-Hk-oH0"/>
-                            <constraint firstItem="lqu-Qc-sI1" firstAttribute="top" secondItem="9tk-BE-Xao" secondAttribute="bottom" constant="43" id="QEa-7Q-HsK"/>
-                            <constraint firstItem="if0-Z5-OtN" firstAttribute="top" secondItem="9tk-BE-Xao" secondAttribute="top" id="Rz1-uQ-U71"/>
+                            <constraint firstItem="if0-Z5-OtN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9tk-BE-Xao" secondAttribute="trailing" constant="8" symbolic="YES" id="QQ5-So-brJ"/>
+                            <constraint firstItem="zeo-SO-Ss7" firstAttribute="top" secondItem="fH4-6r-IaJ" secondAttribute="bottom" constant="18" id="SIQ-2V-jO6"/>
+                            <constraint firstItem="zeo-SO-Ss7" firstAttribute="height" secondItem="fH4-6r-IaJ" secondAttribute="height" id="XMh-bX-FmF"/>
+                            <constraint firstItem="zeo-SO-Ss7" firstAttribute="centerX" secondItem="S1w-uM-Z80" secondAttribute="centerX" id="bWh-Ej-eDQ"/>
                             <constraint firstItem="2eM-sF-lYb" firstAttribute="centerY" secondItem="d2H-bZ-v3U" secondAttribute="centerY" id="dfc-7K-scT"/>
                             <constraint firstItem="S1w-uM-Z80" firstAttribute="height" secondItem="gLS-wI-5r5" secondAttribute="height" id="eNx-2I-tFr"/>
-                            <constraint firstAttribute="trailing" secondItem="S1w-uM-Z80" secondAttribute="trailing" id="fcS-kB-cR7"/>
                             <constraint firstItem="S1w-uM-Z80" firstAttribute="leading" secondItem="gLS-wI-5r5" secondAttribute="leading" id="hgD-a0-0wL"/>
+                            <constraint firstItem="zeo-SO-Ss7" firstAttribute="centerX" secondItem="fH4-6r-IaJ" secondAttribute="centerX" id="iba-yx-OdE"/>
                             <constraint firstItem="2eM-sF-lYb" firstAttribute="top" secondItem="yxE-Mg-21a" secondAttribute="bottom" constant="24" id="kh7-My-LBQ"/>
                             <constraint firstItem="S1w-uM-Z80" firstAttribute="width" secondItem="gLS-wI-5r5" secondAttribute="width" id="nyB-Pf-6d0"/>
-                            <constraint firstItem="9tk-BE-Xao" firstAttribute="leading" secondItem="gLS-wI-5r5" secondAttribute="leadingMargin" id="o84-9I-usF"/>
-                            <constraint firstItem="if0-Z5-OtN" firstAttribute="baseline" secondItem="9tk-BE-Xao" secondAttribute="firstBaseline" id="pyN-ea-iOB"/>
-                            <constraint firstItem="if0-Z5-OtN" firstAttribute="firstBaseline" secondItem="9tk-BE-Xao" secondAttribute="baseline" id="tdT-kk-7zO"/>
+                            <constraint firstItem="lqu-Qc-sI1" firstAttribute="top" secondItem="9tk-BE-Xao" secondAttribute="bottom" constant="43" id="r9j-JL-T5N"/>
+                            <constraint firstItem="lqu-Qc-sI1" firstAttribute="top" secondItem="if0-Z5-OtN" secondAttribute="bottom" constant="43" id="uJE-pw-nqr"/>
                             <constraint firstItem="2eM-sF-lYb" firstAttribute="centerX" secondItem="d2H-bZ-v3U" secondAttribute="centerX" id="uSu-Zi-BDj"/>
                             <constraint firstItem="d2H-bZ-v3U" firstAttribute="centerX" secondItem="S1w-uM-Z80" secondAttribute="centerX" id="vhF-M2-pnI"/>
                         </constraints>
