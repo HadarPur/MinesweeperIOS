@@ -28,7 +28,7 @@ class FirebaseStorage: NSObject {
         self.myRefHard = Database.database().reference(withPath: "HardRecords")
     }
     
-    //read from fire base
+    //read from firebase
     func readResults(level: Int, callback: @escaping () -> ()) {
         switch level {
         case EASY:
@@ -45,7 +45,45 @@ class FirebaseStorage: NSObject {
         }
     }
     
-    //fire base event
+    // replace user in firebase
+    func replaceUser(user: UserInfo,level: Int, users: Array<UserInfo>) {
+        let key: Int = users[users.count-1].getKey()
+        let keyStr: String = " "+String(key)
+        user.setKey(key: key)
+        switch level {
+            case EASY:
+                myRefEasy.child(keyStr).setValue(user)
+                break
+            case NORMAL:
+                myRefMedium.child(keyStr).setValue(user)
+                break
+            case HARD:
+                myRefHard.child(keyStr).setValue(user)
+                break
+            default:
+                break
+        }
+    }
+    
+    // write new user in firebase
+    func writeUser(user: UserInfo,level: Int) {
+        let keyStr: String = " "+String(user.getKey())
+        switch level {
+        case EASY:
+            myRefEasy.child(keyStr).setValue(user)
+            break
+        case NORMAL:
+            myRefMedium.child(keyStr).setValue(user)
+            break
+        case HARD:
+            myRefHard.child(keyStr).setValue(user)
+            break
+        default:
+            break
+        }
+    }
+    
+    //firebase event
     func callingEvent(myRef: DatabaseReference, level: Int, callback: @escaping () -> ()) {
         self.easyUsers.removeAll()
         self.normalUsers.removeAll()

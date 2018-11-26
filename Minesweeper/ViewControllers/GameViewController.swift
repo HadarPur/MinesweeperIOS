@@ -27,20 +27,19 @@ class GameViewController: UIViewController {
     var mNumOfRows: Int?
     var mNumOfColumns: Int?
     var mIsGameEnabled = true
- //   var  cells: [[CollectionViewCell]]!
-
-
+    var jsonData: FirebaseStorage!
     @IBOutlet weak var mTimeTextView: UITextView!
     @IBOutlet weak var mFlagsTextView: UITextView!
     @IBOutlet weak var mGameBoard: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.mGameBoard.isScrollEnabled = false
         self.isChangedOnce = false
         self.isChangeMines = false
         
-        self.mGameBoard.isScrollEnabled = false
+        self.jsonData = FirebaseStorage()
+         // need to do network check!!!!!!!!!!!!!!!!!!!
         
         createNewGame()
     }

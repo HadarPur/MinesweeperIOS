@@ -34,7 +34,7 @@ class RecordsViewController: UIViewController, CallData {
         
         //initialize Firebase
         self.mFbStorage = FirebaseStorage()
-        eazyBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
+        self.eazyBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: EASY, callback: {
             self.performQuery()
         })
@@ -50,30 +50,33 @@ class RecordsViewController: UIViewController, CallData {
     }
     
     @IBAction func hardBtnPressed(_ sender: Any) {
-        hardBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
-        normalBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        eazyBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.hardBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
+        self.normalBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.eazyBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: HARD, callback: {
             self.performQuery()
         })
+        self.checkGPS()
     }
     
     @IBAction func normalBtnPressed(_ sender: Any) {
-        hardBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        normalBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
-        eazyBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.hardBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.normalBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
+        self.eazyBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: NORMAL, callback: {
             self.performQuery()
         })
+        self.checkGPS()
     }
     
     @IBAction func eazyBtnPressed(_ sender: Any) {
-        hardBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        normalBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        eazyBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
+        self.hardBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.normalBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.eazyBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: EASY, callback: {
             self.performQuery()
         })
+        self.checkGPS()
     }
     
     @IBAction func backBtn(_ sender: Any) {
@@ -157,7 +160,6 @@ class RecordsViewController: UIViewController, CallData {
         let loc: CLLocation = CLLocation(latitude:userLocetion.latitude, longitude: userLocetion.longitude)
         let marker = GMSMarker(position: userLocetion)
         
-        marker.title = "Current Position"
         
         if (latitude != 0 && longitude != 0) {
             geocoder.reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) in
@@ -165,10 +167,15 @@ class RecordsViewController: UIViewController, CallData {
                     print("reverse geodcode fail: \(error!.localizedDescription)")
                 }
                 else {
+                    marker.title = "Current Position"
                     let locationStreet = placemarks?[0]
                     marker.snippet = (locationStreet?.name)!+", "+(locationStreet?.locality)!
                 }
             })
+        }
+        else{
+            marker.title = "No Position to show"
+
         }
         
         self.mapView.animate(to: camera)
@@ -190,8 +197,11 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         self.setLocationOnTheMap(latitudeUser: self.usersData[indexPath.row].getLatitude(), longitudeUser: self.usersData[indexPath.row].getLongitude(), titleUser: self.usersData[indexPath.row].toString())
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
