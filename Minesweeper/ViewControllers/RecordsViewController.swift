@@ -135,13 +135,16 @@ class RecordsViewController: UIViewController, CallData {
         marker.iconView = UIImageView(image: UIImage(named: "mark.png"))
         marker.title = titleUser
         
+        
         geocoder.reverseGeocodeLocation(loc, completionHandler: {(placemarks, error) in
             if (error != nil) {
                 print("reverse geodcode fail: \(error!.localizedDescription)")
             }
             else {
                 let locationStreet = placemarks?[0]
-                marker.snippet = (locationStreet?.name)!+", "+(locationStreet?.locality)!
+                let locName: String = locationStreet?.name ?? "null"
+                let locLocality: String = locationStreet?.locality ?? "null"
+                marker.snippet = locName+", "+locLocality
             }
         })
         
@@ -169,13 +172,14 @@ class RecordsViewController: UIViewController, CallData {
                 else {
                     marker.title = "Current Position"
                     let locationStreet = placemarks?[0]
-                    marker.snippet = (locationStreet?.name)!+", "+(locationStreet?.locality)!
+                    let locName: String = locationStreet?.name ?? "null"
+                    let locLocality: String = locationStreet?.locality ?? "null"
+                    marker.snippet = locName+", "+locLocality
                 }
             })
         }
         else{
             marker.title = "No Position to show"
-
         }
         
         self.mapView.animate(to: camera)
@@ -197,7 +201,6 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         self.setLocationOnTheMap(latitudeUser: self.usersData[indexPath.row].getLatitude(), longitudeUser: self.usersData[indexPath.row].getLongitude(), titleUser: self.usersData[indexPath.row].toString())
@@ -207,17 +210,16 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // extension for map view
 extension RecordsViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        guard status == .authorizedWhenInUse else {
+            return
+        }
+        self.locationManager.startUpdatingLocation()
     
-  func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    guard status == .authorizedWhenInUse else {
-    return
+        self.mapView.isMyLocationEnabled = true
+        self.mapView.settings.myLocationButton = true
+    
     }
-    self.locationManager.startUpdatingLocation()
-    
-    self.mapView.isMyLocationEnabled = true
-    self.mapView.settings.myLocationButton = true
-    }
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         self.locationManager.stopUpdatingLocation()
     }
