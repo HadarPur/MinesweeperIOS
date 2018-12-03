@@ -7,6 +7,7 @@
 //
 import Foundation
 import UIKit
+import GameplayKit
 
 class GameViewController: UIViewController {
     let EASY: Int = 0, NORMAL: Int = 1, HARD: Int = 2
@@ -28,6 +29,8 @@ class GameViewController: UIViewController {
     var mNumOfColumns: Int?
     var mIsGameEnabled = true
     var jsonData: FirebaseStorage!
+    var cells = [[CollectionViewCell]]()
+    var setFlags: Set<Int>?
     @IBOutlet weak var mTimeTextView: UITextView!
     @IBOutlet weak var mFlagsTextView: UITextView!
     @IBOutlet weak var mGameBoard: UICollectionView!
@@ -49,18 +52,24 @@ class GameViewController: UIViewController {
     }
 
     func createNewGame() {
+        self.isLost = false
+        self.countOfPressed = 0
+        
         switch self.mDiff {
         case EASY:
             mNumOfRows = BOARD_CELL10
             mNumOfColumns = BOARD_CELL10
+            initGame(level: EASY_FLAGS, boardSize: BOARD_CELL10)
             break
         case NORMAL:
             mNumOfRows = BOARD_CELL10
             mNumOfColumns = BOARD_CELL10
+            initGame(level: HARD_FLAGS, boardSize: BOARD_CELL10)
             break
         case HARD:
             mNumOfRows = BOARD_CELL5
             mNumOfColumns = BOARD_CELL5
+            initGame(level: HARD_FLAGS, boardSize: BOARD_CELL5)
             break
         default:
             break
@@ -68,15 +77,150 @@ class GameViewController: UIViewController {
     }
     
     func pressNewGame() {
+        self.isFirstClick = true
+        self.seconds=0
+        createNewGame()
+    }
+    
+    func initGame(level: Int, boardSize: Int) {
+        self.count = level
+        self.setFlags = Set<Int>()
         
+        while self.setFlags?.count ?? 0 < level {
+            let randomSource = GKRandomSource.sharedRandom()
+            let index = randomSource.nextInt(upperBound: boardSize*boardSize)+0 // returns random Int between 0 and 9
+            print("ran:\(index)\n")
+            self.setFlags?.insert(index)
+        }
+        
+        for i in 0..<boardSize {
+            var row = [CollectionViewCell]()
+            for j in 0..<boardSize {
+                let oneCell = CollectionViewCell()
+                if(self.setFlags?.contains(i*boardSize+j) ?? false) {
+                    oneCell.configure(row: i, col: j, status: -1)
+                }
+                else {
+                    oneCell.configure(row: i, col: j, status: 0)
+                }
+                row.append(oneCell)
+            }
+            self.cells.append(row)
+        }
+        
+        createTimeStartFlags()
+        setBombsNum(boardSize: boardSize)
     }
 
+    func createTimeStartFlags() {
+        mFlagsTextView.text = "\(self.count ?? 0)"
+        mTimeTextView.text = "\(0)"
+    }
+    
+    func setBombsNum(boardSize: Int) {
+        var sum: Int = 0, i: Int = 0, j: Int = 0
+
+        for i in 1..<boardSize-1 {
+            print("i=\(i)")
+            for j in 1..<boardSize-1 {
+                print("j=\(j)")
+                if self.cells[i][j].getStatus() != -1 {
+                    sum = abs(calculateSum(startRow: i-1, endRow: i+1, startCol: j-1, endCol: j+1))
+                    self.cells[i][j].setStatus(status: sum)
+                    print("sum: \(sum)")
+                }
+            }
+        }
+        
+        // first col
+        j = 0
+        for i in 1..<boardSize-1 {
+            if self.cells[i][j].getStatus() != -1 {
+                sum = abs(calculateSum(startRow: i-1, endRow: i+1, startCol: j, endCol: j+1))
+                self.cells[i][j].setStatus(status: sum)
+                print("sum: \(sum)")
+            }
+        }
+        
+        // first row
+        i = 0
+        for j in 1..<boardSize-1 {
+            if self.cells[i][j].getStatus() != -1 {
+                sum = abs(calculateSum(startRow: i, endRow: i+1, startCol: j-1, endCol: j+1))
+                self.cells[i][j].setStatus(status: sum)
+                print("sum: \(sum)")
+            }
+        }
+        
+        // last col
+        j = boardSize-1
+        for i in 1..<boardSize-1 {
+            if self.cells[i][j].getStatus() != -1  {
+                sum = abs(calculateSum(startRow: i-1, endRow: i+1, startCol: j-1, endCol: j))
+                self.cells[i][j].setStatus(status: sum)
+                print("sum: \(sum)")
+            }
+        }
+        
+        // last row
+        i = boardSize-1
+        for j in 1..<boardSize-1 {
+            if self.cells[i][j].getStatus() != -1  {
+                sum = abs(calculateSum(startRow: i-1, endRow: i, startCol: j-1, endCol: j+1))
+                self.cells[i][j].setStatus(status: sum)
+                print("sum: \(sum)")
+            }
+        }
+        
+        j = 0
+        i = 0
+        if self.cells[i][j].getStatus() != -1 {
+            sum = abs(calculateSum(startRow: i, endRow: i+1, startCol: j, endCol: j+1))
+            self.cells[i][j].setStatus(status: sum)
+            print("sum: \(sum)")
+        }
+        
+        j = boardSize-1
+        if self.cells[i][j].getStatus() != -1 {
+            sum = abs(calculateSum(startRow: i, endRow: i+1, startCol: j-1, endCol: j))
+            self.cells[i][j].setStatus(status: sum)
+            print("sum: \(sum)")
+        }
+        
+        i = boardSize-1
+        if self.cells[i][j].getStatus() != -1 {
+            sum = abs(calculateSum(startRow: i-1, endRow: i, startCol: j-1, endCol: j))
+            self.cells[i][j].setStatus(status: sum)
+            print("sum: \(sum)")
+        }
+    
+        j = 0
+        if self.cells[i][j].getStatus() != -1 {
+            sum = abs(calculateSum(startRow: i-1, endRow: i, startCol: j, endCol: j+1))
+            self.cells[i][j].setStatus(status: sum)
+            print("sum: \(sum)")
+        }
+    }
+    
+    func calculateSum(startRow: Int, endRow: Int, startCol: Int, endCol: Int) -> Int {
+        var sum: Int = 0
+        for i in startRow...endRow  {
+            for j in startCol...endCol {
+                if self.cells[i][j].getStatus() == -1 {
+                    sum += self.cells[i][j].getStatus()
+                }
+            }
+        }
+        return sum
+    }
+    
     // MARK: Actions
     @IBAction func backBtn(_ sender: Any) {
         _=self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func restartBtn(_ sender: UIButton) {
+        pressNewGame();
         sender.rotationAnimation()
     }
 }
