@@ -229,6 +229,7 @@
                     <connections>
                         <outlet property="mFlagsTextView" destination="gDW-iF-Idl" id="5rp-7I-irg"/>
                         <outlet property="mGameBoard" destination="yV6-cW-Meh" id="8RH-3V-UHd"/>
+                        <outlet property="mRestartBtn" destination="63b-Fo-SWb" id="vJ6-wq-Fdo"/>
                         <outlet property="mTimeTextView" destination="Yz9-EK-SDE" id="Gsh-k8-h6K"/>
                     </connections>
                 </viewController>
