@@ -210,7 +210,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func showAllMines() {
-        
+        for i in 0..<setFlags.count {
+            cells[i/cells.count][i%cells[0].count].pressButton()
+        }
     }
     
     func openCellRec(x: Int, y: Int) {
@@ -299,7 +301,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         openCellRec(x: indexPath[0], y: indexPath[1]);
                     }
                     cells[indexPath.row][indexPath[1]].pressButton()
-                    
+                    cells[indexPath.row][indexPath[1]].displayContent(image: UIImage(named: "tableopen")!, text: "n")
+
                     //animation when the player win
                     if (countOfPressed + setFlags.count >= cells.count*cells[0].count && isLost == false) {
                         explodeVictoryAnimation();
