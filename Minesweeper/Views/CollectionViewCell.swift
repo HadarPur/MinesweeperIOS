@@ -6,19 +6,23 @@
 //  Copyright © 2018 Hadar Pur. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellLable: UILabel!
+    
+    
     var row: Int!
     var col: Int!
     var status: Int!
     var isPressed: Bool!
     var isLongPressed: Bool!
+    let unPressedImage = UIImage(named: "table.png") as UIImage?
 
     override func awakeFromNib() {
+        super.awakeFromNib()
+
     }
 
     func configure(row: Int, col: Int, status: Int) {
@@ -27,11 +31,7 @@ class CollectionViewCell: UICollectionViewCell {
         self.status = status
         self.isPressed = false
         self.isLongPressed = false
-    }
 
-    func displayContent(image: UIImage, text: String) {
-        cellImage.image = image
-        cellLable.text = text
     }
     
     // returns number of bombs around the cell

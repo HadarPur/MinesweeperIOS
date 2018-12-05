@@ -146,14 +146,14 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="qTW-Fe-IeP" customClass="CollectionViewCell" customModule="Minesweeper" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CollectionViewCell" reuseIdentifier="CollectionViewCell" id="qTW-Fe-IeP" customClass="CollectionViewCell" customModule="Minesweeper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table" translatesAutoresizingMaskIntoConstraints="NO" id="BZy-29-AkO" userLabel="CellImage">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BZy-29-AkO" userLabel="CellImage">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8M-LW-LHb" userLabel="CellLabel">
@@ -175,8 +175,8 @@
                                             <constraint firstAttribute="trailing" secondItem="BZy-29-AkO" secondAttribute="trailing" id="trF-Tb-At9"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="cellImage" destination="BZy-29-AkO" id="ZyB-Nj-N6Y"/>
-                                            <outlet property="cellLable" destination="G8M-LW-LHb" id="Wdt-CW-EH9"/>
+                                            <outlet property="cellImage" destination="BZy-29-AkO" id="rXR-Gj-JQU"/>
+                                            <outlet property="cellLable" destination="G8M-LW-LHb" id="1cw-7p-4XI"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -308,7 +308,7 @@
                                 <color key="tintColor" red="0.64705882349999999" green="0.80392156859999997" blue="0.99215686270000003" alpha="0.71267658389999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="table" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="table" id="etd-fF-8BC" customClass="TableViewCell" customModule="Minesweeper" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="table" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="table" id="etd-fF-8BC" customClass="TableViewCell" customModule="Minesweeper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="etd-fF-8BC" id="cMO-xs-p48">
@@ -372,11 +372,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="eazyBtn" destination="IuQ-ea-law" id="m0V-ed-piJ"/>
-                        <outlet property="hardBtn" destination="j93-NN-TIM" id="8KZ-b6-3e4"/>
-                        <outlet property="mapView" destination="Mpm-9N-mBV" id="1qd-z1-W8i"/>
-                        <outlet property="normalBtn" destination="eMR-LW-Nts" id="Mtp-89-4zb"/>
-                        <outlet property="tableView" destination="EHu-di-bcE" id="REa-SQ-SVo"/>
+                        <outlet property="mEazyBtn" destination="IuQ-ea-law" id="m0V-ed-piJ"/>
+                        <outlet property="mHardBtn" destination="j93-NN-TIM" id="8KZ-b6-3e4"/>
+                        <outlet property="mMapView" destination="Mpm-9N-mBV" id="1qd-z1-W8i"/>
+                        <outlet property="mNormalBtn" destination="eMR-LW-Nts" id="Mtp-89-4zb"/>
+                        <outlet property="mTableView" destination="EHu-di-bcE" id="REa-SQ-SVo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FWU-2X-VKi" userLabel="First Responder" sceneMemberID="firstResponder"/>
