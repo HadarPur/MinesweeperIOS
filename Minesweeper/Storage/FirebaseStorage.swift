@@ -12,15 +12,14 @@ import UIKit
 
 class FirebaseStorage: NSObject {
     let EASY:Int = 0, NORMAL:Int = 1, HARD:Int = 2;
-    var readed: UserInfo!
+    var mReaded: UserInfo!
     var myRefEasy: DatabaseReference!
     var myRefMedium: DatabaseReference!
     var myRefHard: DatabaseReference!
-    var easyUsers : Array<UserInfo> = Array()
-    var normalUsers : Array<UserInfo> = Array()
-    var hardUsers : Array<UserInfo> = Array()
-    var users : Array<UserInfo> = Array()
-
+    var mEasyUsers : Array<UserInfo> = Array()
+    var mNormalUsers : Array<UserInfo> = Array()
+    var mHardUsers : Array<UserInfo> = Array()
+    var mUsers : Array<UserInfo> = Array()
 
     override init() {
         self.myRefEasy = Database.database().reference(withPath: "EasyRecords")
@@ -52,13 +51,13 @@ class FirebaseStorage: NSObject {
         user.setKey(key: key)
         switch level {
             case EASY:
-                myRefEasy.child(keyStr).setValue(user)
+                self.myRefEasy.child(keyStr).setValue(user)
                 break
             case NORMAL:
-                myRefMedium.child(keyStr).setValue(user)
+                self.myRefMedium.child(keyStr).setValue(user)
                 break
             case HARD:
-                myRefHard.child(keyStr).setValue(user)
+                self.myRefHard.child(keyStr).setValue(user)
                 break
             default:
                 break
@@ -70,13 +69,13 @@ class FirebaseStorage: NSObject {
         let keyStr: String = " "+String(user.getKey())
         switch level {
         case EASY:
-            myRefEasy.child(keyStr).setValue(user)
+            self.myRefEasy.child(keyStr).setValue(user)
             break
         case NORMAL:
-            myRefMedium.child(keyStr).setValue(user)
+            self.myRefMedium.child(keyStr).setValue(user)
             break
         case HARD:
-            myRefHard.child(keyStr).setValue(user)
+            self.myRefHard.child(keyStr).setValue(user)
             break
         default:
             break
@@ -85,9 +84,9 @@ class FirebaseStorage: NSObject {
     
     //firebase event
     func callingEvent(myRef: DatabaseReference, level: Int, callback: @escaping () -> ()) {
-        self.easyUsers.removeAll()
-        self.normalUsers.removeAll()
-        self.hardUsers.removeAll()
+        self.mEasyUsers.removeAll()
+        self.mNormalUsers.removeAll()
+        self.mHardUsers.removeAll()
 
         myRef.observeSingleEvent(of: .value, with: { (snapshot) in
             let iterator = snapshot.children
@@ -98,18 +97,18 @@ class FirebaseStorage: NSObject {
                 let latitude = userDic["latitude"] as! Double
                 let longitude = userDic["longitude"] as! Double
                 let points = userDic["points"] as! Int
-                self.readed = UserInfo()
-                self.readed.UserInfo(key: key,name: name,latitude: latitude,longitude: longitude,points: points,level: level)
+                self.mReaded = UserInfo()
+                self.mReaded.UserInfo(key: key,name: name,latitude: latitude,longitude: longitude,points: points,level: level)
                 
                 switch level {
                 case self.EASY:
-                    self.easyUsers.append(self.readed)
+                    self.mEasyUsers.append(self.mReaded)
                     break
                 case self.NORMAL:
-                    self.normalUsers.append(self.readed)
+                    self.mNormalUsers.append(self.mReaded)
                     break
                 case self.HARD:
-                    self.hardUsers.append(self.readed)
+                    self.mHardUsers.append(self.mReaded)
                     break
                 default:
                     break
@@ -118,18 +117,18 @@ class FirebaseStorage: NSObject {
             
             switch level {
             case self.EASY:
-                self.easyUsers.sort(by: self.sorterForArray)
-                self.users = self.easyUsers
+                self.mEasyUsers.sort(by: self.sorterForArray)
+                self.mUsers = self.mEasyUsers
                 callback()
                 break;
             case self.NORMAL:
-                self.normalUsers.sort(by: self.sorterForArray)
-                self.users = self.normalUsers
+                self.mNormalUsers.sort(by: self.sorterForArray)
+                self.mUsers = self.mNormalUsers
                 callback()
                 break;
             case self.HARD:
-                self.hardUsers.sort(by: self.sorterForArray)
-                self.users = self.hardUsers
+                self.mHardUsers.sort(by: self.sorterForArray)
+                self.mUsers = self.mHardUsers
                 callback()
                 break;
             default:
@@ -145,6 +144,6 @@ class FirebaseStorage: NSObject {
     }
     
     func getUserInfoArray() -> Array<UserInfo> {
-        return self.users
+        return self.mUsers
     }
 }

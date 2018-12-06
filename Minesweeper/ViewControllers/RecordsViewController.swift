@@ -24,19 +24,19 @@ class RecordsViewController: UIViewController, CallData {
     @IBOutlet weak var mEazyBtn: UIButton!
     @IBOutlet weak var mNormalBtn: UIButton!
     @IBOutlet weak var mHardBtn: UIButton!
-    
-    let unPressedImage = UIImage(named: "table.png") as UIImage?
-    let pressedImage = UIImage(named: "tableopen.png") as UIImage?
 
     var mCurrentLat: Double = 0
     var mCurrentLong: Double = 0
+    
+    let mUnPressedImage = UIImage(named: "table.png") as UIImage?
+    let mPressedImage = UIImage(named: "tableopen.png") as UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //initialize Firebase
         self.mFbStorage = FirebaseStorage()
-        self.mEazyBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
+        self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: EASY, callback: {
             self.performQuery()
         })
@@ -53,9 +53,9 @@ class RecordsViewController: UIViewController, CallData {
     }
     
     @IBAction func hardBtnPressed(_ sender: Any) {
-        self.mHardBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
-        self.mNormalBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        self.mEazyBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.mHardBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
+        self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
+        self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: HARD, callback: {
             self.performQuery()
         })
@@ -63,9 +63,9 @@ class RecordsViewController: UIViewController, CallData {
     }
     
     @IBAction func normalBtnPressed(_ sender: Any) {
-        self.mHardBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        self.mNormalBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
-        self.mEazyBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
+        self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
+        self.mNormalBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
+        self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: NORMAL, callback: {
             self.performQuery()
         })
@@ -73,9 +73,9 @@ class RecordsViewController: UIViewController, CallData {
     }
     
     @IBAction func eazyBtnPressed(_ sender: Any) {
-        self.mHardBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        self.mNormalBtn.setBackgroundImage(unPressedImage, for: UIControl.State.normal)
-        self.mEazyBtn.setBackgroundImage(pressedImage, for: UIControl.State.normal)
+        self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
+        self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
+        self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: EASY, callback: {
             self.performQuery()
         })

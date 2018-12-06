@@ -7,12 +7,13 @@
 //
 
 import UIKit
+
 class InstructionsViewController: UIViewController {
+    @IBOutlet weak var mTextViewField: UITextView!
     
-    @IBOutlet weak var textViewField: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        textViewField.scrollRangeToVisible(NSMakeRange(0, 0))
+        self.mTextViewField.scrollRangeToVisible(NSMakeRange(0, 0))
     }
     
     override func didReceiveMemoryWarning() {
@@ -21,8 +22,5 @@ class InstructionsViewController: UIViewController {
     
     @IBAction func backBtn(_ sender: Any) {
         _=self.navigationController?.popViewController(animated: true)
-
     }
-    
-    
 }

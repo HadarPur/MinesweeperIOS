@@ -12,66 +12,63 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellLable: UILabel!
     
-    
-    var row: Int!
-    var col: Int!
-    var status: Int!
-    var isPressed: Bool!
-    var isLongPressed: Bool!
-    let unPressedImage = UIImage(named: "table.png") as UIImage?
+    var mRow: Int!
+    var mCol: Int!
+    var mStatus: Int!
+    var mIsPressed: Bool!
+    var mIsLongPressed: Bool!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        print("prepareForReuse")
     }
-
+    
     func configure(row: Int, col: Int, status: Int) {
-        self.row = row
-        self.col = col
-        self.status = status
-        self.isPressed = false
-        self.isLongPressed = false
+        self.mRow = row
+        self.mCol = col
+        self.mStatus = status
+        self.mIsPressed = false
+        self.mIsLongPressed = false
 
     }
     
     // returns number of bombs around the cell
     func getStatus() -> Int {
-        return self.status
+        return self.mStatus
     }
     
     //set number of bombs around the cell
     func setStatus(status: Int){
-        self.status = status
+        self.mStatus = status
     }
     
     // chang cell status to be pressed
     func pressButton() {
-        self.isPressed = true
+        self.mIsPressed = true
     }
     
     //update cell status to be unpressed
     func unPress() {
-        self.isPressed = false
+        self.mIsPressed = false
     }
     
     //returns if cell was pressed
     func pressed() -> Bool{
-        return self.isPressed
+        return self.mIsPressed
     }
     
     //returns if cell was long pressed
     func pressLongButton() {
-        if self.isLongPressed == true {
-            self.isLongPressed = false
+        if self.mIsLongPressed == true {
+            self.mIsLongPressed = false
         }
         else {
-            self.isLongPressed = true
+            self.mIsLongPressed = true
         }
     }
     
     // chang cell status to be long pressed
     func longPressed() -> Bool{
-        return self.isLongPressed
+        return self.mIsLongPressed
     }
-    
 }

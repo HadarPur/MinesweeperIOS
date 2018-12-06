@@ -9,29 +9,29 @@
 
 class UserInfo {
     let EASY: Int = 0, NORMAL: Int = 1, HARD: Int = 2
-    var key: Int!
-    var name: String!
-    var latitude: Double!
-    var longitude: Double!
-    var points: Int!
-    var level: String!
+    var mKey: Int!
+    var mName: String!
+    var mLatitude: Double!
+    var mLongitude: Double!
+    var mPoints: Int!
+    var mLevel: String!
     
     func UserInfo(key: Int,name: String,latitude: Double,longitude: Double ,points: Int, level: Int){
-        self.key=key
-        self.name=name
-        self.latitude=latitude
-        self.longitude=longitude
-        self.points=points
+        self.mKey=key
+        self.mName=name
+        self.mLatitude=latitude
+        self.mLongitude=longitude
+        self.mPoints=points
         
         switch (level){
         case EASY:
-            self.level="Easy"
+            self.mLevel="Easy"
             break
         case NORMAL:
-            self.level="Medium"
+            self.mLevel="Medium"
             break
         case HARD:
-            self.level="Hard"
+            self.mLevel="Hard"
             break
         default:
             break
@@ -39,40 +39,40 @@ class UserInfo {
     }
     
     func getKey() -> Int {
-        return self.key
+        return self.mKey
     }
     
     func getName() -> String {
-        return self.name
+        return self.mName
     }
     
     func getLatitude() -> Double {
-        return self.latitude
+        return self.mLatitude
     }
     
     func getLongitude() -> Double {
-        return self.longitude
+        return self.mLongitude
     }
     
     func getPoints() -> Int {
-        return self.points
+        return self.mPoints
     }
     
     func getLevel() -> String {
-        return self.level
+        return self.mLevel
     }
     
     func setKey(key: Int) {
-        self.key = key
+        self.mKey = key
         
     }
     
     func toString() -> String{
         var objectString : String = ""
         objectString += "Name: "
-        objectString += self.name
+        objectString += self.mName
         objectString += "  , Time: "
-        objectString += String(self.points)
+        objectString += String(self.mPoints)
         objectString += " sec"
         return objectString;
     }

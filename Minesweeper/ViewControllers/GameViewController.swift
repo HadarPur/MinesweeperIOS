@@ -19,7 +19,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     let mFunctions = FuncUtils()
     
     var mLastUpdate: Int = 0
-    var mCount: Int = 0 , mSeconds: Int? , mCountOfPressed: Int = 0 , mChosenLevel: Int?
+    var mCount: Int = 0, mSeconds: Int = 0, mCountOfPressed: Int = 0, mChosenLevel: Int?
     var mIsLost: Bool = false, mIsFirstClick: Bool = true, mFirstAsk: Bool = false
     var mIsChangedOnce: Bool = false ,mIsChangeMines: Bool = false
 
@@ -27,10 +27,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var mNumOfRows: Int?
     var mNumOfColumns: Int?
     var mIsGameEnabled = true
-    var mJsonData: FirebaseStorage!
+    var mFbStorage: FirebaseStorage!
     var mCells = [[CollectionViewCell]]()
     var mSetFlags = Set<Int>()
-    
+    var mTimer = Timer()
+    var mUsersData : Array<UserInfo> = Array()
+
     @IBOutlet weak var mTimeTextView: UITextView!
     @IBOutlet weak var mFlagsTextView: UITextView!
     @IBOutlet weak var mGameBoard: UICollectionView!
@@ -45,15 +47,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidLoad()
         
         self.mGameBoard.isScrollEnabled = false
+        self.mIsChangedOnce = false
+        self.mIsChangeMines = false
         
         let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(longPressGR:)))
         longPressGR.minimumPressDuration = 0.5
         longPressGR.delaysTouchesBegan = true
         self.mGameBoard.addGestureRecognizer(longPressGR)
         
-        self.mJsonData = FirebaseStorage()
-        // need to do network check!!!!!!!!!!!!!!!!!!!
+        self.mFbStorage = FirebaseStorage()
         createNewGame()
+        
+        // need to do network check!!!!!!!!!!!!!!!!!!! and deal with the gps
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,14 +74,23 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         case EASY:
             initGame(level: EASY_FLAGS, boardSize: BOARD_CELL10)
             creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: EASY_FLAGS)
+            self.mFbStorage!.readResults(level: EASY, callback: {
+                self.performQuery()
+            })
             break
         case NORMAL:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL10)
             creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: HARD_FLAGS)
+            self.mFbStorage!.readResults(level: NORMAL, callback: {
+                self.performQuery()
+            })
             break
         case HARD:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL5)
             creatNewCollectionView(colNum: BOARD_CELL5, rowNum: BOARD_CELL5 , mines: HARD_FLAGS)
+            self.mFbStorage!.readResults(level: HARD, callback: {
+                self.performQuery()
+            })
             break
         default:
             break
@@ -83,22 +98,27 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func pressNewGame() {
+        self.mTimer.invalidate()
         self.mIsFirstClick = true
-        self.mSeconds=0
+        self.mSeconds = 0
         createNewGame()
     }
     
     func initGame(level: Int, boardSize: Int) {
         self.mCount = level
+        if self.mSetFlags.count > 0 {
+            self.mSetFlags.removeAll()
+        }
+        if self.mCells.count > 0 {
+            self.mCells.removeAll()
+            self.mGameBoard.reloadData()
+        }
         
         while self.mSetFlags.count < level {
             let randomSource = GKRandomSource.sharedRandom()
             let index = randomSource.nextInt(upperBound: boardSize*boardSize)+0 // returns random Int between 0 and 9
-            print("index: \(index)")
             self.mSetFlags.insert(index)
         }
-        
-        print("count flags: \(self.mSetFlags.count)")
         
         for i in 0..<boardSize {
             var row = [CollectionViewCell]()
@@ -106,7 +126,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 let oneCell = CollectionViewCell()
 
                 if self.mSetFlags.contains(i*boardSize+j) {
-                    print("[\(i), \(j)]")
                     oneCell.configure(row: i, col: j, status: -1)
                 }
                 else {
@@ -128,17 +147,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     func setBombsNum(boardSize: Int) {
         var sum: Int = 0, i: Int = 0, j: Int = 0
-
-        print("setBombsNum")
         
         for i in 1..<boardSize-1 {
             for j in 1..<boardSize-1 {
                 if self.mCells[i][j].getStatus() != -1 {
                     sum = calculateSum(startRow: i-1, endRow: i+1, startCol: j-1, endCol: j+1)
                     self.mCells[i][j].setStatus(status: sum)
-                }
-                else {
-                    print("[\(i), \(j)]")
                 }
             }
         }
@@ -150,9 +164,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 sum = calculateSum(startRow: i-1, endRow: i+1, startCol: j, endCol: j+1)
                 self.mCells[i][j].setStatus(status: sum)
             }
-            else {
-                print("[\(i), \(j)]")
-            }
         }
         
         // first row
@@ -161,9 +172,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             if self.mCells[i][j].getStatus() != -1 {
                 sum = calculateSum(startRow: i, endRow: i+1, startCol: j-1, endCol: j+1)
                 self.mCells[i][j].setStatus(status: sum)
-            }
-            else {
-                print("[\(i), \(j)]")
             }
         }
         
@@ -174,9 +182,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 sum = calculateSum(startRow: i-1, endRow: i+1, startCol: j-1, endCol: j)
                 self.mCells[i][j].setStatus(status: sum)
             }
-            else {
-                print("[\(i), \(j)]")
-            }
         }
         
         // last row
@@ -186,9 +191,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 sum = calculateSum(startRow: i-1, endRow: i, startCol: j-1, endCol: j+1)
                 self.mCells[i][j].setStatus(status: sum)
             }
-            else {
-                print("[\(i), \(j)]")
-            }
         }
         
         j = 0
@@ -197,35 +199,24 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             sum = calculateSum(startRow: i, endRow: i+1, startCol: j, endCol: j+1)
             self.mCells[i][j].setStatus(status: sum)
         }
-        else {
-            print("[\(i), \(j)]")
-        }
         
         j = boardSize-1
         if self.mCells[i][j].getStatus() != -1 {
             sum = calculateSum(startRow: i, endRow: i+1, startCol: j-1, endCol: j)
             self.mCells[i][j].setStatus(status: sum)
         }
-        else {
-            print("[\(i), \(j)]")
-        }
+
         
         i = boardSize-1
         if self.mCells[i][j].getStatus() != -1 {
             sum = calculateSum(startRow: i-1, endRow: i, startCol: j-1, endCol: j)
             self.mCells[i][j].setStatus(status: sum)
         }
-        else {
-            print("[\(i), \(j)]")
-        }
     
         j = 0
         if self.mCells[i][j].getStatus() != -1 {
             sum = calculateSum(startRow: i-1, endRow: i, startCol: j, endCol: j+1)
             self.mCells[i][j].setStatus(status: sum)
-        }
-        else {
-            print("[\(i), \(j)]")
         }
     }
     
@@ -241,41 +232,17 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         return sum
     }
     
-    
     func creatNewCollectionView(colNum: Int, rowNum: Int ,mines: Int) {
         self.mNumOfRows = rowNum
         self.mNumOfColumns = colNum
     }
     
     func showAllMines() {
-        print("showAllMines")
         for i in self.mSetFlags {
-            print("[\(i/mCells.count), \(i%mCells[0].count)]")
             self.mCells[i/mCells.count][i%mCells[0].count].pressButton()
             self.mCells[i/mCells.count][i%mCells[0].count].cellImage.image = bombImage
         }
     }
-    
-//    if (x < 0 || y < 0 || x > cells.length - 1 || y > cells[x].length - 1)
-//    return;
-//
-//    else if (cells[x][y].getStatus() > 0) {
-//    if(cells[x][y].pressed() == false) {
-//    cells[x][y].pressButton();
-//    countOfPressed++;
-//    ((ImageAdapterLevel) gridview.getAdapter()).notifyDataSetChanged();
-//    }
-//    return;
-//    }
-//    if (cells[x][y].getStatus() == 0 && cells[x][y].pressed() == false && cells[x][y].longPressed() == false) {
-//    cells[x][y].pressButton();
-//    countOfPressed++;
-//    ((ImageAdapterLevel) gridview.getAdapter()).notifyDataSetChanged();
-//    openCellRec(x - 1, y); //left
-//    openCellRec(x, y + 1);//down
-//    openCellRec(x, y - 1);//up
-//    openCellRec(x + 1, y); //right
-//    }
     
     func openCellRec(x: Int, y: Int) {
         if x < 0 || y < 0 || x > self.mCells.count - 1 || y > self.mCells.count - 1 {
@@ -302,6 +269,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
 
     }
+    
     func explodeVictoryAnimation() {
         
     }
@@ -342,6 +310,17 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
     
+    @objc func action() {
+        self.mSeconds += 1
+        self.mTimeTextView.text = "\(self.mSeconds)"
+    }
+    
+    //When starting a new conversation
+    func performQuery() {
+        print("Start reading users from DB\n")
+        self.mUsersData = self.mFbStorage!.getUserInfoArray()
+    }
+    
     // MARK: Actions
     @IBAction func backBtn(_ sender: Any) {
         _=self.navigationController?.popViewController(animated: true)
@@ -371,6 +350,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
             if cell.cellLable != nil {
                 lable = ""
             }
+            
             cell.cellLable.textAlignment = .center
             cell.cellLable.text = lable
             
@@ -382,7 +362,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             collectionView.backgroundColor = UIColor.clear
-            
             return self.mNumOfColumns ?? 10
         }
         
@@ -394,12 +373,13 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             if !mIsChangeMines {
                 print(" cell touched with indexPath row: \(indexPath[0]) indexPath col: \(indexPath[1])")
-                if !self.mCells[indexPath[0]][indexPath[1]].isLongPressed {
+                if !self.mCells[indexPath[0]][indexPath[1]].mIsLongPressed {
                     if mIsFirstClick {
                         self.mIsFirstClick = false
-                        //                        timer(mines)
+                        self.mTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.action), userInfo: nil, repeats: true)
                     }
                     if self.mCells[indexPath[0]][indexPath[1]].getStatus() == -1 {
+                        self.mTimer.invalidate()
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
                         showAllMines()
@@ -416,6 +396,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
                     //animation when the player win
                     if (self.mCountOfPressed + self.mSetFlags.count >= self.mCells.count*self.mCells[0].count && self.mIsLost == false) {
+                        self.mTimer.invalidate()
                         explodeVictoryAnimation();
                         print("player win")
                     }
@@ -424,7 +405,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-            
             return true
         }
         

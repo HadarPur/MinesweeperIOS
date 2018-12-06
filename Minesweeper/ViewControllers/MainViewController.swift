@@ -10,10 +10,10 @@ import UIKit
 import GoogleMaps
 
 class MainViewController: UIViewController {
-    var firstAsk = true
+    var mFirstAsk = true
     var mGameViewController: GameViewController?
-    var firstShow: Bool = true
-    let locationManager = CLLocationManager()
+    var mFirstShow: Bool = true
+    let mLocationManager = CLLocationManager()
     @IBOutlet weak var mEazyBtn: UIButton!
     @IBOutlet weak var mNormalBtn: UIButton!
     @IBOutlet weak var mHardBtn: UIButton!
@@ -24,8 +24,8 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
+        self.mLocationManager.delegate = self
+        self.mLocationManager.requestWhenInUseAuthorization()
 
     }
 
@@ -33,18 +33,18 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
 
         enableAllBtns();
-        if (firstShow) {
-            mEazyBtn.center.x  -= view.bounds.width
-            mNormalBtn.center.x  -= view.bounds.width
-            mHardBtn.center.x  -= view.bounds.width
-            mRecordsBtn.center.x  -= view.bounds.width
-            mInstructionBtn.center.x  -= view.bounds.width
+        if (mFirstShow) {
+            self.mEazyBtn.center.x  -= view.bounds.width
+            self.mNormalBtn.center.x  -= view.bounds.width
+            self.mHardBtn.center.x  -= view.bounds.width
+            self.mRecordsBtn.center.x  -= view.bounds.width
+            self.mInstructionBtn.center.x  -= view.bounds.width
         } else {
-            mEazyBtn.center.x  += view.bounds.width
-            mNormalBtn.center.x  += view.bounds.width
-            mHardBtn.center.x  += view.bounds.width
-            mRecordsBtn.center.x  += view.bounds.width
-            mInstructionBtn.center.x  += view.bounds.width
+            self.mEazyBtn.center.x  += view.bounds.width
+            self.mNormalBtn.center.x  += view.bounds.width
+            self.mHardBtn.center.x  += view.bounds.width
+            self.mRecordsBtn.center.x  += view.bounds.width
+            self.mInstructionBtn.center.x  += view.bounds.width
         }
     }
     
@@ -52,58 +52,58 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
 
         UIView.animate(withDuration: 0.5, delay: 0.05, options: [], animations: {
-            if (self.firstShow) {
+            if (self.mFirstShow) {
                 self.mEazyBtn.center.x  += self.view.bounds.width
             } else{
                 self.mEazyBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.1, options: [], animations: {
-            if (self.firstShow) {
+            if (self.mFirstShow) {
                 self.mNormalBtn.center.x  += self.view.bounds.width
             } else{
                 self.mNormalBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.15, options: [], animations: {
-           if (self.firstShow) {
+           if (self.mFirstShow) {
                 self.mHardBtn.center.x  += self.view.bounds.width
            } else{
                 self.mHardBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.2, options: [],animations: {
-            if (self.firstShow) {
+            if (self.mFirstShow) {
                 self.mRecordsBtn.center.x  += self.view.bounds.width
             } else{
                 self.mRecordsBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         UIView.animate(withDuration: 0.5, delay: 0.25, options: [],animations: {
-            if (self.firstShow) {
+            if (self.mFirstShow) {
                 self.mInstructionBtn.center.x  += self.view.bounds.width
             } else{
                 self.mInstructionBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         
-        firstShow = false
+        self.mFirstShow = false
     }
 
     func enableAllBtns() {
-        mEazyBtn.isEnabled = true
-        mNormalBtn.isEnabled = true
-        mHardBtn.isEnabled = true
-        mRecordsBtn.isEnabled = true
-        mInstructionBtn.isEnabled = true
+        self.mEazyBtn.isEnabled = true
+        self.mNormalBtn.isEnabled = true
+        self.mHardBtn.isEnabled = true
+        self.mRecordsBtn.isEnabled = true
+        self.mInstructionBtn.isEnabled = true
     }
     
     func unableAllBtns() {
-        mEazyBtn.isEnabled = false
-        mNormalBtn.isEnabled = false
-        mHardBtn.isEnabled = false
-        mRecordsBtn.isEnabled = false
-        mInstructionBtn.isEnabled = false
+        self.mEazyBtn.isEnabled = false
+        self.mNormalBtn.isEnabled = false
+        self.mHardBtn.isEnabled = false
+        self.mRecordsBtn.isEnabled = false
+        self.mInstructionBtn.isEnabled = false
     }
     
     // MARK: Actions
@@ -208,10 +208,10 @@ extension MainViewController: CLLocationManagerDelegate {
         guard status == .authorizedWhenInUse else {
             return
         }
-        self.locationManager.startUpdatingLocation()
+        self.mLocationManager.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.locationManager.stopUpdatingLocation()
+        self.mLocationManager.stopUpdatingLocation()
     }
 }

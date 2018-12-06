@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 extension UIButton {
+    
     func touch() {
         let touch = CABasicAnimation(keyPath: "position")
         touch.duration = 0.1

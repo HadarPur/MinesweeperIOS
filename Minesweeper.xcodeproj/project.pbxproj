@@ -29,6 +29,7 @@
 		3E7B32882185B75A00285186 /* FuncUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B32872185B75A00285186 /* FuncUtils.swift */; };
 		3E7B328C2185B7D500285186 /* PaddingLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B328B2185B7D500285186 /* PaddingLable.swift */; };
 		3E7B328E2185B7EE00285186 /* AlertsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B328D2185B7EE00285186 /* AlertsHandler.swift */; };
+		3EB0229721B9803A003998E8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB0229621B9803A003998E8 /* Reachability.swift */; };
 		3ECA2C09217D9A12006BE85D /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */; };
 		3EF85ABF2186D6650041BC80 /* GPSTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF85ABE2186D6650041BC80 /* GPSTracker.swift */; };
 		3EF85AC12186D7100041BC80 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF85AC02186D7100041BC80 /* CoreLocation.framework */; };
@@ -86,6 +87,7 @@
 		3E7B32872185B75A00285186 /* FuncUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncUtils.swift; sourceTree = "<group>"; };
 		3E7B328B2185B7D500285186 /* PaddingLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLable.swift; sourceTree = "<group>"; };
 		3E7B328D2185B7EE00285186 /* AlertsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsHandler.swift; sourceTree = "<group>"; };
+		3EB0229621B9803A003998E8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		3EF85ABE2186D6650041BC80 /* GPSTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSTracker.swift; sourceTree = "<group>"; };
 		3EF85AC02186D7100041BC80 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -226,6 +228,7 @@
 				3E7B328D2185B7EE00285186 /* AlertsHandler.swift */,
 				3E093C7721832A5200AFC581 /* ButtonExtentions.swift */,
 				3E4D62A821A1A4210020EB93 /* UserInfo.swift */,
+				3EB0229621B9803A003998E8 /* Reachability.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 			files = (
 				3E7B328E2185B7EE00285186 /* AlertsHandler.swift in Sources */,
 				3E7B328C2185B7D500285186 /* PaddingLable.swift in Sources */,
+				3EB0229721B9803A003998E8 /* Reachability.swift in Sources */,
 				3E68B1352184BACD001FA5CD /* CollectionViewCell.swift in Sources */,
 				3E4D62B121A2BD0E0020EB93 /* TableViewCell.swift in Sources */,
 				3E530C712178D7D100440B79 /* ResultViewController.swift in Sources */,
