@@ -30,6 +30,10 @@
 		3E7B328C2185B7D500285186 /* PaddingLable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B328B2185B7D500285186 /* PaddingLable.swift */; };
 		3E7B328E2185B7EE00285186 /* AlertsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7B328D2185B7EE00285186 /* AlertsHandler.swift */; };
 		3EB0229721B9803A003998E8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EB0229621B9803A003998E8 /* Reachability.swift */; };
+		3EB0229D21B9886A003998E8 /* DS-DIGIB.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3EB0229921B98869003998E8 /* DS-DIGIB.TTF */; };
+		3EB0229E21B9886A003998E8 /* DS-DIGIT.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3EB0229A21B98869003998E8 /* DS-DIGIT.TTF */; };
+		3EB0229F21B9886A003998E8 /* DS-DIGII.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3EB0229B21B98869003998E8 /* DS-DIGII.TTF */; };
+		3EB022A021B9886A003998E8 /* DS-DIGI.TTF in Resources */ = {isa = PBXBuildFile; fileRef = 3EB0229C21B9886A003998E8 /* DS-DIGI.TTF */; };
 		3ECA2C09217D9A12006BE85D /* ScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */; };
 		3EF85ABF2186D6650041BC80 /* GPSTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF85ABE2186D6650041BC80 /* GPSTracker.swift */; };
 		3EF85AC12186D7100041BC80 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EF85AC02186D7100041BC80 /* CoreLocation.framework */; };
@@ -88,6 +92,10 @@
 		3E7B328B2185B7D500285186 /* PaddingLable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLable.swift; sourceTree = "<group>"; };
 		3E7B328D2185B7EE00285186 /* AlertsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsHandler.swift; sourceTree = "<group>"; };
 		3EB0229621B9803A003998E8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		3EB0229921B98869003998E8 /* DS-DIGIB.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIB.TTF"; sourceTree = "<group>"; };
+		3EB0229A21B98869003998E8 /* DS-DIGIT.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGIT.TTF"; sourceTree = "<group>"; };
+		3EB0229B21B98869003998E8 /* DS-DIGII.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGII.TTF"; sourceTree = "<group>"; };
+		3EB0229C21B9886A003998E8 /* DS-DIGI.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DS-DIGI.TTF"; sourceTree = "<group>"; };
 		3ECA2C08217D9A12006BE85D /* ScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreViewController.swift; sourceTree = "<group>"; };
 		3EF85ABE2186D6650041BC80 /* GPSTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPSTracker.swift; sourceTree = "<group>"; };
 		3EF85AC02186D7100041BC80 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -188,6 +196,7 @@
 		3E560142213EB85B00ACFF91 /* Minesweeper */ = {
 			isa = PBXGroup;
 			children = (
+				3EB0229821B98833003998E8 /* Fonts */,
 				3E4D62AC21A1B68B0020EB93 /* Quaries */,
 				3E4D62A521A1A0F50020EB93 /* Storage */,
 				3E7B32912185BC3100285186 /* Logic */,
@@ -259,6 +268,17 @@
 				3EF85ABE2186D6650041BC80 /* GPSTracker.swift */,
 			);
 			path = Logic;
+			sourceTree = "<group>";
+		};
+		3EB0229821B98833003998E8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				3EB0229C21B9886A003998E8 /* DS-DIGI.TTF */,
+				3EB0229921B98869003998E8 /* DS-DIGIB.TTF */,
+				3EB0229B21B98869003998E8 /* DS-DIGII.TTF */,
+				3EB0229A21B98869003998E8 /* DS-DIGIT.TTF */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		3ECA2C0A217DB2A8006BE85D /* ViewControllers */ = {
@@ -399,6 +419,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EB022A021B9886A003998E8 /* DS-DIGI.TTF in Resources */,
+				3EB0229D21B9886A003998E8 /* DS-DIGIB.TTF in Resources */,
+				3EB0229F21B9886A003998E8 /* DS-DIGII.TTF in Resources */,
+				3EB0229E21B9886A003998E8 /* DS-DIGIT.TTF in Resources */,
 				3E560151213EB85D00ACFF91 /* LaunchScreen.storyboard in Resources */,
 				3E4D62AB21A1B2BB0020EB93 /* GoogleService-Info.plist in Resources */,
 				3E56014E213EB85D00ACFF91 /* Assets.xcassets in Resources */,

@@ -76,6 +76,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: EASY_FLAGS)
             self.mFbStorage!.readResults(level: EASY, callback: {
                 self.performQuery()
+                print("array count: \(self.mUsersData.count)")
             })
             break
         case NORMAL:
@@ -142,7 +143,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
 
     func createTimeStartFlags() {
         self.mFlagsTextView.text = "\(mCount)"
-        self.mTimeTextView.text = "\(0)"
+        self.mTimeTextView.text = "\(0)\(0)"
     }
     
     func setBombsNum(boardSize: Int) {

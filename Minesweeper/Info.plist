@@ -4,6 +4,10 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>DS-DIGII.TTF</string>
+		<string>DS-DIGIT.TTF</string>
+		<string>DS-DIGIB.TTF</string>
+		<string>DS-DIGI.TTF</string>
 		<string>DBLCDTempBlack</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
