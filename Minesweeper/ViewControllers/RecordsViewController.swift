@@ -44,12 +44,20 @@ class RecordsViewController: UIViewController, CallData {
         
         self.mLocationManager.delegate = self
         self.mLocationManager.requestWhenInUseAuthorization()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
         checkGPS()
 
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            print("Swipe Right")
+            _=self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func hardBtnPressed(_ sender: Any) {

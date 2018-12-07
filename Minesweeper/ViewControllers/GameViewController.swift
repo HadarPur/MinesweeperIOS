@@ -55,6 +55,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         longPressGR.delaysTouchesBegan = true
         self.mGameBoard.addGestureRecognizer(longPressGR)
         
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
         self.mFbStorage = FirebaseStorage()
         createNewGame()
         
@@ -66,6 +70,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         super.viewDidAppear(animated)
     }
 
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            print("Swipe Right")
+            _=self.navigationController?.popViewController(animated: true)
+        }
+    }
+    
     func createNewGame() {
         self.mIsLost = false
         self.mCountOfPressed = 0

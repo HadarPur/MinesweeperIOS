@@ -13,11 +13,18 @@ class InstructionsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mTextViewField.scrollRangeToVisible(NSMakeRange(0, 0))
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+        
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
+        if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+            print("Swipe Right")
+            _=self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func backBtn(_ sender: Any) {

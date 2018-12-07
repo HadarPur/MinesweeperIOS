@@ -118,7 +118,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island3" translatesAutoresizingMaskIntoConstraints="NO" id="nTp-hE-YgG" userLabel="Background Image">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="backBtn" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcd-vo-vLd" userLabel="Back Btn">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" restorationIdentifier="backBtn" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcd-vo-vLd" userLabel="Back Btn">
                                 <rect key="frame" x="16" y="54" width="73" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="73" id="WfV-TH-DSs"/>
@@ -313,7 +313,7 @@
                                 <color key="tintColor" red="0.64705882349999999" green="0.80392156859999997" blue="0.99215686270000003" alpha="0.71267658389999999" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" restorationIdentifier="table" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="table" id="etd-fF-8BC" customClass="TableViewCell" customModule="Minesweeper" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="table" preservesSuperviewLayoutMargins="YES" selectionStyle="blue" indentationWidth="10" reuseIdentifier="table" id="etd-fF-8BC" customClass="TableViewCell" customModule="Minesweeper" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="etd-fF-8BC" id="cMO-xs-p48">
@@ -329,7 +329,7 @@
                                     <outlet property="delegate" destination="5Uo-GX-dnp" id="KFb-Op-HWp"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ulg-9q-BDa" userLabel="Back Btn">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ulg-9q-BDa" userLabel="Back Btn">
                                 <rect key="frame" x="16" y="54" width="73" height="41"/>
                                 <state key="normal" backgroundImage="back"/>
                                 <connections>
@@ -410,7 +410,7 @@
                                     <constraint firstAttribute="width" constant="181" id="zbd-S4-UqF"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZg-jQ-JvL" userLabel="Back Btn">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZg-jQ-JvL" userLabel="Back Btn">
                                 <rect key="frame" x="16" y="53" width="73" height="42"/>
                                 <state key="normal" backgroundImage="back"/>
                                 <connections>
