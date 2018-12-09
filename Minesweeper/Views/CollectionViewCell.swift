@@ -20,7 +20,6 @@ class CollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        print("prepareForReuse")
     }
     
     func configure(row: Int, col: Int, status: Int) {
@@ -29,7 +28,6 @@ class CollectionViewCell: UICollectionViewCell {
         self.mStatus = status
         self.mIsPressed = false
         self.mIsLongPressed = false
-
     }
     
     // returns number of bombs around the cell

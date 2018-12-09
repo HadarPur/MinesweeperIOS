@@ -118,7 +118,7 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island3" translatesAutoresizingMaskIntoConstraints="NO" id="nTp-hE-YgG" userLabel="Background Image">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" restorationIdentifier="backBtn" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcd-vo-vLd" userLabel="Back Btn">
+                            <button opaque="NO" contentMode="scaleToFill" restorationIdentifier="backBtn" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qcd-vo-vLd" userLabel="Back Btn">
                                 <rect key="frame" x="16" y="54" width="73" height="41"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="73" id="WfV-TH-DSs"/>
@@ -329,7 +329,7 @@
                                     <outlet property="delegate" destination="5Uo-GX-dnp" id="KFb-Op-HWp"/>
                                 </connections>
                             </tableView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ulg-9q-BDa" userLabel="Back Btn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ulg-9q-BDa" userLabel="Back Btn">
                                 <rect key="frame" x="16" y="54" width="73" height="41"/>
                                 <state key="normal" backgroundImage="back"/>
                                 <connections>
@@ -410,7 +410,7 @@
                                     <constraint firstAttribute="width" constant="181" id="zbd-S4-UqF"/>
                                 </constraints>
                             </imageView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZg-jQ-JvL" userLabel="Back Btn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZg-jQ-JvL" userLabel="Back Btn">
                                 <rect key="frame" x="16" y="53" width="73" height="42"/>
                                 <state key="normal" backgroundImage="back"/>
                                 <connections>
@@ -485,10 +485,10 @@ Of course to see where it was, you need to click on location marker.</string>
             </objects>
             <point key="canvasLocation" x="1100" y="1130.2848575712144"/>
         </scene>
-        <!--Result View Controller-->
+        <!--ResultViewController-->
         <scene sceneID="Y5k-WN-MI6">
             <objects>
-                <viewController id="dF6-ye-QD5" customClass="ResultViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ResultViewController" title="ResultViewController" id="dF6-ye-QD5" customClass="ResultViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TVt-lZ-g0V"/>
                         <viewControllerLayoutGuide type="bottom" id="YhT-4A-N1u"/>
@@ -549,13 +549,18 @@ Of course to see where it was, you need to click on location marker.</string>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xmr-k2-qwd">
+                                <rect key="frame" x="46" y="165" width="283" height="262"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="xmr-k2-qwd" firstAttribute="top" secondItem="TVt-lZ-g0V" secondAttribute="bottom" constant="145" id="2Zu-dW-51N"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leading" id="3xM-gQ-xyx"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="top" secondItem="7R4-gp-Uc6" secondAttribute="bottom" constant="8" symbolic="YES" id="5Vi-t5-7fM"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="width" secondItem="M8i-Kr-8Ry" secondAttribute="width" id="7KX-xw-cBq"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="height" secondItem="7R4-gp-Uc6" secondAttribute="height" id="9Zm-vu-wUv"/>
+                            <constraint firstItem="YhT-4A-N1u" firstAttribute="top" secondItem="xmr-k2-qwd" secondAttribute="bottom" constant="240" id="F8L-w7-NKa"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="width" secondItem="QUn-ig-cjA" secondAttribute="width" id="Gxr-Bp-Wct"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leadingMargin" constant="88" id="Nia-nA-ZLA"/>
                             <constraint firstItem="7R4-gp-Uc6" firstAttribute="leading" secondItem="f16-RR-llk" secondAttribute="leading" id="PdD-gf-43a"/>
@@ -568,17 +573,25 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="rK7-m6-oJ9" firstAttribute="centerX" secondItem="f16-RR-llk" secondAttribute="centerX" id="aPF-U4-9jx"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="centerY" secondItem="QUn-ig-cjA" secondAttribute="centerY" id="daO-gG-OJg"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="centerX" secondItem="rK7-m6-oJ9" secondAttribute="centerX" id="dpD-z9-vrb"/>
+                            <constraint firstItem="xmr-k2-qwd" firstAttribute="centerX" secondItem="QUn-ig-cjA" secondAttribute="centerX" id="dy6-Vn-pDO"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="centerY" secondItem="rK7-m6-oJ9" secondAttribute="centerY" id="f5y-BP-Jg1"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="height" secondItem="M8i-Kr-8Ry" secondAttribute="height" id="kck-K6-DRV"/>
+                            <constraint firstItem="xmr-k2-qwd" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leading" constant="46" id="rpV-Vf-euB"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="baseline" secondItem="7R4-gp-Uc6" secondAttribute="firstBaseline" id="sda-Lo-9kC"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="height" secondItem="QUn-ig-cjA" secondAttribute="height" id="xU8-fh-aq3"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="trailing" secondItem="QUn-ig-cjA" secondAttribute="trailingMargin" id="y6X-q9-aO2"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mHomeBtn" destination="7R4-gp-Uc6" id="9kT-0G-xfI"/>
+                        <outlet property="mNewGameBtn" destination="M8i-Kr-8Ry" id="bfu-lP-GUb"/>
+                        <outlet property="mRecordBtn" destination="tA8-4X-OEt" id="WuG-yd-mQO"/>
+                        <outlet property="mStatusImageView" destination="xmr-k2-qwd" id="Ed5-AC-KgP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vAa-0V-1Mu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3015" y="72"/>
+            <point key="canvasLocation" x="3013.5999999999999" y="71.514242878560722"/>
         </scene>
         <!--Score View Controller-->
         <scene sceneID="Rnh-py-neb">
@@ -605,6 +618,9 @@ Of course to see where it was, you need to click on location marker.</string>
                                 <state key="normal" title="Save" backgroundImage="table">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="SaveBtn:" destination="YkU-GC-Rk0" eventType="touchUpInside" id="kO9-L1-8kn"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="if0-Z5-OtN" userLabel="Cancel Btn">
                                 <rect key="frame" x="194" y="568" width="165" height="56"/>
@@ -616,6 +632,9 @@ Of course to see where it was, you need to click on location marker.</string>
                                 <state key="normal" title="Cancel" backgroundImage="table">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelBtn:" destination="YkU-GC-Rk0" eventType="touchUpInside" id="h8I-7h-gyc"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table" translatesAutoresizingMaskIntoConstraints="NO" id="2eM-sF-lYb" userLabel="Title Background Image">
                                 <rect key="frame" x="97" y="44" width="181" height="53"/>
@@ -679,6 +698,11 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="d2H-bZ-v3U" firstAttribute="centerX" secondItem="S1w-uM-Z80" secondAttribute="centerX" id="vhF-M2-pnI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mCancelBtn" destination="if0-Z5-OtN" id="hqm-lU-mM2"/>
+                        <outlet property="mSaveBtn" destination="9tk-BE-Xao" id="F8y-j9-l9J"/>
+                        <outlet property="mTextField" destination="zeo-SO-Ss7" id="2yT-4R-0zg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lyr-M0-9YT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -68,6 +68,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if self.mIsLost {
+            pressNewGame()
+        }
     }
 
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
@@ -113,6 +121,13 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.mTimer.invalidate()
         self.mIsFirstClick = true
         self.mSeconds = 0
+        
+        if self.mIsLost {
+            self.mIsLost = false
+            self.mRestartBtn.setImage(UIImage(named: "smileisland"), for: .normal)
+            self.mRestartBtn.isEnabled = true
+        }
+        
         createNewGame()
     }
     
@@ -254,6 +269,15 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             self.mCells[i/mCells.count][i%mCells[0].count].pressButton()
             self.mCells[i/mCells.count][i%mCells[0].count].cellImage.image = bombImage
         }
+        let deadlineTime = DispatchTime.now() + .milliseconds(1000)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let resultsViewController = storyBoard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController
+
+        resultsViewController?.mStatus = self.mIsLost
+
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            self.navigationController?.pushViewController(resultsViewController!, animated: true)
+        })
     }
     
     func openCellRec(x: Int, y: Int) {
@@ -394,8 +418,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         self.mTimer.invalidate()
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
-                        showAllMines()
                         self.mIsLost = true
+                        showAllMines()
                         print("player lose")
                         return
                     }
@@ -404,7 +428,9 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     }
                     self.mCells[indexPath[0]][indexPath[1]].pressButton()
                     self.mCells[indexPath[0]][indexPath[1]].cellImage.image = pressedImage
-                    self.mCells[indexPath[0]][indexPath[1]].cellLable.text = "\(self.mCells[indexPath[0]][indexPath[1]].getStatus())"
+                    if self.mCells[indexPath[0]][indexPath[1]].getStatus() != 0 {
+                        self.mCells[indexPath[0]][indexPath[1]].cellLable.text = "\(self.mCells[indexPath[0]][indexPath[1]].getStatus())"
+                    }
 
                     //animation when the player win
                     if (self.mCountOfPressed + self.mSetFlags.count >= self.mCells.count*self.mCells[0].count && self.mIsLost == false) {
