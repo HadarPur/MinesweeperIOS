@@ -93,6 +93,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         guard scoreViewController != nil else {
             return
         }
+    
+        scoreViewController?.mUsersData = self.mUsersData
+        scoreViewController?.mPoints = self.mSeconds
+        scoreViewController?.mLevel = self.mDiff
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(scoreViewController!, animated: true)
@@ -107,10 +111,18 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         guard resultsViewController != nil else {
             return
         }
+        if self.mIsLost {
+            resultsViewController?.mResults = LOSS
+        }
+        else {
+            resultsViewController?.mResults = WIN
+        }
         
         resultsViewController?.mStatus = self.mIsLost
         resultsViewController?.mState = false
-
+        resultsViewController?.mLevel = self.mDiff
+        
+        // need to check if there is loaction anf if there is so to moving forward this one
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(resultsViewController!, animated: true)
         })

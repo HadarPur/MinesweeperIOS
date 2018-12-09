@@ -11,9 +11,10 @@ import UIKit
 class ResultViewController: UIViewController {
     let mWinningImage = UIImage(named: "winning.png") as UIImage?
     let mLossingImage = UIImage(named: "lose.png") as UIImage?
-    var mStatus: Bool!
-    var mState: Bool!
-    
+    var mStatus: Bool?
+    var mState: Bool?
+    var mLatitude: Double?, mLongitude: Double?
+    var mResults: Int?, mPoints: Int?, mLevel: Int?
     @IBOutlet weak var mStatusImageView: UIImageView!
     @IBOutlet weak var mRecordBtn: UIButton!
     @IBOutlet weak var mNewGameBtn: UIButton!
