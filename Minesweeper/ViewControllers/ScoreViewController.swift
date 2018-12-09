@@ -24,9 +24,7 @@ class ScoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    func getResults() {
-        
-    }
+
     @IBAction func SaveBtn(_ sender: Any) {
     }
     

@@ -109,7 +109,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
         
         resultsViewController?.mStatus = self.mIsLost
-        
+        resultsViewController?.mState = false
+
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(resultsViewController!, animated: true)
         })
