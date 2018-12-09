@@ -20,7 +20,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var mLastUpdate: Int = 0
     var mCount: Int = 0, mSeconds: Int = 0, mCountOfPressed: Int = 0, mChosenLevel: Int?
-    var mIsLost: Bool = false, mIsFirstClick: Bool = true, mFirstAsk: Bool = false
+    var mIsLost: Bool = false, mIsFirstClick: Bool = true, mFirstAsk: Bool = false, mIsDone: Bool = false
     var mIsChangedOnce: Bool = false ,mIsChangeMines: Bool = false
 
     var mDiff: Int? = 0
@@ -73,7 +73,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if self.mIsLost {
+        if self.mIsDone {
             pressNewGame()
         }
     }
@@ -83,6 +83,32 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             print("Swipe Right")
             _=self.navigationController?.popViewController(animated: true)
         }
+    }
+    
+    func moveToScoreViewController() {
+        let deadlineTime = DispatchTime.now() + .milliseconds(500)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let scoreViewController = storyBoard.instantiateViewController(withIdentifier: "ScoreViewController") as? ScoreViewController
+        
+        guard scoreViewController != nil else {
+            return
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            self.navigationController?.pushViewController(scoreViewController!, animated: true)
+        })
+    }
+    
+    func moveToResultsViewController() {
+        let deadlineTime = DispatchTime.now() + .milliseconds(1000)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let resultsViewController = storyBoard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController
+        
+        resultsViewController?.mStatus = self.mIsLost
+        
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            self.navigationController?.pushViewController(resultsViewController!, animated: true)
+        })
     }
     
     func createNewGame() {
@@ -121,12 +147,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.mTimer.invalidate()
         self.mIsFirstClick = true
         self.mSeconds = 0
-        
-        if self.mIsLost {
-            self.mIsLost = false
-            self.mRestartBtn.setImage(UIImage(named: "smileisland"), for: .normal)
-            self.mRestartBtn.isEnabled = true
-        }
+        self.mIsLost = false
+        self.mIsDone = false
+        self.mRestartBtn.setImage(UIImage(named: "smileisland"), for: .normal)
+        self.mRestartBtn.isEnabled = true
         
         createNewGame()
     }
@@ -269,15 +293,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             self.mCells[i/mCells.count][i%mCells[0].count].pressButton()
             self.mCells[i/mCells.count][i%mCells[0].count].cellImage.image = bombImage
         }
-        let deadlineTime = DispatchTime.now() + .milliseconds(1000)
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let resultsViewController = storyBoard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController
-
-        resultsViewController?.mStatus = self.mIsLost
-
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-            self.navigationController?.pushViewController(resultsViewController!, animated: true)
-        })
     }
     
     func openCellRec(x: Int, y: Int) {
@@ -384,7 +399,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.cellImage.image = image
             
             if cell.cellLable != nil {
-                lable = ""
+                lable = "\(self.mCells[indexPath[0]][indexPath[1]].getStatus())"
             }
             
             cell.cellLable.textAlignment = .center
@@ -419,7 +434,9 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = true
+                        self.mIsDone = true
                         showAllMines()
+                        moveToResultsViewController()
                         print("player lose")
                         return
                     }
@@ -435,7 +452,22 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     //animation when the player win
                     if (self.mCountOfPressed + self.mSetFlags.count >= self.mCells.count*self.mCells[0].count && self.mIsLost == false) {
                         self.mTimer.invalidate()
+                        self.mIsDone = true
                         explodeVictoryAnimation();
+                        // if network is available
+                        if self.mUsersData.count>0 {
+                            if self.mUsersData.count < MAX_RECORDS || self.mUsersData[self.mUsersData.count-1].getPoints() > self.mSeconds {
+                                moveToScoreViewController()
+                            }
+                            else {
+                                moveToResultsViewController()
+                            }
+                        }
+                        else {
+                            moveToScoreViewController()
+                        }
+                        
+                        // else go to results view controller
                         print("player win")
                     }
                 }

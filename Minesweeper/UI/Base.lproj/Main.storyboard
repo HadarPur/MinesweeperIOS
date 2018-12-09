@@ -596,7 +596,7 @@ Of course to see where it was, you need to click on location marker.</string>
         <!--Score View Controller-->
         <scene sceneID="Rnh-py-neb">
             <objects>
-                <viewController id="YkU-GC-Rk0" customClass="ScoreViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScoreViewController" id="YkU-GC-Rk0" customClass="ScoreViewController" customModule="Minesweeper" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="yxE-Mg-21a"/>
                         <viewControllerLayoutGuide type="bottom" id="lqu-Qc-sI1"/>
