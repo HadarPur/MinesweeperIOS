@@ -31,5 +31,23 @@ class ScoreViewController: UIViewController {
     }
     
     @IBAction func cancelBtn(_ sender: Any) {
+        moveToResultsViewController()
+    }
+    
+    func moveToResultsViewController() {
+        let deadlineTime = DispatchTime.now() + .milliseconds(1000)
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let resultsViewController = storyBoard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController
+        
+        guard resultsViewController != nil else {
+            return
+        }
+        
+        resultsViewController?.mStatus = false
+        resultsViewController?.mState = true
+
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
+            self.navigationController?.pushViewController(resultsViewController!, animated: true)
+        })
     }
 }

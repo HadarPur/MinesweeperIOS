@@ -104,6 +104,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let resultsViewController = storyBoard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController
         
+        guard resultsViewController != nil else {
+            return
+        }
+        
         resultsViewController?.mStatus = self.mIsLost
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {

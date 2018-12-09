@@ -139,7 +139,6 @@ class MainViewController: UIViewController {
         }
         
         self.mGameViewController!.mDiff = 1
-
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(self.mGameViewController!, animated: true)
         })

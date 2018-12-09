@@ -12,6 +12,7 @@ class ResultViewController: UIViewController {
     let mWinningImage = UIImage(named: "winning.png") as UIImage?
     let mLossingImage = UIImage(named: "lose.png") as UIImage?
     var mStatus: Bool!
+    var mState: Bool!
     
     @IBOutlet weak var mStatusImageView: UIImageView!
     @IBOutlet weak var mRecordBtn: UIButton!
@@ -38,6 +39,11 @@ class ResultViewController: UIViewController {
         }
         else {
             self.mStatusImageView.image = mWinningImage
+            if self.mState {
+                var navigationArray = self.navigationController?.viewControllers //To get all UIViewController stack as Array
+                navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController
+                self.navigationController?.viewControllers = navigationArray!
+            }
         }
     }
     
