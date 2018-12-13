@@ -12,7 +12,9 @@ import MapKit
 
 class RecordsViewController: UIViewController, CallData {
 
-    let EASY:Int = 0, NORMAL:Int = 1, HARD:Int = 2
+    let EASY:Int = 0
+    let NORMAL:Int = 1
+    let HARD:Int = 2
     let mLocationManager = CLLocationManager()
 
     var mFbStorage : FirebaseStorage?
@@ -220,6 +222,7 @@ extension RecordsViewController: UITableViewDelegate, UITableViewDataSource {
 
 // extension for map view
 extension RecordsViewController: CLLocationManagerDelegate {
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else {
             return

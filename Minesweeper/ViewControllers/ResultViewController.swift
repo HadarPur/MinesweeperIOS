@@ -14,7 +14,7 @@ class ResultViewController: UIViewController {
     var mStatus: Bool = false
     var mState: Bool = false
     var mLatitude: Double?, mLongitude: Double?
-    var mResults: Int?, mPoints: Int = 0, mLevel: Int?
+    var mPoints: Int = 0, mLevel: Int?
     @IBOutlet weak var mStatusImageView: UIImageView!
     @IBOutlet weak var mRecordBtn: UIButton!
     @IBOutlet weak var mNewGameBtn: UIButton!
@@ -35,9 +35,15 @@ class ResultViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        enableAllBtns();
+        enableAllBtns()
     }
 
+    func popupViewControllerFromStack() {
+        var navigationArray = self.navigationController?.viewControllers //To get all UIViewController stack as Array
+        navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController
+        self.navigationController?.viewControllers = navigationArray!
+    }
+    
     func setStatusImage() {
         if self.mStatus {
             self.mStatusImageView.image = mLossingImage
@@ -50,9 +56,7 @@ class ResultViewController: UIViewController {
             self.mLable.text = "Time: \(self.mPoints) sec"
 
             if self.mState {
-                var navigationArray = self.navigationController?.viewControllers //To get all UIViewController stack as Array
-                navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController
-                self.navigationController?.viewControllers = navigationArray!
+                popupViewControllerFromStack()
             }
         }
     }
@@ -65,11 +69,9 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func homePageBtn(_ sender: UIButton) {
-        unableAllBtns();
+        unableAllBtns()
         sender.touch()
-        var navigationArray = self.navigationController?.viewControllers //To get all UIViewController stack as Array
-        navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController
-        self.navigationController?.viewControllers = navigationArray!
+        popupViewControllerFromStack()
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
@@ -78,8 +80,9 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func newGameBtn(_ sender: UIButton) {
-        unableAllBtns();
+        unableAllBtns()
         sender.touch()
+        
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             _=self.navigationController?.popViewController(animated: true)
@@ -87,7 +90,7 @@ class ResultViewController: UIViewController {
     }
     
     @IBAction func recordsBtn(_ sender: UIButton) {
-        unableAllBtns();
+        unableAllBtns()
         
         sender.touch()
         

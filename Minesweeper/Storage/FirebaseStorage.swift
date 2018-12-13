@@ -48,16 +48,19 @@ class FirebaseStorage: NSObject {
     func replaceUser(user: UserInfo,level: Int, users: Array<UserInfo>) {
         let key: Int = users[users.count-1].getKey()
         let keyStr: String = " "+String(key)
+        
         user.setKey(key: key)
+        let dict : NSDictionary = ["key" :  user.getKey(), "latitude" : user.getLatitude(), "level" : user.getLevel(), "longitude" : user.getLongitude(), "name" : user.getName(), "points" : user.getPoints()]
+        
         switch level {
             case EASY:
-                self.myRefEasy.child(keyStr).setValue(user)
+                self.myRefEasy.child(keyStr).setValue(dict)
                 break
             case NORMAL:
-                self.myRefMedium.child(keyStr).setValue(user)
+                self.myRefMedium.child(keyStr).setValue(dict)
                 break
             case HARD:
-                self.myRefHard.child(keyStr).setValue(user)
+                self.myRefHard.child(keyStr).setValue(dict)
                 break
             default:
                 break
@@ -67,15 +70,17 @@ class FirebaseStorage: NSObject {
     // write new user in firebase
     func writeUser(user: UserInfo,level: Int) {
         let keyStr: String = " "+String(user.getKey())
+        let dict : NSDictionary = ["key" :  user.getKey(), "latitude" : user.getLatitude(), "level" : user.getLevel(), "longitude" : user.getLongitude(), "name" : user.getName(), "points" : user.getPoints()]
+        
         switch level {
         case EASY:
-            self.myRefEasy.child(keyStr).setValue(user)
+            self.myRefEasy.child(keyStr).setValue(dict)
             break
         case NORMAL:
-            self.myRefMedium.child(keyStr).setValue(user)
+            self.myRefMedium.child(keyStr).setValue(dict)
             break
         case HARD:
-            self.myRefHard.child(keyStr).setValue(user)
+            self.myRefHard.child(keyStr).setValue(dict)
             break
         default:
             break

@@ -17,7 +17,12 @@ class InstructionsViewController: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
-        
+
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.mTextViewField.setContentOffset(CGPoint.zero, animated: false)
     }
     
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {

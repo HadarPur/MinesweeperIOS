@@ -23,23 +23,25 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        enableAllBtns()
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.mLocationManager.delegate = self
         self.mLocationManager.requestWhenInUseAuthorization()
-
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        enableAllBtns();
+        enableAllBtns()
+        
         if (mFirstShow) {
             self.mEazyBtn.center.x  -= view.bounds.width
             self.mNormalBtn.center.x  -= view.bounds.width
             self.mHardBtn.center.x  -= view.bounds.width
             self.mRecordsBtn.center.x  -= view.bounds.width
             self.mInstructionBtn.center.x  -= view.bounds.width
-        } else {
+        }
+        else {
             self.mEazyBtn.center.x  += view.bounds.width
             self.mNormalBtn.center.x  += view.bounds.width
             self.mHardBtn.center.x  += view.bounds.width
@@ -58,6 +60,7 @@ class MainViewController: UIViewController {
                 self.mEazyBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
+        
         UIView.animate(withDuration: 0.5, delay: 0.1, options: [], animations: {
             if (self.mFirstShow) {
                 self.mNormalBtn.center.x  += self.view.bounds.width
@@ -65,6 +68,7 @@ class MainViewController: UIViewController {
                 self.mNormalBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
+        
         UIView.animate(withDuration: 0.5, delay: 0.15, options: [], animations: {
            if (self.mFirstShow) {
                 self.mHardBtn.center.x  += self.view.bounds.width
@@ -72,6 +76,7 @@ class MainViewController: UIViewController {
                 self.mHardBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
+        
         UIView.animate(withDuration: 0.5, delay: 0.2, options: [],animations: {
             if (self.mFirstShow) {
                 self.mRecordsBtn.center.x  += self.view.bounds.width
@@ -79,6 +84,7 @@ class MainViewController: UIViewController {
                 self.mRecordsBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
+        
         UIView.animate(withDuration: 0.5, delay: 0.25, options: [],animations: {
             if (self.mFirstShow) {
                 self.mInstructionBtn.center.x  += self.view.bounds.width
@@ -108,9 +114,9 @@ class MainViewController: UIViewController {
     
     // MARK: Actions
     @IBAction func eazyLevelBtn(_ sender: UIButton) {
-        unableAllBtns();
-        
+        unableAllBtns()
         sender.touch()
+        
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         self.mGameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
@@ -126,8 +132,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func normalLevelBtn(_ sender: UIButton) {
-        unableAllBtns();
-        
+        unableAllBtns()
         sender.touch()
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
@@ -145,8 +150,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func hardLevelBtn(_ sender: UIButton) {
-        unableAllBtns();
-        
+        unableAllBtns()
         sender.touch()
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
@@ -164,8 +168,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func recordsBtn(_ sender: UIButton) {
-        unableAllBtns();
-        
+        unableAllBtns()
         sender.touch()
 
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
@@ -182,8 +185,7 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func instructionsBtn(_ sender: UIButton) {
-        unableAllBtns();
-        
+        unableAllBtns()
         sender.touch()
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)

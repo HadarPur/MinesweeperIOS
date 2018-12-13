@@ -10,18 +10,37 @@ import UIKit
 import GameplayKit
 
 class GameViewController: UIViewController, UIGestureRecognizerDelegate {
-    let EASY: Int = 0, NORMAL: Int = 1, HARD: Int = 2
-    let BOARD_CELL10: Int = 10, BOARD_CELL5: Int = 5
-    let EASY_FLAGS: Int = 5, HARD_FLAGS: Int = 10
-    let LOSS: Int = 0, WIN: Int = 1
+    // levels
+    let EASY: Int = 0
+    let NORMAL: Int = 1
+    let HARD: Int = 2
+    
+    // board size
+    let BOARD_CELL10: Int = 10
+    let BOARD_CELL5: Int = 5
+    
+    // board flags
+    let EASY_FLAGS: Int = 5
+    let HARD_FLAGS: Int = 10
+    
+    // state
+    let LOSS: Int = 0
+    let WIN: Int = 1
+    
     let MAX_RECORDS: Int = 10
-
     let mFunctions = FuncUtils()
     
     var mLastUpdate: Int = 0
-    var mCount: Int = 0, mSeconds: Int = 0, mCountOfPressed: Int = 0, mChosenLevel: Int?
-    var mIsLost: Bool = false, mIsFirstClick: Bool = true, mFirstAsk: Bool = false, mIsDone: Bool = false
-    var mIsChangedOnce: Bool = false ,mIsChangeMines: Bool = false
+    var mCount: Int = 0
+    var mSeconds: Int = 0
+    var mCountOfPressed: Int = 0
+    var mChosenLevel: Int?
+    var mIsLost: Bool = false
+    var mIsFirstClick: Bool = true
+    var mFirstAsk: Bool = false
+    var mIsDone: Bool = false
+    var mIsChangedOnce: Bool = false
+    var mIsChangeMines: Bool = false
 
     var mDiff: Int? = 0
     var mNumOfRows: Int?
@@ -68,12 +87,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if self.mIsDone {
+            self.mIsDone = false
             pressNewGame()
         }
     }
@@ -98,6 +117,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         scoreViewController?.mPoints = self.mSeconds
         scoreViewController?.mLevel = self.mDiff
         
+        
+        // if location != null
+        
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(scoreViewController!, animated: true)
         })
@@ -110,12 +132,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         guard resultsViewController != nil else {
             return
-        }
-        if self.mIsLost {
-            resultsViewController?.mResults = LOSS
-        }
-        else {
-            resultsViewController?.mResults = WIN
         }
         
         resultsViewController?.mStatus = self.mIsLost
@@ -355,7 +371,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         print("Long press with index path: \(String(describing: indexPath))")
 
         if let indexPath = indexPath {
-            if !self.mIsChangeMines {
+            if !self.mIsChangeMines && !self.mIsDone {
                 if !self.mCells[indexPath[0]][indexPath[1]].pressed() {
                     if !self.mCells[indexPath[0]][indexPath[1]].longPressed() {
                         if self.mCount>0 {
@@ -415,7 +431,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
             cell.cellImage.image = image
             
             if cell.cellLable != nil {
-                lable = "\(self.mCells[indexPath[0]][indexPath[1]].getStatus())"
+                lable = ""
             }
             
             cell.cellLable.textAlignment = .center
@@ -438,7 +454,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         // MARK: - UICollectionViewDelegate
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            if !mIsChangeMines {
+            if !self.mIsChangeMines && !self.mIsDone {
                 print(" cell touched with indexPath row: \(indexPath[0]) indexPath col: \(indexPath[1])")
                 if !self.mCells[indexPath[0]][indexPath[1]].mIsLongPressed {
                     if mIsFirstClick {
@@ -468,9 +484,9 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     //animation when the player win
                     if (self.mCountOfPressed + self.mSetFlags.count >= self.mCells.count*self.mCells[0].count && self.mIsLost == false) {
                         self.mTimer.invalidate()
-                        self.mIsDone = true
                         explodeVictoryAnimation();
                         // if network is available
+                        self.mIsDone = true
                         if self.mUsersData.count>0 {
                             if self.mUsersData.count < MAX_RECORDS || self.mUsersData[self.mUsersData.count-1].getPoints() > self.mSeconds {
                                 moveToScoreViewController()

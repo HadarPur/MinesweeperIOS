@@ -68,12 +68,7 @@ class UserInfo {
     }
     
     func toString() -> String{
-        var objectString : String = ""
-        objectString += "Name: "
-        objectString += self.mName
-        objectString += "  , Time: "
-        objectString += String(self.mPoints)
-        objectString += " sec"
-        return objectString;
+        let objectString : String = "Name: \(self.mName ?? ""), TIme: \(self.mPoints ?? 0) sec"
+        return objectString
     }
 }
