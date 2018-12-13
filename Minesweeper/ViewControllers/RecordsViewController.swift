@@ -189,13 +189,9 @@ class RecordsViewController: UIViewController, CallData {
                     marker.snippet = locName+", "+locLocality
                 }
             })
+            self.mMapView.animate(to: camera)
+            marker.map = self.mMapView
         }
-        else{
-            marker.title = "No Position to show"
-        }
-        
-        self.mMapView.animate(to: camera)
-        marker.map = self.mMapView
     }
 }
 
