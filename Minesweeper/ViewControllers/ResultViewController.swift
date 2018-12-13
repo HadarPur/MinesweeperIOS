@@ -11,14 +11,16 @@ import UIKit
 class ResultViewController: UIViewController {
     let mWinningImage = UIImage(named: "winning.png") as UIImage?
     let mLossingImage = UIImage(named: "lose.png") as UIImage?
-    var mStatus: Bool?
-    var mState: Bool?
+    var mStatus: Bool = false
+    var mState: Bool = false
     var mLatitude: Double?, mLongitude: Double?
-    var mResults: Int?, mPoints: Int?, mLevel: Int?
+    var mResults: Int?, mPoints: Int = 0, mLevel: Int?
     @IBOutlet weak var mStatusImageView: UIImageView!
     @IBOutlet weak var mRecordBtn: UIButton!
     @IBOutlet weak var mNewGameBtn: UIButton!
     @IBOutlet weak var mHomeBtn: UIButton!
+    @IBOutlet weak var mLable: UILabel!
+    @IBOutlet weak var mBackgroundLable: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +29,8 @@ class ResultViewController: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
+        
+        self.view.bringSubviewToFront(self.mLable)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,9 +41,14 @@ class ResultViewController: UIViewController {
     func setStatusImage() {
         if self.mStatus {
             self.mStatusImageView.image = mLossingImage
+            self.mLable.text = ""
+            self.mBackgroundLable.isHidden = true
         }
         else {
             self.mStatusImageView.image = mWinningImage
+            self.mBackgroundLable.isHidden = false
+            self.mLable.text = "Time: \(self.mPoints) sec"
+
             if self.mState {
                 var navigationArray = self.navigationController?.viewControllers //To get all UIViewController stack as Array
                 navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController

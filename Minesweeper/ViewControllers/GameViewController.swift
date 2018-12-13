@@ -121,6 +121,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         resultsViewController?.mStatus = self.mIsLost
         resultsViewController?.mState = false
         resultsViewController?.mLevel = self.mDiff
+        resultsViewController?.mPoints = self.mSeconds
         
         // need to check if there is loaction anf if there is so to moving forward this one
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
@@ -361,14 +362,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                             self.mCount -= 1
                             self.mCells[indexPath[0]][indexPath[1]].pressLongButton()
                             self.mCells[indexPath[0]][indexPath[1]].cellImage.image = flagImage
-
                         }
                     }
                     else if self.mCells[indexPath[0]][indexPath[1]].longPressed() {
                         self.mCount+=1
                         self.mCells[indexPath[0]][indexPath[1]].pressLongButton()
                         self.mCells[indexPath[0]][indexPath[1]].cellImage.image = unPressedImage
-
                     }
                     self.mFlagsTextView.text = "\(mCount)"
                 }

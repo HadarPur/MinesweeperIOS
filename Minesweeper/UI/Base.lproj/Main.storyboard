@@ -517,7 +517,7 @@ Of course to see where it was, you need to click on location marker.</string>
                                     <action selector="homePageBtn:" destination="dF6-ye-QD5" eventType="touchUpInside" id="Gdc-QW-eKe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8i-Kr-8Ry" userLabel="New Game Btn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8i-Kr-8Ry" userLabel="New Game Btn">
                                 <rect key="frame" x="210" y="490" width="165" height="63"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="New Game" backgroundImage="table">
@@ -527,7 +527,7 @@ Of course to see where it was, you need to click on location marker.</string>
                                     <action selector="newGameBtn:" destination="dF6-ye-QD5" eventType="touchUpInside" id="dWm-d8-zl1"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tA8-4X-OEt" userLabel="Records Btn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tA8-4X-OEt" userLabel="Records Btn">
                                 <rect key="frame" x="105" y="561" width="165" height="63"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="63" id="2L9-mz-ddi"/>
@@ -552,6 +552,18 @@ Of course to see where it was, you need to click on location marker.</string>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xmr-k2-qwd">
                                 <rect key="frame" x="46" y="165" width="283" height="262"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXu-9F-t3y">
+                                <rect key="frame" x="187.5" y="375" width="0.0" height="52"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="table" translatesAutoresizingMaskIntoConstraints="NO" id="b86-5G-IDi" userLabel="Time Background Image">
+                                <rect key="frame" x="20" y="375" width="334" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="4en-Ln-P55"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -560,30 +572,38 @@ Of course to see where it was, you need to click on location marker.</string>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="top" secondItem="7R4-gp-Uc6" secondAttribute="bottom" constant="8" symbolic="YES" id="5Vi-t5-7fM"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="width" secondItem="M8i-Kr-8Ry" secondAttribute="width" id="7KX-xw-cBq"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="height" secondItem="7R4-gp-Uc6" secondAttribute="height" id="9Zm-vu-wUv"/>
+                            <constraint firstItem="b86-5G-IDi" firstAttribute="centerX" secondItem="f16-RR-llk" secondAttribute="centerX" id="Af2-F2-yWd"/>
+                            <constraint firstItem="cXu-9F-t3y" firstAttribute="centerX" secondItem="b86-5G-IDi" secondAttribute="centerX" id="BV4-Q3-qv3"/>
+                            <constraint firstItem="cXu-9F-t3y" firstAttribute="top" secondItem="b86-5G-IDi" secondAttribute="top" id="Cyh-O5-WcH"/>
                             <constraint firstItem="YhT-4A-N1u" firstAttribute="top" secondItem="xmr-k2-qwd" secondAttribute="bottom" constant="240" id="F8L-w7-NKa"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="width" secondItem="QUn-ig-cjA" secondAttribute="width" id="Gxr-Bp-Wct"/>
-                            <constraint firstItem="tA8-4X-OEt" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leadingMargin" constant="88" id="Nia-nA-ZLA"/>
+                            <constraint firstItem="tA8-4X-OEt" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leadingMargin" constant="89" id="Nia-nA-ZLA"/>
                             <constraint firstItem="7R4-gp-Uc6" firstAttribute="leading" secondItem="f16-RR-llk" secondAttribute="leading" id="PdD-gf-43a"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="width" secondItem="7R4-gp-Uc6" secondAttribute="width" id="Ucp-PQ-e6y"/>
+                            <constraint firstItem="cXu-9F-t3y" firstAttribute="centerY" secondItem="b86-5G-IDi" secondAttribute="centerY" id="V3G-1v-y8l"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="top" secondItem="TVt-lZ-g0V" secondAttribute="bottom" constant="37" id="VUl-Nm-ue5"/>
                             <constraint firstItem="7R4-gp-Uc6" firstAttribute="top" secondItem="M8i-Kr-8Ry" secondAttribute="top" id="X1h-N3-ae7"/>
                             <constraint firstItem="rK7-m6-oJ9" firstAttribute="top" secondItem="TVt-lZ-g0V" secondAttribute="bottom" constant="27" id="XHM-WX-FB0"/>
                             <constraint firstItem="YhT-4A-N1u" firstAttribute="top" secondItem="tA8-4X-OEt" secondAttribute="bottom" constant="43" id="XrS-GC-wOH"/>
                             <constraint firstItem="rK7-m6-oJ9" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leadingMargin" constant="81" id="Xzt-Lf-XW3"/>
+                            <constraint firstItem="b86-5G-IDi" firstAttribute="bottom" secondItem="xmr-k2-qwd" secondAttribute="bottom" id="YXJ-KF-LMf"/>
                             <constraint firstItem="rK7-m6-oJ9" firstAttribute="centerX" secondItem="f16-RR-llk" secondAttribute="centerX" id="aPF-U4-9jx"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="centerY" secondItem="QUn-ig-cjA" secondAttribute="centerY" id="daO-gG-OJg"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="centerX" secondItem="rK7-m6-oJ9" secondAttribute="centerX" id="dpD-z9-vrb"/>
                             <constraint firstItem="xmr-k2-qwd" firstAttribute="centerX" secondItem="QUn-ig-cjA" secondAttribute="centerX" id="dy6-Vn-pDO"/>
                             <constraint firstItem="uNj-7n-9cj" firstAttribute="centerY" secondItem="rK7-m6-oJ9" secondAttribute="centerY" id="f5y-BP-Jg1"/>
                             <constraint firstItem="tA8-4X-OEt" firstAttribute="height" secondItem="M8i-Kr-8Ry" secondAttribute="height" id="kck-K6-DRV"/>
+                            <constraint firstItem="f16-RR-llk" firstAttribute="leading" secondItem="b86-5G-IDi" secondAttribute="trailing" constant="-354" id="odK-LA-JA1"/>
                             <constraint firstItem="xmr-k2-qwd" firstAttribute="leading" secondItem="QUn-ig-cjA" secondAttribute="leading" constant="46" id="rpV-Vf-euB"/>
                             <constraint firstItem="M8i-Kr-8Ry" firstAttribute="baseline" secondItem="7R4-gp-Uc6" secondAttribute="firstBaseline" id="sda-Lo-9kC"/>
                             <constraint firstItem="f16-RR-llk" firstAttribute="height" secondItem="QUn-ig-cjA" secondAttribute="height" id="xU8-fh-aq3"/>
-                            <constraint firstItem="M8i-Kr-8Ry" firstAttribute="trailing" secondItem="QUn-ig-cjA" secondAttribute="trailingMargin" id="y6X-q9-aO2"/>
+                            <constraint firstItem="M8i-Kr-8Ry" firstAttribute="trailing" secondItem="QUn-ig-cjA" secondAttribute="trailingMargin" constant="16" id="y6X-q9-aO2"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="mBackgroundLable" destination="b86-5G-IDi" id="sp8-0M-3M4"/>
                         <outlet property="mHomeBtn" destination="7R4-gp-Uc6" id="9kT-0G-xfI"/>
+                        <outlet property="mLable" destination="cXu-9F-t3y" id="hWC-wS-sBz"/>
                         <outlet property="mNewGameBtn" destination="M8i-Kr-8Ry" id="bfu-lP-GUb"/>
                         <outlet property="mRecordBtn" destination="tA8-4X-OEt" id="WuG-yd-mQO"/>
                         <outlet property="mStatusImageView" destination="xmr-k2-qwd" id="Ed5-AC-KgP"/>
