@@ -10,26 +10,28 @@ import Foundation
 import UIKit
 import MapKit
 
-class ScoreViewController: UIViewController {
+class ScoreViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var mCancelBtn: UIButton!
     @IBOutlet weak var mSaveBtn: UIButton!
     @IBOutlet weak var mTextField: UITextField!
     
     let WIN: Int = 1
     let MAX_RECORDS: Int = 10
-
+    let mFunctions = FuncUtils()
     var mLatitude: Double = 0
     var mLongitude: Double = 0
     var mIndex: Int = 0
     var mPoints: Int?
     var mLevel: Int?
     var mName: String?
+    
     var mUsersData : Array<UserInfo>?
     var mFbStorage : FirebaseStorage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.mFbStorage = FirebaseStorage()
+        self.mTextField.delegate = self
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,13 +44,13 @@ class ScoreViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-
     @IBAction func SaveBtn(_ sender: UIButton) {
         unableAllBtns()
         sender.touch()
         
         guard let name = self.mTextField.text, !name.isEmpty else {
             enableAllBtns()
+            mFunctions.showToast(msg: "Please enter your name to save")
             return
         }
         
@@ -85,10 +87,11 @@ class ScoreViewController: UIViewController {
             return
         }
         
-        resultsViewController?.mStatus = false
-        resultsViewController?.mState = true
-        resultsViewController?.mLevel = self.mLevel
-        resultsViewController?.mPoints = self.mPoints ?? 0
+        resultsViewController!.mStatus = false
+        resultsViewController!.mState = true
+        resultsViewController!.mLevel = self.mLevel
+        resultsViewController!.mPoints = self.mPoints ?? 0
+        resultsViewController!.mIsNetworkEnabled = true
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(resultsViewController!, animated: true)

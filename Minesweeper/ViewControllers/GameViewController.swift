@@ -29,7 +29,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     let WIN: Int = 1
     
     let MAX_RECORDS: Int = 10
-    let mFunctions = FuncUtils()
     let cheerView = CheerView()
 
     var mLastUpdate: Int = 0
@@ -43,7 +42,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var mIsDone: Bool = false
     var mIsChangedOnce: Bool = false
     var mIsChangeMines: Bool = false
-
+    var mIsNetworkEnabled: Bool?
     var mDiff: Int? = 0
     var mNumOfRows: Int?
     var mNumOfColumns: Int?
@@ -53,7 +52,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var mSetFlags = Set<Int>()
     var mTimer = Timer()
     var mUsersData : Array<UserInfo> = Array()
-
+    var mCurrentLat: Double = 0
+    var mCurrentLong: Double = 0
+    
     @IBOutlet weak var mTimeTextView: UITextView!
     @IBOutlet weak var mFlagsTextView: UITextView!
     @IBOutlet weak var mGameBoard: UICollectionView!
@@ -86,7 +87,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         
         self.mFbStorage = FirebaseStorage()
         createNewGame()
-        // need to do network check!!!!!!!!!!!!!!!!!!! and deal with the gps
 
     }
     
@@ -131,10 +131,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             return
         }
     
-        scoreViewController?.mUsersData = self.mUsersData
-        scoreViewController?.mPoints = self.mSeconds
-        scoreViewController?.mLevel = self.mDiff
-
+        scoreViewController!.mUsersData = self.mUsersData
+        scoreViewController!.mPoints = self.mSeconds
+        scoreViewController!.mLevel = self.mDiff
+        scoreViewController!.mLatitude = self.mCurrentLat
+        scoreViewController!.mLongitude = self.mCurrentLong
         
         // if location != null
         let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
@@ -157,12 +158,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             return
         }
         
-        resultsViewController?.mStatus = self.mIsLost
-        resultsViewController?.mState = false
-        resultsViewController?.mLevel = self.mDiff
-        resultsViewController?.mPoints = self.mSeconds
+        resultsViewController!.mStatus = self.mIsLost
+        resultsViewController!.mState = false
+        resultsViewController!.mLevel = self.mDiff
+        resultsViewController!.mPoints = self.mSeconds
+        resultsViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
 
-        
         // if location != null
         let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
         DispatchQueue.main.asyncAfter(deadline: deadlineTimeAnimate, execute: {
@@ -532,19 +533,32 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         // Start
                         self.cheerView.start()
 
-                        // if network is available
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = false
                         self.mIsDone = true
                         
-                        if self.mUsersData.count>0 {
-                            if self.mUsersData.count < MAX_RECORDS || self.mUsersData[self.mUsersData.count-1].getPoints() > self.mSeconds {
-                                moveToScoreViewController()
+                        // if network is available
+                        if Reachability.isConnectedToNetwork(){
+                            print("Internet Connection Available!")
+                            self.mIsNetworkEnabled = true
+                            
+                        }else{
+                            print("Internet Connection not Available!")
+                            self.mIsNetworkEnabled = false
+                        }
+                        
+                        if self.mIsNetworkEnabled ?? false {
+                            if self.mUsersData.count>0 {
+                                if self.mUsersData.count < MAX_RECORDS || self.mUsersData[self.mUsersData.count-1].getPoints() > self.mSeconds {
+                                    moveToScoreViewController()
+                                } else {
+                                    moveToResultsViewController()
+                                }
                             } else {
-                                moveToResultsViewController()
+                                moveToScoreViewController()
                             }
                         } else {
-                            moveToScoreViewController()
+                            moveToResultsViewController()
                         }
                         
                         // else go to results view controller

@@ -10,11 +10,16 @@ import UIKit
 import GoogleMaps
 
 class MainViewController: UIViewController {
-    var mLocationManager : CLLocationManager?
+    
+    let mLocationManager = CLLocationManager()
     var mGameViewController: GameViewController?
-
+    
+    var mCurrentLat: Double = 0
+    var mCurrentLong: Double = 0
+    
     var mFirstAsk = true
     var mFirstShow: Bool?
+    var mIsNetworkEnabled: Bool?
     
     // outlet
     @IBOutlet weak var mEazyBtn: UIButton!
@@ -23,16 +28,14 @@ class MainViewController: UIViewController {
     @IBOutlet weak var mRecordsBtn: UIButton!
     @IBOutlet weak var mInstructionBtn: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         enableAllBtns()
         
         self.mFirstShow = true
         
-        self.mLocationManager = CLLocationManager()
-        self.mLocationManager!.delegate = self
-        self.mLocationManager!.requestWhenInUseAuthorization()
+        self.mLocationManager.delegate = self
+        self.mLocationManager.requestWhenInUseAuthorization()
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
 
@@ -41,13 +44,23 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if checkLocation() {
-            enableAllBtns()
-        }
-        else {
+        guard Reachability.isLocationEnable() == true else  {
+            AlertsHandler.showAlertMessage(title: "Location denid", message: "Please allow location to play", cancelButtonTitle: "OK")
             self.mInstructionBtn.isEnabled = true
+            return
+        }
+
+        guard Reachability.isConnectedToNetwork() == true else {
+            print("Internet Connection not Available!")
+            self.mIsNetworkEnabled = false
+            self.mRecordsBtn.isEnabled = false
+            return
         }
         
+        checkGPS()
+        self.mIsNetworkEnabled = true
+        enableAllBtns()
+
         if self.mFirstShow! {
             self.mEazyBtn.center.x  -= view.bounds.width
             self.mNormalBtn.center.x  -= view.bounds.width
@@ -144,6 +157,10 @@ class MainViewController: UIViewController {
         }
         
         self.mGameViewController!.mDiff = 0
+        self.mGameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
+        self.mGameViewController!.mCurrentLat = self.mCurrentLat
+        self.mGameViewController!.mCurrentLong = self.mCurrentLong
+        
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(self.mGameViewController!, animated: true)
         })
@@ -162,6 +179,10 @@ class MainViewController: UIViewController {
         }
         
         self.mGameViewController!.mDiff = 1
+        self.mGameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
+        self.mGameViewController!.mCurrentLat = self.mCurrentLat
+        self.mGameViewController!.mCurrentLong = self.mCurrentLong
+        
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(self.mGameViewController!, animated: true)
         })
@@ -180,6 +201,10 @@ class MainViewController: UIViewController {
         }
         
         self.mGameViewController!.mDiff = 2
+        self.mGameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
+        self.mGameViewController!.mCurrentLat = self.mCurrentLat
+        self.mGameViewController!.mCurrentLong = self.mCurrentLong
+        
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(self.mGameViewController!, animated: true)
         })
@@ -219,24 +244,14 @@ class MainViewController: UIViewController {
         })
     }
     
-    func checkLocation() -> Bool {
-        var enable: Bool = false
-        if CLLocationManager.locationServicesEnabled() {
-            switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
-                print("No access")
-                enable = false
-                break
-            case .authorizedAlways, .authorizedWhenInUse:
-                print("Access")
-                enable = true
-                break
+    func checkGPS() {
+        if (CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedWhenInUse || CLLocationManager.authorizationStatus() == CLAuthorizationStatus.authorizedAlways){
+            guard let currentLocation = self.mLocationManager.location else {
+                return
             }
-        } else {
-            print("Location services are not enabled")
-            enable = false
+            self.mCurrentLat = currentLocation.coordinate.latitude
+            self.mCurrentLong = currentLocation.coordinate.longitude
         }
-        return enable
     }
 }
 
@@ -253,12 +268,12 @@ extension MainViewController: CLLocationManagerDelegate {
             self.mInstructionBtn.isEnabled = true
             return
         }
-        self.mLocationManager!.startUpdatingLocation()
+        self.mLocationManager.startUpdatingLocation()
         enableAllBtns()
 
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.mLocationManager!.stopUpdatingLocation()
+        self.mLocationManager.stopUpdatingLocation()
     }
 }

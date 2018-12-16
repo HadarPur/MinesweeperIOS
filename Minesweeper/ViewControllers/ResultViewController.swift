@@ -16,6 +16,8 @@ class ResultViewController: UIViewController {
     var mState: Bool = false
     var mLatitude: Double?, mLongitude: Double?
     var mPoints: Int = 0, mLevel: Int?
+    var mIsNetworkEnabled: Bool?
+    
     @IBOutlet weak var mStatusImageView: UIImageView!
     @IBOutlet weak var mRecordBtn: UIButton!
     @IBOutlet weak var mNewGameBtn: UIButton!
@@ -115,7 +117,11 @@ class ResultViewController: UIViewController {
     }
     
     func enableAllBtns() {
-        self.mRecordBtn.isEnabled = true
+        if self.mIsNetworkEnabled! {
+            self.mRecordBtn.isEnabled = true
+        } else {
+            self.mRecordBtn.isEnabled = false
+        }
         self.mNewGameBtn.isEnabled = true
         self.mHomeBtn.isEnabled = true
     }
