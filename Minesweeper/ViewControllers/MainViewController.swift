@@ -109,7 +109,7 @@ class MainViewController: UIViewController {
         
         self.mFirstShow = false
         
-        guard Reachability.isLocationEnable() == true else  {
+        guard Reachability.isLocationEnable() == true  && self.mFirstAsk == false else  {
             AlertsHandler.showAlertMessage(title: "Location needed", message: "Please allow location to play", cancelButtonTitle: "OK")
             self.mInstructionBtn.isEnabled = true
             return
@@ -262,6 +262,7 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else {
+            self.mFirstAsk = false
             self.mEazyBtn.isEnabled = false
             self.mNormalBtn.isEnabled = false
             self.mHardBtn.isEnabled = false
