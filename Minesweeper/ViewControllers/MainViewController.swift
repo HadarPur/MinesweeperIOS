@@ -44,23 +44,6 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        guard Reachability.isLocationEnable() == true else  {
-            AlertsHandler.showAlertMessage(title: "Location denid", message: "Please allow location to play", cancelButtonTitle: "OK")
-            self.mInstructionBtn.isEnabled = true
-            return
-        }
-
-        guard Reachability.isConnectedToNetwork() == true else {
-            print("Internet Connection not Available!")
-            self.mIsNetworkEnabled = false
-            self.mRecordsBtn.isEnabled = false
-            return
-        }
-        
-        checkGPS()
-        self.mIsNetworkEnabled = true
-        enableAllBtns()
-
         if self.mFirstShow! {
             self.mEazyBtn.center.x  -= view.bounds.width
             self.mNormalBtn.center.x  -= view.bounds.width
@@ -79,7 +62,7 @@ class MainViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+   
         UIView.animate(withDuration: 0.5, delay: 0.05, options: [], animations: {
             if self.mFirstShow! {
                 self.mEazyBtn.center.x  += self.view.bounds.width
@@ -125,6 +108,24 @@ class MainViewController: UIViewController {
         }, completion: nil)
         
         self.mFirstShow = false
+        
+        guard Reachability.isLocationEnable() == true else  {
+            AlertsHandler.showAlertMessage(title: "Location needed", message: "Please allow location to play", cancelButtonTitle: "OK")
+            self.mInstructionBtn.isEnabled = true
+            return
+        }
+        
+        guard Reachability.isConnectedToNetwork() == true else {
+            print("Internet Connection not Available!")
+            self.mIsNetworkEnabled = false
+            self.mRecordsBtn.isEnabled = false
+            return
+        }
+        
+        checkGPS()
+        enableAllBtns()
+        self.mIsNetworkEnabled = true
+        
     }
 
     func enableAllBtns() {
@@ -270,7 +271,6 @@ extension MainViewController: CLLocationManagerDelegate {
         }
         self.mLocationManager.startUpdatingLocation()
         enableAllBtns()
-
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
