@@ -38,6 +38,8 @@ class RecordsViewController: UIViewController, CallData {
         
         //initialize Firebase
         self.mFbStorage = FirebaseStorage()
+        
+        unableAllBtns()
         self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mFbStorage!.readResults(level: EASY, callback: {
             self.performQuery()
@@ -52,7 +54,6 @@ class RecordsViewController: UIViewController, CallData {
         self.view.addGestureRecognizer(swipeRight)
         
         checkGPS()
-
     }
 
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
@@ -63,6 +64,7 @@ class RecordsViewController: UIViewController, CallData {
     }
     
     @IBAction func hardBtnPressed(_ sender: Any) {
+        unableAllBtns()
         self.mHardBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
@@ -73,6 +75,7 @@ class RecordsViewController: UIViewController, CallData {
     }
     
     @IBAction func normalBtnPressed(_ sender: Any) {
+        unableAllBtns()
         self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
@@ -83,6 +86,7 @@ class RecordsViewController: UIViewController, CallData {
     }
     
     @IBAction func eazyBtnPressed(_ sender: Any) {
+        unableAllBtns()
         self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
@@ -121,6 +125,20 @@ class RecordsViewController: UIViewController, CallData {
             i+=1
         }
         self.mTableView.endUpdates()
+        enableAllBtns()
+        print("Done reading users from DB\n")
+    }
+    
+    func unableAllBtns() {
+        self.mEazyBtn.isEnabled = false
+        self.mNormalBtn.isEnabled = false
+        self.mHardBtn.isEnabled = false
+    }
+    
+    func enableAllBtns() {
+        self.mEazyBtn.isEnabled = true
+        self.mNormalBtn.isEnabled = true
+        self.mHardBtn.isEnabled = true
     }
     
     func checkGPS() {

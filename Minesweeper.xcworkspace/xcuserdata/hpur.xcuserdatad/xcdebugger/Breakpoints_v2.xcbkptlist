@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.739368"
+            timestampString = "566641804.2869509"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "performQuery()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.73983"
+            timestampString = "566641804.287621"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "performQuery()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.740126"
+            timestampString = "566641804.287959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "performQuery()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.740413"
+            timestampString = "566641804.2885261"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "RecordsViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.740698"
+            timestampString = "566641804.289003"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "setMyLocationOnTheMap(latitudeUser:longitudeUser:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.740976"
+            timestampString = "566641804.289287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "setMyLocationOnTheMap(latitudeUser:longitudeUser:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.741254"
+            timestampString = "566641804.289646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "setMyLocationOnTheMap(latitudeUser:longitudeUser:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.7415479"
+            timestampString = "566641804.289958"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "setLocationOnTheMap(latitudeUser:longitudeUser:titleUser:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.7418309"
+            timestampString = "566641804.29027"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "setLocationOnTheMap(latitudeUser:longitudeUser:titleUser:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/RecordsViewController.swift"
-            timestampString = "566403131.742123"
+            timestampString = "566641804.290545"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "160"
-            endingLineNumber = "160"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "setLocationOnTheMap(latitudeUser:longitudeUser:titleUser:)"
             landmarkType = "7">
             <Locations>

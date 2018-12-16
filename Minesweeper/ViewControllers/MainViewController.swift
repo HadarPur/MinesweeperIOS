@@ -10,10 +10,13 @@ import UIKit
 import GoogleMaps
 
 class MainViewController: UIViewController {
-    var mFirstAsk = true
+    var mLocationManager : CLLocationManager?
     var mGameViewController: GameViewController?
-    var mFirstShow: Bool = true
-    let mLocationManager = CLLocationManager()
+
+    var mFirstAsk = true
+    var mFirstShow: Bool?
+    
+    // outlet
     @IBOutlet weak var mEazyBtn: UIButton!
     @IBOutlet weak var mNormalBtn: UIButton!
     @IBOutlet weak var mHardBtn: UIButton!
@@ -24,9 +27,15 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         enableAllBtns()
+        
+        self.mFirstShow = true
+        
+        self.mLocationManager = CLLocationManager()
+        self.mLocationManager!.delegate = self
+        self.mLocationManager!.requestWhenInUseAuthorization()
+        
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-        self.mLocationManager.delegate = self
-        self.mLocationManager.requestWhenInUseAuthorization()
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -34,7 +43,7 @@ class MainViewController: UIViewController {
 
         enableAllBtns()
         
-        if (mFirstShow) {
+        if self.mFirstShow! {
             self.mEazyBtn.center.x  -= view.bounds.width
             self.mNormalBtn.center.x  -= view.bounds.width
             self.mHardBtn.center.x  -= view.bounds.width
@@ -54,39 +63,43 @@ class MainViewController: UIViewController {
         super.viewDidAppear(animated)
 
         UIView.animate(withDuration: 0.5, delay: 0.05, options: [], animations: {
-            if (self.mFirstShow) {
+            if self.mFirstShow! {
                 self.mEazyBtn.center.x  += self.view.bounds.width
-            } else{
+            }
+            else{
                 self.mEazyBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.1, options: [], animations: {
-            if (self.mFirstShow) {
+            if self.mFirstShow! {
                 self.mNormalBtn.center.x  += self.view.bounds.width
-            } else{
+            }
+            else{
                 self.mNormalBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.15, options: [], animations: {
-           if (self.mFirstShow) {
+           if self.mFirstShow! {
                 self.mHardBtn.center.x  += self.view.bounds.width
-           } else{
+           }
+           else{
                 self.mHardBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.2, options: [],animations: {
-            if (self.mFirstShow) {
+            if self.mFirstShow! {
                 self.mRecordsBtn.center.x  += self.view.bounds.width
-            } else{
+            }
+            else{
                 self.mRecordsBtn.center.x  -= self.view.bounds.width
             }
         }, completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.25, options: [],animations: {
-            if (self.mFirstShow) {
+            if self.mFirstShow! {
                 self.mInstructionBtn.center.x  += self.view.bounds.width
             } else{
                 self.mInstructionBtn.center.x  -= self.view.bounds.width
@@ -209,10 +222,10 @@ extension MainViewController: CLLocationManagerDelegate {
         guard status == .authorizedWhenInUse else {
             return
         }
-        self.mLocationManager.startUpdatingLocation()
+        self.mLocationManager!.startUpdatingLocation()
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.mLocationManager.stopUpdatingLocation()
+        self.mLocationManager!.stopUpdatingLocation()
     }
 }
