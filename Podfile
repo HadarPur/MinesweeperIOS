@@ -13,7 +13,9 @@ target 'Minesweeper' do
     pod 'Firebase/Auth'
     pod 'Firebase/Core'
     pod 'Firebase/Database'
-
+    pod 'Cheers'
+    pod 'JRMFloatingAnimation'
+    
   target 'MinesweeperTests' do
     inherit! :search_paths
     # Pods for testing

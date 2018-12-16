@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import GameplayKit
+import Cheers
 
 class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     // levels
@@ -29,7 +30,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     let MAX_RECORDS: Int = 10
     let mFunctions = FuncUtils()
-    
+    let cheerView = CheerView()
+
     var mLastUpdate: Int = 0
     var mCount: Int = 0
     var mSeconds: Int = 0
@@ -61,6 +63,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     let pressedImage = UIImage(named: "tableopen.png") as UIImage?
     let bombImage = UIImage(named: "tablebombopen.png") as UIImage?
     let flagImage = UIImage(named: "tableflag.png") as UIImage?
+    // Create the view
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,10 +80,12 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture))
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
+
+        // Configure Cheers
+        self.view.addSubview(cheerView)
         
         self.mFbStorage = FirebaseStorage()
         createNewGame()
-        
         // need to do network check!!!!!!!!!!!!!!!!!!! and deal with the gps
 
     }
@@ -91,10 +96,24 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         if self.mIsDone {
             self.mIsDone = false
             pressNewGame()
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.cheerView.frame = self.view.bounds
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
 
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
@@ -105,7 +124,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     }
     
     func moveToScoreViewController() {
-        let deadlineTime = DispatchTime.now() + .milliseconds(500)
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let scoreViewController = storyBoard.instantiateViewController(withIdentifier: "ScoreViewController") as? ScoreViewController
         
@@ -116,17 +134,22 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         scoreViewController?.mUsersData = self.mUsersData
         scoreViewController?.mPoints = self.mSeconds
         scoreViewController?.mLevel = self.mDiff
-        
+
         
         // if location != null
+        let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTimeAnimate, execute: {
+            // Stop
+            self.cheerView.stop()
+        })
         
+        let deadlineTime = DispatchTime.now() + .milliseconds(3500)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(scoreViewController!, animated: true)
         })
     }
     
     func moveToResultsViewController() {
-        let deadlineTime = DispatchTime.now() + .milliseconds(1000)
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let resultsViewController = storyBoard.instantiateViewController(withIdentifier: "ResultViewController") as? ResultViewController
         
@@ -138,7 +161,16 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         resultsViewController?.mState = false
         resultsViewController?.mLevel = self.mDiff
         resultsViewController?.mPoints = self.mSeconds
+
         
+        // if location != null
+        let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTimeAnimate, execute: {
+            // Stop
+            self.cheerView.stop()
+        })
+
+        let deadlineTime = DispatchTime.now() + .milliseconds(3500)
         // need to check if there is loaction anf if there is so to moving forward this one
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
             self.navigationController?.pushViewController(resultsViewController!, animated: true)
@@ -148,7 +180,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     func createNewGame() {
         self.mIsLost = false
         self.mCountOfPressed = 0
-        
+
         switch self.mDiff {
         case EASY:
             initGame(level: EASY_FLAGS, boardSize: BOARD_CELL10)
@@ -354,10 +386,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
 
     }
-    
-    func explodeVictoryAnimation() {
-        
-    }
 
     //MARK: - UILongPressGestureRecognizer Action -
     @objc
@@ -463,6 +491,18 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     }
                     if self.mCells[indexPath[0]][indexPath[1]].getStatus() == -1 {
                         self.mTimer.invalidate()
+                        
+                        // Cheers animation
+                        let string = NSAttributedString(string: "😔", attributes: [
+                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)
+                            ])
+                        let size = CGSize(width: 30, height: 30)
+                        self.cheerView.config.particle = .text(size, [string])
+                        // Change colors
+                        self.cheerView.config.colors = [UIColor.yellow, UIColor.orange, UIColor.red]
+                        // Start
+                        self.cheerView.start()
+                        
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = true
@@ -484,18 +524,26 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     //animation when the player win
                     if (self.mCountOfPressed + self.mSetFlags.count >= self.mCells.count*self.mCells[0].count && self.mIsLost == false) {
                         self.mTimer.invalidate()
-                        explodeVictoryAnimation();
+                        
+                        // Cheers animation
+                        self.cheerView.config.particle = .confetti(allowedShapes: Particle.ConfettiShape.all)
+                        // Change colors
+                        self.cheerView.config.colors = [UIColor.red, UIColor.green, UIColor.blue, UIColor.yellow]
+                        // Start
+                        self.cheerView.start()
+
                         // if network is available
+                        self.mRestartBtn.isEnabled = false
+                        self.mIsLost = false
                         self.mIsDone = true
+                        
                         if self.mUsersData.count>0 {
                             if self.mUsersData.count < MAX_RECORDS || self.mUsersData[self.mUsersData.count-1].getPoints() > self.mSeconds {
                                 moveToScoreViewController()
-                            }
-                            else {
+                            } else {
                                 moveToResultsViewController()
                             }
-                        }
-                        else {
+                        } else {
                             moveToScoreViewController()
                         }
                         

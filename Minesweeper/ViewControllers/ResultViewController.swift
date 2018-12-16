@@ -11,6 +11,7 @@ import UIKit
 class ResultViewController: UIViewController {
     let mWinningImage = UIImage(named: "winning.png") as UIImage?
     let mLossingImage = UIImage(named: "lose.png") as UIImage?
+
     var mStatus: Bool = false
     var mState: Bool = false
     var mLatitude: Double?, mLongitude: Double?

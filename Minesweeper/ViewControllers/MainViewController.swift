@@ -41,7 +41,12 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        enableAllBtns()
+        if checkLocation() {
+            enableAllBtns()
+        }
+        else {
+            self.mInstructionBtn.isEnabled = true
+        }
         
         if self.mFirstShow! {
             self.mEazyBtn.center.x  -= view.bounds.width
@@ -213,16 +218,44 @@ class MainViewController: UIViewController {
             self.navigationController?.pushViewController(instrucionsViewController!, animated: true)
         })
     }
+    
+    func checkLocation() -> Bool {
+        var enable: Bool = false
+        if CLLocationManager.locationServicesEnabled() {
+            switch CLLocationManager.authorizationStatus() {
+            case .notDetermined, .restricted, .denied:
+                print("No access")
+                enable = false
+                break
+            case .authorizedAlways, .authorizedWhenInUse:
+                print("Access")
+                enable = true
+                break
+            }
+        } else {
+            print("Location services are not enabled")
+            enable = false
+        }
+        return enable
+    }
 }
+
 
 // extension for map view
 extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else {
+            self.mEazyBtn.isEnabled = false
+            self.mNormalBtn.isEnabled = false
+            self.mHardBtn.isEnabled = false
+            self.mRecordsBtn.isEnabled = false
+            self.mInstructionBtn.isEnabled = true
             return
         }
         self.mLocationManager!.startUpdatingLocation()
+        enableAllBtns()
+
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
