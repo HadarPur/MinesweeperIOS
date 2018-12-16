@@ -26,6 +26,8 @@ If you want to see where the record was broken you need to click on the specific
 
 Of course to see where it was, you need to click on location marker.
 
+##App design:
+
 ![Alt Text](https://github.com/HadarPur/MinesweeperIOS/blob/master/wirfarme.png)
 
 
