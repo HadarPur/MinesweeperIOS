@@ -27,6 +27,6 @@ If you want to see where the record was broken you need to click on the specific
 Of course to see where it was, you need to click on location marker.
 
 
-/Users/hpur/Desktop/Screen Shot 2018-12-16 at 18.16.04.png
+![alt text](https://drive.google.com/open?id=1f3IDM2yGsy0acBx-zTBmLK6mqKgAsToE)
 
 /Users/hpur/Desktop/Screen Shot 2018-12-16 at 18.16.15.png
