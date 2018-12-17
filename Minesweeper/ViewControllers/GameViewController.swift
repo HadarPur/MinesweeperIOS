@@ -486,9 +486,9 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         
                         // Cheers animation
                         let string = NSAttributedString(string: "😔", attributes: [
-                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)
+                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18)
                             ])
-                        let size = CGSize(width: 50, height: 50)
+                        let size = CGSize(width: 100, height: 100)
                         self.mCheerView.config.particle = .text(size, [string])
                         // Change colors
                         self.mCheerView.config.colors = [UIColor.yellow, UIColor.orange, UIColor.red]
