@@ -475,8 +475,20 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         // MARK: - UICollectionViewDelegate
         func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             if !self.mIsChangeMines && !self.mIsDone {
+                
                 print(" cell touched with indexPath row: \(indexPath[0]) indexPath col: \(indexPath[1])")
                 if !self.mCells[indexPath[0]][indexPath[1]].mIsLongPressed {
+                    
+                    // if network is available
+                    if Reachability.isConnectedToNetwork(){
+                        print("Internet Connection Available!")
+                        self.mIsNetworkEnabled = true
+                        
+                    }else{
+                        print("Internet Connection not Available!")
+                        self.mIsNetworkEnabled = false
+                    }
+                    
                     if mIsFirstClick {
                         self.mIsFirstClick = false
                         self.mTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(GameViewController.action), userInfo: nil, repeats: true)
@@ -494,17 +506,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         self.mCheerView.config.colors = [UIColor.yellow, UIColor.orange, UIColor.red]
                         // Start
                         self.mCheerView.start()
-                        
-                        // if network is available
-                        if Reachability.isConnectedToNetwork(){
-                            print("Internet Connection Available!")
-                            self.mIsNetworkEnabled = true
-                            
-                        }else{
-                            print("Internet Connection not Available!")
-                            self.mIsNetworkEnabled = false
-                        }
-                        
+
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = true
@@ -537,16 +539,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = false
                         self.mIsDone = true
-                        
-                        // if network is available
-                        if Reachability.isConnectedToNetwork(){
-                            print("Internet Connection Available!")
-                            self.mIsNetworkEnabled = true
-                            
-                        }else{
-                            print("Internet Connection not Available!")
-                            self.mIsNetworkEnabled = false
-                        }
                         
                         if self.mIsNetworkEnabled ?? false {
                             if self.mUsersData.count>0 {
