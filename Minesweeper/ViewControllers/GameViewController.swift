@@ -486,14 +486,24 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         
                         // Cheers animation
                         let string = NSAttributedString(string: "😔", attributes: [
-                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)
+                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)
                             ])
-                        let size = CGSize(width: 40, height: 40)
+                        let size = CGSize(width: 50, height: 50)
                         self.mCheerView.config.particle = .text(size, [string])
                         // Change colors
                         self.mCheerView.config.colors = [UIColor.yellow, UIColor.orange, UIColor.red]
                         // Start
                         self.mCheerView.start()
+                        
+                        // if network is available
+                        if Reachability.isConnectedToNetwork(){
+                            print("Internet Connection Available!")
+                            self.mIsNetworkEnabled = true
+                            
+                        }else{
+                            print("Internet Connection not Available!")
+                            self.mIsNetworkEnabled = false
+                        }
                         
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
