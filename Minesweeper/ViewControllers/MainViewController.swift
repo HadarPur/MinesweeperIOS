@@ -260,7 +260,6 @@ extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         guard status == .authorizedWhenInUse else {
-            self.mFirstAsk = false
             self.mEazyBtn.isEnabled = false
             self.mNormalBtn.isEnabled = false
             self.mHardBtn.isEnabled = false
@@ -268,6 +267,7 @@ extension MainViewController: CLLocationManagerDelegate {
             self.mInstructionBtn.isEnabled = true
             return
         }
+        self.mFirstAsk = false
         self.mLocationManager.startUpdatingLocation()
         enableAllBtns()
     }
