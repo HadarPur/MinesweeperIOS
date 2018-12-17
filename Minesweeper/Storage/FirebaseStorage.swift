@@ -11,15 +11,18 @@ import FirebaseDatabase
 import UIKit
 
 class FirebaseStorage: NSObject {
-    let EASY:Int = 0, NORMAL:Int = 1, HARD:Int = 2;
-    var mReaded: UserInfo!
-    var myRefEasy: DatabaseReference!
-    var myRefMedium: DatabaseReference!
-    var myRefHard: DatabaseReference!
+    let EASY:Int = 0, NORMAL:Int = 1, HARD:Int = 2
+    
     var mEasyUsers : Array<UserInfo> = Array()
     var mNormalUsers : Array<UserInfo> = Array()
     var mHardUsers : Array<UserInfo> = Array()
     var mUsers : Array<UserInfo> = Array()
+    
+    var mReaded: UserInfo!
+    var myRefEasy: DatabaseReference!
+    var myRefMedium: DatabaseReference!
+    var myRefHard: DatabaseReference!
+
 
     override init() {
         self.myRefEasy = Database.database().reference(withPath: "EasyRecords")

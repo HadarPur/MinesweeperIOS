@@ -10,9 +10,14 @@ import UIKit
 import GoogleMaps
 
 class MainViewController: UIViewController {
+    // outlet
+    @IBOutlet weak var mEazyBtn: UIButton!
+    @IBOutlet weak var mNormalBtn: UIButton!
+    @IBOutlet weak var mHardBtn: UIButton!
+    @IBOutlet weak var mRecordsBtn: UIButton!
+    @IBOutlet weak var mInstructionBtn: UIButton!
     
     let mLocationManager = CLLocationManager()
-    var mGameViewController: GameViewController?
     
     var mCurrentLat: Double = 0
     var mCurrentLong: Double = 0
@@ -20,13 +25,6 @@ class MainViewController: UIViewController {
     var mFirstAsk = true
     var mFirstShow: Bool?
     var mIsNetworkEnabled: Bool?
-    
-    // outlet
-    @IBOutlet weak var mEazyBtn: UIButton!
-    @IBOutlet weak var mNormalBtn: UIButton!
-    @IBOutlet weak var mHardBtn: UIButton!
-    @IBOutlet weak var mRecordsBtn: UIButton!
-    @IBOutlet weak var mInstructionBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,19 +149,19 @@ class MainViewController: UIViewController {
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        self.mGameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
         
-        guard self.mGameViewController != nil else {
+        guard gameViewController != nil else {
             return
         }
         
-        self.mGameViewController!.mDiff = 0
-        self.mGameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
-        self.mGameViewController!.mCurrentLat = self.mCurrentLat
-        self.mGameViewController!.mCurrentLong = self.mCurrentLong
+        gameViewController!.mDiff = 0
+        gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
+        gameViewController!.mCurrentLat = self.mCurrentLat
+        gameViewController!.mCurrentLong = self.mCurrentLong
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-            self.navigationController?.pushViewController(self.mGameViewController!, animated: true)
+            self.navigationController?.pushViewController(gameViewController!, animated: true)
         })
     }
     
@@ -173,19 +171,19 @@ class MainViewController: UIViewController {
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        self.mGameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
         
-        guard self.mGameViewController != nil else {
+        guard gameViewController != nil else {
             return
         }
         
-        self.mGameViewController!.mDiff = 1
-        self.mGameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
-        self.mGameViewController!.mCurrentLat = self.mCurrentLat
-        self.mGameViewController!.mCurrentLong = self.mCurrentLong
+        gameViewController!.mDiff = 1
+        gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
+        gameViewController!.mCurrentLat = self.mCurrentLat
+        gameViewController!.mCurrentLong = self.mCurrentLong
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-            self.navigationController?.pushViewController(self.mGameViewController!, animated: true)
+            self.navigationController?.pushViewController(gameViewController!, animated: true)
         })
     }
     
@@ -195,19 +193,19 @@ class MainViewController: UIViewController {
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        self.mGameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
+        let gameViewController = storyBoard.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController
         
-        guard self.mGameViewController != nil else {
+        guard gameViewController != nil else {
             return
         }
         
-        self.mGameViewController!.mDiff = 2
-        self.mGameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
-        self.mGameViewController!.mCurrentLat = self.mCurrentLat
-        self.mGameViewController!.mCurrentLong = self.mCurrentLong
+        gameViewController!.mDiff = 2
+        gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
+        gameViewController!.mCurrentLat = self.mCurrentLat
+        gameViewController!.mCurrentLong = self.mCurrentLong
         
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-            self.navigationController?.pushViewController(self.mGameViewController!, animated: true)
+            self.navigationController?.pushViewController(gameViewController!, animated: true)
         })
     }
     

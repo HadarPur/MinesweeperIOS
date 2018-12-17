@@ -9,21 +9,24 @@
 import UIKit
 
 class ResultViewController: UIViewController {
-    let mWinningImage = UIImage(named: "winning.png") as UIImage?
-    let mLossingImage = UIImage(named: "lose.png") as UIImage?
-
-    var mStatus: Bool = false
-    var mState: Bool = false
-    var mLatitude: Double?, mLongitude: Double?
-    var mPoints: Int = 0, mLevel: Int?
-    var mIsNetworkEnabled: Bool?
-    
+    // outlet
     @IBOutlet weak var mStatusImageView: UIImageView!
     @IBOutlet weak var mRecordBtn: UIButton!
     @IBOutlet weak var mNewGameBtn: UIButton!
     @IBOutlet weak var mHomeBtn: UIButton!
     @IBOutlet weak var mLable: UILabel!
     @IBOutlet weak var mBackgroundLable: UIImageView!
+    
+    let mWinningImage = UIImage(named: "winning.png") as UIImage?
+    let mLossingImage = UIImage(named: "lose.png") as UIImage?
+    
+    var mStatus: Bool?
+    var mState: Bool?
+    var mLatitude: Double?
+    var mLongitude: Double?
+    var mPoints: Int?
+    var mLevel: Int?
+    var mIsNetworkEnabled: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +49,9 @@ class ResultViewController: UIViewController {
         navigationArray!.remove(at: (navigationArray?.count)! - 2) // To remove previous UIViewController
         self.navigationController?.viewControllers = navigationArray!
     }
-    
+
     func setStatusImage() {
-        if self.mStatus {
+        if self.mStatus! {
             self.mStatusImageView.image = mLossingImage
             self.mLable.text = ""
             self.mBackgroundLable.isHidden = true
@@ -56,9 +59,9 @@ class ResultViewController: UIViewController {
         else {
             self.mStatusImageView.image = mWinningImage
             self.mBackgroundLable.isHidden = false
-            self.mLable.text = "Time: \(self.mPoints) sec"
+            self.mLable.text = "Time: \(self.mPoints!) sec"
 
-            if self.mState {
+            if self.mState! {
                 popupViewControllerFromStack()
             }
         }

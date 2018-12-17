@@ -11,37 +11,34 @@ import GoogleMaps
 import MapKit
 
 class RecordsViewController: UIViewController, CallData {
-
-    let EASY:Int = 0
-    let NORMAL:Int = 1
-    let HARD:Int = 2
-    let mLocationManager = CLLocationManager()
-
-    var mFbStorage : FirebaseStorage?
-    var mUsersData : Array<UserInfo> = Array()
-    var mUsers : Array<String> = Array()
-    @IBOutlet weak var mTableView: UITableView! 
-    
+    // outlet
+    @IBOutlet weak var mTableView: UITableView!
     @IBOutlet weak var mMapView: GMSMapView!
     @IBOutlet weak var mEazyBtn: UIButton!
     @IBOutlet weak var mNormalBtn: UIButton!
     @IBOutlet weak var mHardBtn: UIButton!
 
-    var mCurrentLat: Double = 0
-    var mCurrentLong: Double = 0
-    
     let mUnPressedImage = UIImage(named: "table.png") as UIImage?
     let mPressedImage = UIImage(named: "tableopen.png") as UIImage?
+    
+    let EASY:Int = 0
+    let NORMAL:Int = 1
+    let HARD:Int = 2
+    let mLocationManager = CLLocationManager()
+    let mFbStorage = FirebaseStorage()
+    
+    var mUsersData : Array<UserInfo> = Array()
+    var mUsers : Array<String> = Array()
+    
+    var mCurrentLat: Double?
+    var mCurrentLong: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //initialize Firebase
-        self.mFbStorage = FirebaseStorage()
-        
         unableAllBtns()
         self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
-        self.mFbStorage!.readResults(level: EASY, callback: {
+        self.mFbStorage.readResults(level: EASY, callback: {
             self.performQuery()
         })
         self.mTableView.isScrollEnabled = true
@@ -68,7 +65,7 @@ class RecordsViewController: UIViewController, CallData {
         self.mHardBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
-        self.mFbStorage!.readResults(level: HARD, callback: {
+        self.mFbStorage.readResults(level: HARD, callback: {
             self.performQuery()
         })
         checkGPS()
@@ -79,7 +76,7 @@ class RecordsViewController: UIViewController, CallData {
         self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
-        self.mFbStorage!.readResults(level: NORMAL, callback: {
+        self.mFbStorage.readResults(level: NORMAL, callback: {
             self.performQuery()
         })
         checkGPS()
@@ -90,7 +87,7 @@ class RecordsViewController: UIViewController, CallData {
         self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
-        self.mFbStorage!.readResults(level: EASY, callback: {
+        self.mFbStorage.readResults(level: EASY, callback: {
             self.performQuery()
         })
         checkGPS()
@@ -109,15 +106,11 @@ class RecordsViewController: UIViewController, CallData {
         self.mUsers.removeAll()
         self.mTableView.reloadData()
         
-        self.mUsersData = self.mFbStorage!.getUserInfoArray()
+        self.mUsersData = self.mFbStorage.getUserInfoArray()
         self.mTableView.beginUpdates()
 
         for user in self.mUsersData {
-            var s: String = ""
-            s += "( "
-            s += String(i+1)
-            s += " ) "
-            s += user.toString()
+            let s: String = "( \(String(i+1)) ) \(user.toString())"
             self.mUsers.append(s)
             print("\n", self.mUsers[i])
             
@@ -148,12 +141,12 @@ class RecordsViewController: UIViewController, CallData {
             }
             self.mCurrentLat = currentLocation.coordinate.latitude
             self.mCurrentLong = currentLocation.coordinate.longitude
-            setMyLocationOnTheMap(latitudeUser: self.mCurrentLat, longitudeUser: self.mCurrentLong)
+            setMyLocationOnTheMap(latitudeUser: self.mCurrentLat ?? 0, longitudeUser: self.mCurrentLong ?? 0)
         }
     }
     
     func setLocationOnTheMap(latitudeUser: Double, longitudeUser: Double, titleUser: String) {
-        self.setMyLocationOnTheMap(latitudeUser: self.mCurrentLat, longitudeUser: self.mCurrentLong)
+        self.setMyLocationOnTheMap(latitudeUser: self.mCurrentLat ?? 0, longitudeUser: self.mCurrentLong ?? 0)
 
         let latitude = latitudeUser
         let longitude = longitudeUser

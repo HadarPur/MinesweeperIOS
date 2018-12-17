@@ -11,6 +11,7 @@ import UIKit
 import MapKit
 
 class ScoreViewController: UIViewController, UITextFieldDelegate {
+    // outlet
     @IBOutlet weak var mCancelBtn: UIButton!
     @IBOutlet weak var mSaveBtn: UIButton!
     @IBOutlet weak var mTextField: UITextField!
@@ -18,19 +19,20 @@ class ScoreViewController: UIViewController, UITextFieldDelegate {
     let WIN: Int = 1
     let MAX_RECORDS: Int = 10
     let mFunctions = FuncUtils()
-    var mLatitude: Double = 0
-    var mLongitude: Double = 0
-    var mIndex: Int = 0
+    let mFbStorage = FirebaseStorage()
+
+    var mLatitude: Double?
+    var mLongitude: Double?
+    var mIndex: Int?
     var mPoints: Int?
     var mLevel: Int?
     var mName: String?
     
     var mUsersData : Array<UserInfo>?
-    var mFbStorage : FirebaseStorage?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.mFbStorage = FirebaseStorage()
+        
         self.mTextField.delegate = self
     }
 
@@ -58,14 +60,14 @@ class ScoreViewController: UIViewController, UITextFieldDelegate {
         self.mIndex = self.mUsersData!.count
         
         let userInfo: UserInfo =  UserInfo()
-        userInfo.UserInfo(key: self.mIndex, name: self.mName!, latitude: self.mLatitude, longitude: self.mLongitude, points: self.mPoints!, level: self.mLevel ?? 0)
+        userInfo.UserInfo(key: self.mIndex!, name: self.mName!, latitude: self.mLatitude ?? 0, longitude: self.mLongitude ?? 0, points: self.mPoints!, level: self.mLevel ?? 0)
         
-        if self.mIndex >= MAX_RECORDS {
+        if self.mIndex! >= MAX_RECORDS {
             print("level: \(self.mLevel!)")
-            self.mFbStorage?.replaceUser(user: userInfo, level: self.mLevel!, users: self.mUsersData!)
+            self.mFbStorage.replaceUser(user: userInfo, level: self.mLevel!, users: self.mUsersData!)
         }
         else {
-            self.mFbStorage?.writeUser(user: userInfo, level: self.mLevel!)
+            self.mFbStorage.writeUser(user: userInfo, level: self.mLevel!)
             print("level: \(self.mLevel!)")
         }
         moveToResultsViewController()

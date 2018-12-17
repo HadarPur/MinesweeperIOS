@@ -18,6 +18,5 @@ class AlertsHandler {
         alert.addAction(cancelAction)
         
         UIApplication.shared.keyWindow?.rootViewController?.present(alert, animated: true, completion: nil)
-        
     }
 }

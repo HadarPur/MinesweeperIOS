@@ -11,6 +11,17 @@ import GameplayKit
 import Cheers
 
 class GameViewController: UIViewController, UIGestureRecognizerDelegate {
+    // outlet
+    @IBOutlet weak var mTimeTextView: UITextView!
+    @IBOutlet weak var mFlagsTextView: UITextView!
+    @IBOutlet weak var mGameBoard: UICollectionView!
+    @IBOutlet weak var mRestartBtn: UIButton!
+    
+    let unPressedImage = UIImage(named: "table.png") as UIImage?
+    let pressedImage = UIImage(named: "tableopen.png") as UIImage?
+    let bombImage = UIImage(named: "tablebombopen.png") as UIImage?
+    let flagImage = UIImage(named: "tableflag.png") as UIImage?
+    
     // levels
     let EASY: Int = 0
     let NORMAL: Int = 1
@@ -29,8 +40,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     let WIN: Int = 1
     
     let MAX_RECORDS: Int = 10
-    let cheerView = CheerView()
-
+    let mCheerView = CheerView()
+    let mFbStorage = FirebaseStorage()
+    
+    var mTimer = Timer()
     var mLastUpdate: Int = 0
     var mCount: Int = 0
     var mSeconds: Int = 0
@@ -47,24 +60,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var mNumOfRows: Int?
     var mNumOfColumns: Int?
     var mIsGameEnabled = true
-    var mFbStorage: FirebaseStorage!
     var mCells = [[CollectionViewCell]]()
     var mSetFlags = Set<Int>()
-    var mTimer = Timer()
     var mUsersData : Array<UserInfo> = Array()
-    var mCurrentLat: Double = 0
-    var mCurrentLong: Double = 0
-    
-    @IBOutlet weak var mTimeTextView: UITextView!
-    @IBOutlet weak var mFlagsTextView: UITextView!
-    @IBOutlet weak var mGameBoard: UICollectionView!
-    @IBOutlet weak var mRestartBtn: UIButton!
-    
-    let unPressedImage = UIImage(named: "table.png") as UIImage?
-    let pressedImage = UIImage(named: "tableopen.png") as UIImage?
-    let bombImage = UIImage(named: "tablebombopen.png") as UIImage?
-    let flagImage = UIImage(named: "tableflag.png") as UIImage?
-    // Create the view
+    var mCurrentLat: Double?
+    var mCurrentLong: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,9 +83,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.addGestureRecognizer(swipeRight)
 
         // Configure Cheers
-        self.view.addSubview(cheerView)
+        self.view.addSubview(mCheerView)
         
-        self.mFbStorage = FirebaseStorage()
         createNewGame()
 
     }
@@ -105,17 +104,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.cheerView.frame = self.view.bounds
+        self.mCheerView.frame = self.view.bounds
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-
     @objc func handleGesture(gesture: UISwipeGestureRecognizer) -> Void {
         if gesture.direction == UISwipeGestureRecognizer.Direction.right {
             print("Swipe Right")
@@ -141,7 +132,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
         DispatchQueue.main.asyncAfter(deadline: deadlineTimeAnimate, execute: {
             // Stop
-            self.cheerView.stop()
+            self.mCheerView.stop()
         })
         
         let deadlineTime = DispatchTime.now() + .milliseconds(3500)
@@ -168,7 +159,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
         DispatchQueue.main.asyncAfter(deadline: deadlineTimeAnimate, execute: {
             // Stop
-            self.cheerView.stop()
+            self.mCheerView.stop()
         })
 
         let deadlineTime = DispatchTime.now() + .milliseconds(3500)
@@ -186,7 +177,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         case EASY:
             initGame(level: EASY_FLAGS, boardSize: BOARD_CELL10)
             creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: EASY_FLAGS)
-            self.mFbStorage!.readResults(level: EASY, callback: {
+            self.mFbStorage.readResults(level: EASY, callback: {
                 self.performQuery()
                 print("array count: \(self.mUsersData.count)")
             })
@@ -194,14 +185,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         case NORMAL:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL10)
             creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: HARD_FLAGS)
-            self.mFbStorage!.readResults(level: NORMAL, callback: {
+            self.mFbStorage.readResults(level: NORMAL, callback: {
                 self.performQuery()
             })
             break
         case HARD:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL5)
             creatNewCollectionView(colNum: BOARD_CELL5, rowNum: BOARD_CELL5 , mines: HARD_FLAGS)
-            self.mFbStorage!.readResults(level: HARD, callback: {
+            self.mFbStorage.readResults(level: HARD, callback: {
                 self.performQuery()
             })
             break
@@ -430,7 +421,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     //When starting a new conversation
     func performQuery() {
         print("Start reading users from DB\n")
-        self.mUsersData = self.mFbStorage!.getUserInfoArray()
+        self.mUsersData = self.mFbStorage.getUserInfoArray()
     }
     
     // MARK: Actions
@@ -497,12 +488,12 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         let string = NSAttributedString(string: "😔", attributes: [
                             NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)
                             ])
-                        let size = CGSize(width: 30, height: 30)
-                        self.cheerView.config.particle = .text(size, [string])
+                        let size = CGSize(width: 40, height: 40)
+                        self.mCheerView.config.particle = .text(size, [string])
                         // Change colors
-                        self.cheerView.config.colors = [UIColor.yellow, UIColor.orange, UIColor.red]
+                        self.mCheerView.config.colors = [UIColor.yellow, UIColor.orange, UIColor.red]
                         // Start
-                        self.cheerView.start()
+                        self.mCheerView.start()
                         
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
@@ -527,11 +518,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         self.mTimer.invalidate()
                         
                         // Cheers animation
-                        self.cheerView.config.particle = .confetti(allowedShapes: Particle.ConfettiShape.all)
+                        self.mCheerView.config.particle = .confetti(allowedShapes: Particle.ConfettiShape.all)
                         // Change colors
-                        self.cheerView.config.colors = [UIColor.red, UIColor.green, UIColor.blue, UIColor.yellow]
+                        self.mCheerView.config.colors = [UIColor.red, UIColor.green, UIColor.blue, UIColor.yellow]
                         // Start
-                        self.cheerView.start()
+                        self.mCheerView.start()
 
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = false
