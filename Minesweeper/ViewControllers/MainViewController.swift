@@ -36,7 +36,7 @@ class MainViewController: UIViewController {
         self.mLocationManager.requestWhenInUseAuthorization()
         
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -108,11 +108,10 @@ class MainViewController: UIViewController {
         self.mFirstShow = false
         
         guard Reachability.isLocationEnable() == true  && self.mFirstAsk == false else  {
-            AlertsHandler.showAlertMessage(title: "Location needed", message: "Please allow location to play", cancelButtonTitle: "OK")
             self.mInstructionBtn.isEnabled = true
             return
         }
-        
+
         guard Reachability.isConnectedToNetwork() == true else {
             print("Internet Connection not Available!")
             self.mIsNetworkEnabled = false
@@ -259,6 +258,13 @@ class MainViewController: UIViewController {
 extension MainViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+        if mFirstAsk {
+            AlertsHandler.showAlertMessage(title: "Location needed", message: "Please allow location to play", cancelButtonTitle: "OK")
+        }
+        
+        self.mFirstAsk = false
+  
         guard status == .authorizedWhenInUse else {
             self.mEazyBtn.isEnabled = false
             self.mNormalBtn.isEnabled = false
@@ -267,7 +273,7 @@ extension MainViewController: CLLocationManagerDelegate {
             self.mInstructionBtn.isEnabled = true
             return
         }
-        self.mFirstAsk = false
+
         self.mLocationManager.startUpdatingLocation()
         enableAllBtns()
     }
