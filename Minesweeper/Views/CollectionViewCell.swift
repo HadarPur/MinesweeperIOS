@@ -11,10 +11,7 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellLable: UILabel!
-
-    var mOriginalX: CGFloat?
-    var mOriginalY: CGFloat?
-
+    
     var mRow: Int!
     var mCol: Int!
     var mStatus: Int!
@@ -71,5 +68,13 @@ class CollectionViewCell: UICollectionViewCell {
     // chang cell status to be long pressed
     func longPressed() -> Bool{
         return self.mIsLongPressed
+    }
+}
+
+extension CollectionViewCell {
+    func fallDown(duration: Double) {
+        UIView.animate(withDuration: duration) {
+            self.frame.origin.y = 800
+        }
     }
 }

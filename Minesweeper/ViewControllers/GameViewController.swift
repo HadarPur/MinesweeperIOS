@@ -128,7 +128,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         scoreViewController!.mLatitude = self.mCurrentLat
         scoreViewController!.mLongitude = self.mCurrentLong
         
-        // if location != null
         let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
         DispatchQueue.main.asyncAfter(deadline: deadlineTimeAnimate, execute: {
             // Stop
@@ -155,7 +154,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         resultsViewController!.mPoints = self.mSeconds
         resultsViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
 
-        // if location != null
         if !self.mIsLost {
             let deadlineTimeAnimate = DispatchTime.now() + .milliseconds(2000)
             DispatchQueue.main.asyncAfter(deadline: deadlineTimeAnimate, execute: {
@@ -232,7 +230,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             self.mSetFlags.insert(index)
         }
         
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime(uptimeNanoseconds: 1000)) {
+        self.mGameBoard.performBatchUpdates(nil, completion: { (result) in
             for i in 0..<boardSize {
                 //            var row = [CollectionViewCell]()
                 for j in 0..<boardSize {
@@ -250,7 +248,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             
             self.createTimeStartFlags()
             self.setBombsNum(boardSize: boardSize)
-        }
+        })
     }
     
     func createTimeStartFlags() {
@@ -601,12 +599,3 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
 }
 
-extension CollectionViewCell {
-    func fallDown(duration: Double) {
-        mOriginalX = frame.origin.x
-        mOriginalY = frame.origin.y
-        UIView.animate(withDuration: duration) {
-            self.frame.origin.y = 800
-        }
-    }
-}
