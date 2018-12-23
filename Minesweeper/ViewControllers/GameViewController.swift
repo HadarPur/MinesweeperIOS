@@ -516,7 +516,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         let randomSource = GKRandomSource.sharedRandom()
                         mGameBoard.visibleCells.forEach { cell in
                             let index = randomSource.nextInt(upperBound: 100) // returns random Int between 0 and 100
-                            print("index: \(index)")
                             (cell as? CollectionViewCell)?.fallDown(duration: Double(index) / 100.0 + 1.0)
                         }
 
