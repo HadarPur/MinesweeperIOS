@@ -217,22 +217,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minesweeper/Views/CollectionViewCell.swift"
-            timestampString = "566042501.162132"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "configure(row:col:status:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/ScoreViewController.swift"
             timestampString = "566742765.199168"
             startingColumnNumber = "9223372036854775807"
@@ -330,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/GameViewController.swift"
-            timestampString = "566751436.319095"
+            timestampString = "567264583.7726049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "537"
-            endingLineNumber = "537"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
             landmarkName = "collectionView(_:didSelectItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -346,7 +330,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Minesweeper/ViewControllers/GameViewController.swift"
-            timestampString = "566751436.3205169"
+            timestampString = "567264583.773103"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
@@ -374,16 +358,33 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minesweeper/ViewControllers/MainViewController.swift"
-            timestampString = "567020830.59556"
+            filePath = "Minesweeper/ViewControllers/GameViewController.swift"
+            timestampString = "567264583.7735651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
-            landmarkName = "locationManager(_:didChangeAuthorization:)"
+            startingLineNumber = "458"
+            endingLineNumber = "458"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            condition = "status != 0"
+            continueAfterRunningActions = "No"
+            filePath = "Minesweeper/Views/CollectionViewCell.swift"
+            timestampString = "567264583.773895"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "configure(row:col:status:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -393,13 +394,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minesweeper/ViewControllers/MainViewController.swift"
-            timestampString = "567020830.596033"
+            filePath = "Minesweeper/ViewControllers/GameViewController.swift"
+            timestampString = "567264583.77397"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
-            landmarkName = "locationManager(_:didChangeAuthorization:)"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "moveToResultsViewController(duration:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -409,13 +410,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Minesweeper/ViewControllers/MainViewController.swift"
-            timestampString = "567020830.596288"
+            filePath = "Minesweeper/ViewControllers/GameViewController.swift"
+            timestampString = "567264583.774357"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "267"
-            endingLineNumber = "267"
-            landmarkName = "locationManager(_:didChangeAuthorization:)"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "moveToResultsViewController(duration:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

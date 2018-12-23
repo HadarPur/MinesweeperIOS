@@ -11,7 +11,10 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var cellImage: UIImageView!
     @IBOutlet weak var cellLable: UILabel!
-    
+
+    var mOriginalX: CGFloat?
+    var mOriginalY: CGFloat?
+
     var mRow: Int!
     var mCol: Int!
     var mStatus: Int!
