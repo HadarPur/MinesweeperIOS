@@ -391,6 +391,19 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         }
 
     }
+    
+    func checkConnection()  {
+        // if network is available
+        if Reachability.isConnectedToNetwork(){
+            print("Internet Connection Available!")
+            self.mIsNetworkEnabled = true
+            
+        }else{
+            print("Internet Connection not Available!")
+            self.mIsNetworkEnabled = false
+        }
+
+    }
 
     //MARK: - UILongPressGestureRecognizer Action -
     @objc
@@ -493,15 +506,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 print(" cell touched with indexPath row: \(indexPath[0]) indexPath col: \(indexPath[1])")
                 if !self.getCell(i: indexPath[0], j: indexPath[1]).mIsLongPressed {
                     
-                    // if network is available
-                    if Reachability.isConnectedToNetwork(){
-                        print("Internet Connection Available!")
-                        self.mIsNetworkEnabled = true
-                        
-                    }else{
-                        print("Internet Connection not Available!")
-                        self.mIsNetworkEnabled = false
-                    }
                     
                     if mIsFirstClick {
                         self.mIsFirstClick = false
@@ -510,7 +514,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     
                     if self.getCell(i: indexPath[0], j: indexPath[1]).getStatus() == -1 {
                         self.mTimer.invalidate()
-                        
+                        checkConnection()
+
                         let randomSource = GKRandomSource.sharedRandom()
                         mGameBoard.visibleCells.forEach { cell in
                             let index = randomSource.nextInt(upperBound: 100) // returns random Int between 0 and 100
@@ -548,6 +553,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         self.mCheerView.config.colors = [UIColor.red, UIColor.green, UIColor.blue, UIColor.yellow]
                         // Start
                         self.mCheerView.start()
+
+                        checkConnection()
 
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = false
