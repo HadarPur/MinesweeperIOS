@@ -271,7 +271,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
                 if self.getCell(i: i, j: j).getStatus() != -1 {
                     sum = calculateSum(startRow: i-1, endRow: i+1, startCol: j-1, endCol: j+1)
                     
-                    getCell(i: i, j: j).setStatus(status: sum)
+                    self.getCell(i: i, j: j).setStatus(status: sum)
                 }
             }
         }
@@ -359,8 +359,8 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     func showAllMines() {
         let rowsCount = self.mNumOfRows!
         for i in self.mSetFlags {
-            getCell(i: i/rowsCount, j: i%rowsCount).pressButton()
-            getCell(i: i/rowsCount, j: i%rowsCount).cellImage.image = bombImage
+            self.getCell(i: i/rowsCount, j: i%rowsCount).pressButton()
+            self.getCell(i: i/rowsCount, j: i%rowsCount).cellImage.image = bombImage
         }
     }
     
@@ -368,7 +368,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         guard let numOfColumns = self.mNumOfColumns, let numOfRows = self.mNumOfRows else { return }
         if x < 0 || y < 0 || x > numOfColumns - 1 || y > numOfRows - 1 { return }
 
-        let cell = getCell(i: x, j: y)
+        let cell = self.getCell(i: x, j: y)
         
         if cell.getStatus() > 0 {
             if cell.pressed() == false {
