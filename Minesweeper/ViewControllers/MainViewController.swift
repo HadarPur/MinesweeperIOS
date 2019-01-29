@@ -155,6 +155,8 @@ class MainViewController: UIViewController {
         }
         
         gameViewController!.mDiff = 0
+        gameViewController!.mNumOfRows = 10
+        gameViewController!.mNumOfColumns = 10
         gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
         gameViewController!.mCurrentLat = self.mCurrentLat
         gameViewController!.mCurrentLong = self.mCurrentLong
@@ -177,6 +179,8 @@ class MainViewController: UIViewController {
         }
         
         gameViewController!.mDiff = 1
+        gameViewController!.mNumOfRows = 10
+        gameViewController!.mNumOfColumns = 10
         gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
         gameViewController!.mCurrentLat = self.mCurrentLat
         gameViewController!.mCurrentLong = self.mCurrentLong
@@ -199,6 +203,8 @@ class MainViewController: UIViewController {
         }
         
         gameViewController!.mDiff = 2
+        gameViewController!.mNumOfRows = 5
+        gameViewController!.mNumOfColumns = 5
         gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
         gameViewController!.mCurrentLat = self.mCurrentLat
         gameViewController!.mCurrentLong = self.mCurrentLong
