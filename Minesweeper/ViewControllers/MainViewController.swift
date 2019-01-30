@@ -22,6 +22,10 @@ class MainViewController: UIViewController {
     var mCurrentLat: Double = 0
     var mCurrentLong: Double = 0
     
+    // board size
+    let BOARD_CELL10: Int = 10
+    let BOARD_CELL5: Int = 5
+    
     var mFirstAsk = true
     var mFirstShow: Bool?
     var mIsNetworkEnabled: Bool?
@@ -155,8 +159,8 @@ class MainViewController: UIViewController {
         }
         
         gameViewController!.mDiff = 0
-        gameViewController!.mNumOfRows = 10
-        gameViewController!.mNumOfColumns = 10
+        gameViewController!.mNumOfRows = BOARD_CELL10
+        gameViewController!.mNumOfColumns = BOARD_CELL10
         gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
         gameViewController!.mCurrentLat = self.mCurrentLat
         gameViewController!.mCurrentLong = self.mCurrentLong
@@ -179,8 +183,8 @@ class MainViewController: UIViewController {
         }
         
         gameViewController!.mDiff = 1
-        gameViewController!.mNumOfRows = 10
-        gameViewController!.mNumOfColumns = 10
+        gameViewController!.mNumOfRows = BOARD_CELL10
+        gameViewController!.mNumOfColumns = BOARD_CELL10
         gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
         gameViewController!.mCurrentLat = self.mCurrentLat
         gameViewController!.mCurrentLong = self.mCurrentLong
@@ -203,8 +207,8 @@ class MainViewController: UIViewController {
         }
         
         gameViewController!.mDiff = 2
-        gameViewController!.mNumOfRows = 5
-        gameViewController!.mNumOfColumns = 5
+        gameViewController!.mNumOfRows = BOARD_CELL5
+        gameViewController!.mNumOfColumns = BOARD_CELL5
         gameViewController!.mIsNetworkEnabled = self.mIsNetworkEnabled
         gameViewController!.mCurrentLat = self.mCurrentLat
         gameViewController!.mCurrentLong = self.mCurrentLong

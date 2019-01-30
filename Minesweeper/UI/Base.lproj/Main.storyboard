@@ -749,9 +749,9 @@ Of course to see where it was, you need to click on location marker.</string>
     </scenes>
     <resources>
         <image name="back" width="100" height="69"/>
-        <image name="island" width="210" height="300"/>
-        <image name="island2" width="250" height="347"/>
-        <image name="island3" width="250" height="347"/>
+        <image name="island" width="421" height="600"/>
+        <image name="island2" width="501" height="694"/>
+        <image name="island3" width="501" height="694"/>
         <image name="smileisland" width="240" height="240"/>
         <image name="table" width="113" height="87"/>
     </resources>

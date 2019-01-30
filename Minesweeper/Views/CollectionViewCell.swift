@@ -17,6 +17,7 @@ class CollectionViewCell: UICollectionViewCell {
     var mStatus: Int!
     var mIsPressed: Bool!
     var mIsLongPressed: Bool!
+    var mCellYIndex: CGFloat!
 
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -75,6 +76,18 @@ extension CollectionViewCell {
     func fallDown(duration: Double) {
         UIView.animate(withDuration: duration) {
             self.frame.origin.y = 800
+        }
+    }
+    
+    func moveLeft(duration: Double) {
+        UIView.animate(withDuration: duration) {
+            self.frame.origin.x = -800
+        }
+    }
+    
+    func moveRight(duration: Double) {
+        UIView.animate(withDuration: duration) {
+            self.frame.origin.x = 800
         }
     }
 }

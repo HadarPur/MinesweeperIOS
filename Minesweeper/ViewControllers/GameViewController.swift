@@ -48,7 +48,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var mCount: Int = 0
     var mSeconds: Int = 0
     var mCountOfPressed: Int = 0
-    var mChosenLevel: Int?
+    var mChosenLevel: Int!
     var mIsLost: Bool = false
     var mIsFirstClick: Bool = true
     var mFirstAsk: Bool = false
@@ -56,9 +56,9 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
     var mIsChangedOnce: Bool = false
     var mIsChangeMines: Bool = false
     var mIsNetworkEnabled: Bool?
-    var mDiff: Int? = 0
-    var mNumOfRows: Int?
-    var mNumOfColumns: Int?
+    var mDiff: Int!
+    var mNumOfRows: Int!
+    var mNumOfColumns: Int!
     var mIsGameEnabled = true
     //var mCells = [[CollectionViewCell]]()
     var mSetFlags = Set<Int>()
@@ -89,10 +89,6 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
 
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -100,6 +96,10 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             self.mIsDone = false
             pressNewGame()
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewDidLayoutSubviews() {
@@ -176,7 +176,7 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         switch self.mDiff {
         case EASY:
             initGame(level: EASY_FLAGS, boardSize: BOARD_CELL10)
-            creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: EASY_FLAGS)
+//            creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: EASY_FLAGS)
             self.mFbStorage.readResults(level: EASY, callback: {
                 self.performQuery()
                 print("array count: \(self.mUsersData.count)")
@@ -184,14 +184,14 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             break
         case NORMAL:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL10)
-            creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: HARD_FLAGS)
+//            creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: HARD_FLAGS)
             self.mFbStorage.readResults(level: NORMAL, callback: {
                 self.performQuery()
             })
             break
         case HARD:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL5)
-            creatNewCollectionView(colNum: BOARD_CELL5, rowNum: BOARD_CELL5 , mines: HARD_FLAGS)
+//            creatNewCollectionView(colNum: BOARD_CELL5, rowNum: BOARD_CELL5 , mines: HARD_FLAGS)
             self.mFbStorage.readResults(level: HARD, callback: {
                 self.performQuery()
             })
@@ -219,9 +219,11 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
             self.mSetFlags.removeAll()
         }
         
+        self.mGameBoard.reloadData()
+
 //        if self.mCells.count > 0 {
-            //self.mCells.removeAll()
-            self.mGameBoard.reloadData()
+//            self.mCells.removeAll()
+//            self.mGameBoard.reloadData()
 //        }
         
         while self.mSetFlags.count < level {
@@ -492,11 +494,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             collectionView.backgroundColor = UIColor.clear
-            return self.mNumOfColumns ?? 10
+            return self.mNumOfColumns ?? 5
         }
         
         func numberOfSections(in collectionView: UICollectionView) -> Int {
-            return self.mNumOfRows ?? 10
+            return self.mNumOfRows ?? 5
         }
         
         // MARK: - UICollectionViewDelegate
@@ -505,7 +507,6 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 
                 print(" cell touched with indexPath row: \(indexPath[0]) indexPath col: \(indexPath[1])")
                 if !self.getCell(i: indexPath[0], j: indexPath[1]).mIsLongPressed {
-                    
                     
                     if mIsFirstClick {
                         self.mIsFirstClick = false
@@ -517,7 +518,10 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         checkConnection()
 
                         let randomSource = GKRandomSource.sharedRandom()
-                        mGameBoard.visibleCells.forEach { cell in
+                        
+                        showAllMines()
+
+                        self.mGameBoard.visibleCells.forEach { cell in
                             let index = randomSource.nextInt(upperBound: 100) // returns random Int between 0 and 100
                             (cell as? CollectionViewCell)?.fallDown(duration: Double(index) / 100.0 + 1.0)
                         }
@@ -526,7 +530,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = true
                         self.mIsDone = true
-                        showAllMines()
+                        
                         moveToResultsViewController(duration: 1000)
                         print("player lose")
                         
@@ -586,7 +590,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         
         var cellWidth: CGFloat {
-            let rowsCount = CGFloat(mNumOfColumns ?? 10)
+            let rowsCount = CGFloat(mNumOfColumns)
             return self.mGameBoard.frame.width / rowsCount * 0.8
         }
         
@@ -596,8 +600,8 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
             
-            let totalCellWidth = cellWidth * CGFloat(mNumOfColumns ?? 10)
-            let totalSpacingWidth = CGFloat(4) * CGFloat((mNumOfColumns ?? 10))
+            let totalCellWidth = cellWidth * CGFloat(mNumOfColumns)
+            let totalSpacingWidth = CGFloat(4) * CGFloat((mNumOfColumns))
             
             let leftInset = (mGameBoard.frame.width - CGFloat(totalCellWidth - totalSpacingWidth))/4
             let rightInset = leftInset
