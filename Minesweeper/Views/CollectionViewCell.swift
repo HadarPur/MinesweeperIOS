@@ -19,8 +19,13 @@ class CollectionViewCell: UICollectionViewCell {
     var mIsLongPressed: Bool!
     var mCellYIndex: CGFloat!
 
+    var mOriginalX: CGFloat?
+    var mOriginalY: CGFloat?
+    
     override func prepareForReuse() {
         super.prepareForReuse()
+        self.frame.origin.x = mOriginalX!
+        self.frame.origin.y = mOriginalY!
     }
     
     func configure(row: Int, col: Int, status: Int) {
@@ -74,18 +79,24 @@ class CollectionViewCell: UICollectionViewCell {
 
 extension CollectionViewCell {
     func fallDown(duration: Double) {
+        mOriginalX = frame.origin.x
+        mOriginalY = frame.origin.y
         UIView.animate(withDuration: duration) {
             self.frame.origin.y = 800
         }
     }
     
     func moveLeft(duration: Double) {
+        mOriginalX = frame.origin.x
+        mOriginalY = frame.origin.y
         UIView.animate(withDuration: duration) {
             self.frame.origin.x = -800
         }
     }
     
     func moveRight(duration: Double) {
+        mOriginalX = frame.origin.x
+        mOriginalY = frame.origin.y
         UIView.animate(withDuration: duration) {
             self.frame.origin.x = 800
         }

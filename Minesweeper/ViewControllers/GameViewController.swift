@@ -525,7 +525,7 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                             let index = randomSource.nextInt(upperBound: 100) // returns random Int between 0 and 100
                             (cell as? CollectionViewCell)?.fallDown(duration: Double(index) / 100.0 + 1.0)
                         }
-
+                        
                         self.mRestartBtn.setImage(UIImage(named: "burnsmile"), for: .normal)
                         self.mRestartBtn.isEnabled = false
                         self.mIsLost = true
