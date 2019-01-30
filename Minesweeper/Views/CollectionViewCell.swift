@@ -78,25 +78,27 @@ class CollectionViewCell: UICollectionViewCell {
 }
 
 extension CollectionViewCell {
-    func fallDown(duration: Double) {
+    func saveLocation() {
         mOriginalX = frame.origin.x
         mOriginalY = frame.origin.y
+    }
+    
+    func fallDown(duration: Double) {
+        saveLocation()
         UIView.animate(withDuration: duration) {
             self.frame.origin.y = 800
         }
     }
     
     func moveLeft(duration: Double) {
-        mOriginalX = frame.origin.x
-        mOriginalY = frame.origin.y
+        saveLocation()
         UIView.animate(withDuration: duration) {
             self.frame.origin.x = -800
         }
     }
     
     func moveRight(duration: Double) {
-        mOriginalX = frame.origin.x
-        mOriginalY = frame.origin.y
+        saveLocation()
         UIView.animate(withDuration: duration) {
             self.frame.origin.x = 800
         }

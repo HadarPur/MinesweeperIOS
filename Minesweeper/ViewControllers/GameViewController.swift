@@ -556,6 +556,11 @@ extension GameViewController: UICollectionViewDelegate, UICollectionViewDataSour
                         // Change colors
                         self.mCheerView.config.colors = [UIColor.red, UIColor.green, UIColor.blue, UIColor.yellow]
                         // Start
+                        
+                        self.mGameBoard.visibleCells.forEach { cell in
+                            (cell as? CollectionViewCell)?.saveLocation()
+                        }
+                        
                         self.mCheerView.start()
 
                         checkConnection()
