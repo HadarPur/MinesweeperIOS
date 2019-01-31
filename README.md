@@ -28,5 +28,5 @@ Of course to see where it was, you need to click on location marker.
 
 ## App design:
 
-<img src="https://github.com/HadarPur/MinesweeperIOS/blob/master/Wirefarme.png" />
+<img src="https://github.com/HadarPur/MinesweeperIOS/blob/master/Wireframe.png" />
 <img src="https://github.com/HadarPur/MinesweeperIOS/blob/master/Diagram.png" />
