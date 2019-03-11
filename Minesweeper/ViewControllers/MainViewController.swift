@@ -110,25 +110,40 @@ class MainViewController: UIViewController {
         }, completion: nil)
         
         self.mFirstShow = false
+        checkParameters()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidEnterForground(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         
+    }
+
+    @objc func applicationDidEnterForground(_ notification: Notification) {
+        self.mLocationManager.requestWhenInUseAuthorization()
+        checkParameters()
+    }
+    
+    func checkParameters(){
         guard Reachability.isLocationEnable() == true  && self.mFirstAsk == false else  {
             self.mInstructionBtn.isEnabled = true
             return
         }
-
+        
         guard Reachability.isConnectedToNetwork() == true else {
             print("Internet Connection not Available!")
             self.mIsNetworkEnabled = false
             self.mRecordsBtn.isEnabled = false
             return
         }
-        
         checkGPS()
         enableAllBtns()
         self.mIsNetworkEnabled = true
-        
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     func enableAllBtns() {
         self.mEazyBtn.isEnabled = true
         self.mNormalBtn.isEnabled = true
@@ -266,6 +281,7 @@ class MainViewController: UIViewController {
 
 // extension for map view
 extension MainViewController: CLLocationManagerDelegate {
+    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         

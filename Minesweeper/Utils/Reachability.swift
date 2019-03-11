@@ -39,17 +39,20 @@ public class Reachability {
         
     }
     
-    class func isLocationEnable() -> Bool {
-        var enable: Bool = false
+    class func isLocationEnable() -> Bool? {
+        var enable: Bool?
         if CLLocationManager.locationServicesEnabled() {
             switch CLLocationManager.authorizationStatus() {
-            case .notDetermined, .restricted, .denied:
+            case .restricted, .denied:
                 print("No access")
                 enable = false
                 break
             case .authorizedAlways, .authorizedWhenInUse:
                 print("Access")
                 enable = true
+                break
+            case .notDetermined:
+                enable = nil
                 break
             }
         } else {
