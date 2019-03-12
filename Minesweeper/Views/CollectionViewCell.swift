@@ -34,6 +34,7 @@ class CollectionViewCell: UICollectionViewCell {
         self.mStatus = status
         self.mIsPressed = false
         self.mIsLongPressed = false
+        saveLocation()
     }
     
     // returns number of bombs around the cell
