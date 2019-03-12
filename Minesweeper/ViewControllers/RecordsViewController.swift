@@ -42,7 +42,7 @@ class RecordsViewController: UIViewController, CallData {
             self.performQuery()
         })
         self.mTableView.isScrollEnabled = true
-        
+
         self.mLocationManager.delegate = self
         self.mLocationManager.requestWhenInUseAuthorization()
         
