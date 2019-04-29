@@ -177,23 +177,23 @@ class GameViewController: UIViewController, UIGestureRecognizerDelegate {
         case EASY:
             initGame(level: EASY_FLAGS, boardSize: BOARD_CELL10)
 //            creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: EASY_FLAGS)
-            self.mFbStorage.readResults(level: EASY, callback: {
-                self.performQuery()
-                print("array count: \(self.mUsersData.count)")
+            self.mFbStorage.readResults(level: EASY, callback: { [weak self] in
+                self?.performQuery()
+                print("array count: \(String(describing: self?.mUsersData.count))")
             })
             break
         case NORMAL:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL10)
 //            creatNewCollectionView(colNum: BOARD_CELL10, rowNum: BOARD_CELL10 , mines: HARD_FLAGS)
-            self.mFbStorage.readResults(level: NORMAL, callback: {
-                self.performQuery()
+            self.mFbStorage.readResults(level: NORMAL, callback: {  [weak self] in
+                self?.performQuery()
             })
             break
         case HARD:
             initGame(level: HARD_FLAGS, boardSize: BOARD_CELL5)
 //            creatNewCollectionView(colNum: BOARD_CELL5, rowNum: BOARD_CELL5 , mines: HARD_FLAGS)
-            self.mFbStorage.readResults(level: HARD, callback: {
-                self.performQuery()
+            self.mFbStorage.readResults(level: HARD, callback: {  [weak self] in
+                self?.performQuery()
             })
             break
         default:

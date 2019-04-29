@@ -276,21 +276,35 @@ class MainViewController: UIViewController {
             self.mCurrentLong = currentLocation.coordinate.longitude
         }
     }
+    
+    func showEventsAcessDeniedAlert() {
+        let alertController = UIAlertController(title: "Location is needed",message: "The location permission was not authorized. Please enable it in Settings to continue.", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (alertAction) in
+            // THIS IS WHERE THE MAGIC HAPPENS!!!!
+            if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(appSettings as URL, options: [:], completionHandler: nil)
+            }
+        }
+        alertController.addAction(settingsAction)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 }
 
 
 // extension for map view
 extension MainViewController: CLLocationManagerDelegate {
     
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         
-        if mFirstAsk {
-            AlertsHandler.showAlertMessage(title: "Location needed", message: "Please allow location to play", cancelButtonTitle: "OK")
+        if mFirstAsk && status == .denied {
+            showEventsAcessDeniedAlert()
         }
         
-        self.mFirstAsk = false
-  
         guard status == .authorizedWhenInUse else {
             self.mEazyBtn.isEnabled = false
             self.mNormalBtn.isEnabled = false
@@ -299,6 +313,8 @@ extension MainViewController: CLLocationManagerDelegate {
             self.mInstructionBtn.isEnabled = true
             return
         }
+        
+        self.mFirstAsk = false
 
         self.mLocationManager.startUpdatingLocation()
         enableAllBtns()

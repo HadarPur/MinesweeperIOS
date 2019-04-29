@@ -77,11 +77,10 @@ class ResultViewController: UIViewController {
     @IBAction func homePageBtn(_ sender: UIButton) {
         unableAllBtns()
         sender.touch()
-        popupViewControllerFromStack()
         
         let deadlineTime = DispatchTime.now() + .milliseconds(500)
         DispatchQueue.main.asyncAfter(deadline: deadlineTime, execute: {
-            _=self.navigationController?.popViewController(animated: true)
+            _=self.navigationController?.popToRootViewController(animated: true)
         })
     }
     

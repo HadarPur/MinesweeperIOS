@@ -164,12 +164,12 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
-		3E4D62AC21A1B68B0020EB93 /* Quaries */ = {
+		3E4D62AC21A1B68B0020EB93 /* Queries */ = {
 			isa = PBXGroup;
 			children = (
 				3E4D62AE21A1B6B70020EB93 /* CallData.swift */,
 			);
-			path = Quaries;
+			path = Queries;
 			sourceTree = "<group>";
 		};
 		3E560137213EB85B00ACFF91 = {
@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				3EB0229821B98833003998E8 /* Fonts */,
-				3E4D62AC21A1B68B0020EB93 /* Quaries */,
+				3E4D62AC21A1B68B0020EB93 /* Queries */,
 				3E4D62A521A1A0F50020EB93 /* Storage */,
 				3E7B32912185BC3100285186 /* Logic */,
 				3E7B328F2185BB8100285186 /* UI */,

@@ -38,8 +38,8 @@ class RecordsViewController: UIViewController, CallData {
         
         unableAllBtns()
         self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
-        self.mFbStorage.readResults(level: EASY, callback: {
-            self.performQuery()
+        self.mFbStorage.readResults(level: EASY, callback: {  [weak self] in
+            self?.performQuery()
         })
         self.mTableView.isScrollEnabled = true
 
@@ -65,8 +65,8 @@ class RecordsViewController: UIViewController, CallData {
         self.mHardBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
-        self.mFbStorage.readResults(level: HARD, callback: {
-            self.performQuery()
+        self.mFbStorage.readResults(level: HARD, callback: {  [weak self] in
+            self?.performQuery()
         })
         checkGPS()
     }
@@ -76,8 +76,8 @@ class RecordsViewController: UIViewController, CallData {
         self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
-        self.mFbStorage.readResults(level: NORMAL, callback: {
-            self.performQuery()
+        self.mFbStorage.readResults(level: NORMAL, callback: {  [weak self] in
+            self?.performQuery()
         })
         checkGPS()
     }
@@ -87,8 +87,8 @@ class RecordsViewController: UIViewController, CallData {
         self.mHardBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mNormalBtn.setBackgroundImage(mUnPressedImage, for: UIControl.State.normal)
         self.mEazyBtn.setBackgroundImage(mPressedImage, for: UIControl.State.normal)
-        self.mFbStorage.readResults(level: EASY, callback: {
-            self.performQuery()
+        self.mFbStorage.readResults(level: EASY, callback: {  [weak self] in
+            self?.performQuery()
         })
         checkGPS()
     }
